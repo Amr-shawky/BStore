@@ -5,12 +5,52 @@
       "PackagePath": "staticwebassets\\BKStore-MVC.bundle.scp.css"
     },
     {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\favicon.ico",
+      "PackagePath": "staticwebassets\\assets\\favicon.ico"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\avataaars.svg",
+      "PackagePath": "staticwebassets\\assets\\img\\avataaars.svg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\portfolio\\cabin.png",
+      "PackagePath": "staticwebassets\\assets\\img\\portfolio\\cabin.png"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\portfolio\\cake.png",
+      "PackagePath": "staticwebassets\\assets\\img\\portfolio\\cake.png"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\portfolio\\circus.png",
+      "PackagePath": "staticwebassets\\assets\\img\\portfolio\\circus.png"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\portfolio\\game.png",
+      "PackagePath": "staticwebassets\\assets\\img\\portfolio\\game.png"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\portfolio\\safe.png",
+      "PackagePath": "staticwebassets\\assets\\img\\portfolio\\safe.png"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\portfolio\\submarine.png",
+      "PackagePath": "staticwebassets\\assets\\img\\portfolio\\submarine.png"
+    },
+    {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\css\\styles.css",
+      "PackagePath": "staticwebassets\\css\\styles.css"
+    },
+    {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\js\\scripts.js",
+      "PackagePath": "staticwebassets\\js\\scripts.js"
     },
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\js\\site.js",
