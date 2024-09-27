@@ -1,0 +1,81 @@
+﻿@model Book
+
+@{
+    ViewData["Title"] = "NEw";
+    // SelectList deptOptions = new SelectList(ViewBag.DeptList,"Id","Name");
+    SelectList Categories = new SelectList(ViewBag.Categories, "CategoryID", "Name");
+}
+
+<h1>New</h1>
+<form method="post" asp-action="SaveNew" asp-controller="Book">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div>
+        <label asp-for="Title"></label>
+        <input class="form form-control" asp-for="Title" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="AuthorID"></label>
+        <input class="form form-control" asp-for="AuthorID" />
+        <span asp-validation-for="AuthorID" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="ISBN"></label>
+        <input class="form form-control" asp-for="ISBN" />
+        <span asp-validation-for="ISBN" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Price"></label>
+        <input class="form form-control" asp-for="Price" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="PublisherID"></label>
+        <input class="form form-control" asp-for="PublisherID" />
+        <span asp-validation-for="PublisherID" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="StockQuantity"></label>
+        <input class="form form-control" asp-for="StockQuantity" />
+        <span asp-validation-for="StockQuantity" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="CategoryID"> Category </label>
+
+        <select class="form form-control" name="CategoryID" id="CategoryID">
+            <option value="0">--Select Department--</option>
+            <!-- Assuming you will dynamically generate the options with Categories in the server-side code -->
+            <option value="1">Finance</option>
+            <option value="2">Software</option>
+            <option value="3">Cyber Security</option>
+            <!-- Add more options based on your categories -->
+        </select>
+
+
+        <span asp-validation-for="CategoryID" class="text-danger"></span>
+
+    </div>
+
+    <div>
+        <label asp-for="ImagePath"></label>
+        <input class="form form-control" asp-for="ImagePath" />
+        <span asp-validation-for="ImagePath" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Description"></label>
+        <input class="form form-control" asp-for="Description" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <input type="submit" value="Create" class="btn btn-success" />
+
+</form>
+<a asp-action="Index">Back To List</a>
+

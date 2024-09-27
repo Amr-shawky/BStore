@@ -15,7 +15,7 @@ namespace BKStore_MVC.Models
         public string? Biography { get; set; }
         [ForeignKey(nameof(Country))]
         public int? CountryID { get; set; }
-        public ICollection<Book> books { get; set; }
-        public Country Country { get; set; }
+        public ICollection<Book>? books { get; set; }
+        public Country? Country { get; set; }
     }
 }

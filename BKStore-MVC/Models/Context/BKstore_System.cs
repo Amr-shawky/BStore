@@ -45,10 +45,6 @@ namespace BKStore_MVC.Models.Context
         public DbSet<Country> Country { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
         public DbSet<Governorate> governorate { get; set; }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("Server =.;Database =BKStore ;integrated security = true ;Encrypt=False;Trust Server Certificate=True ");
-        //}
-        
-            }
+       
+    }
 }

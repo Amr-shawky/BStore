@@ -4,6 +4,7 @@ using BKStore_MVC.Models.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BKStore_MVC.Migrations
 {
     [DbContext(typeof(BKstore_System))]
-    partial class BKstore_SystemModelSnapshot : ModelSnapshot
+    [Migration("20240927121528_EditDateTime2DateOnly")]
+    partial class EditDateTime2DateOnly
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,16 +135,21 @@ namespace BKStore_MVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ISBN")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<DateOnly?>("PublicationDate")
+                        .HasColumnType("date");
 
                     b.Property<int>("PublisherID")
                         .HasColumnType("int");

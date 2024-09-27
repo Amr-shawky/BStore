@@ -29,7 +29,7 @@ namespace BKStore_MVC.Repository
 
         public Category GetByID(int ID)
         {
-            return context.Category.FirstOrDefault(c => c.CategoryID== ID) ?? new Category();
+            return context.Category.FirstOrDefault(c => c.CategoryID== ID);
         }
 
         public void Save()

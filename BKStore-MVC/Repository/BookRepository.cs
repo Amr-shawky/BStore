@@ -29,7 +29,7 @@ namespace BKStore_MVC.Repository
 
         public Book GetByID(int ID)
         {
-            return context.Book.FirstOrDefault(c => c.BookID== ID) ?? new Book();
+            return context.Book.FirstOrDefault(c => c.BookID== ID);
         }
 
         public void Save()

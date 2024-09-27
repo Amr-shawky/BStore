@@ -4,6 +4,7 @@ using BKStore_MVC.Models.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BKStore_MVC.Migrations
 {
     [DbContext(typeof(BKstore_System))]
-    partial class BKstore_SystemModelSnapshot : ModelSnapshot
+    [Migration("20240927064008_NagyAddToDB")]
+    partial class NagyAddToDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,10 +146,13 @@ namespace BKStore_MVC.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<DateTime?>("PublicationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("PublisherID")
                         .HasColumnType("int");
 
-                    b.Property<int>("StockQuantity")
+                    b.Property<int?>("StockQuantity")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")

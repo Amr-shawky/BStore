@@ -29,9 +29,8 @@ namespace BKStore_MVC.Repository
 
         public Author GetByID(int ID)
         {
-            return context.Author.FirstOrDefault(c => c.AuthorId == ID) ?? new Author();
+            return context.Author.FirstOrDefault(c => c.AuthorId == ID);
         }
-
         public void Save()
         {
             context.SaveChanges();

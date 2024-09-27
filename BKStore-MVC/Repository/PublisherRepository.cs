@@ -29,7 +29,7 @@ namespace BKStore_MVC.Repository
 
         public Publisher GetByID(int ID)
         {
-            return context.Publisher.FirstOrDefault(c => c.ID== ID) ?? new Publisher();
+            return context.Publisher.FirstOrDefault(c => c.ID== ID);
         }
 
         public void Save()
