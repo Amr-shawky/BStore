@@ -14,7 +14,7 @@ namespace BKStore_MVC.Models
         public string? UserID { get; set; }
         [Range(0,5)]
         public decimal Rating { get; set; }
-        [StringLength(15, ErrorMessage = " Review cannot exceed 300 characters.")]
+        [StringLength(150, ErrorMessage = " Review cannot exceed 150 characters.")]
         public string? ReviewText { get; set; }
         public DateTime ReviewDate { get; set; } = DateTime.Now;
         public Book Book { get; set; }

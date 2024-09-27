@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BKStore_MVC.Migrations
 {
     [DbContext(typeof(BKstore_System))]
-    [Migration("20240927130612_DeleteDateProp")]
-    partial class DeleteDateProp
+    [Migration("20240927202231_AmrModifying")]
+    partial class AmrModifying
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -90,36 +90,6 @@ namespace BKStore_MVC.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("BKStore_MVC.Models.Author", b =>
-                {
-                    b.Property<int>("AuthorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AuthorId"));
-
-                    b.Property<string>("Biography")
-                        .HasMaxLength(600)
-                        .HasColumnType("nvarchar(600)");
-
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CountryID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("AuthorId");
-
-                    b.HasIndex("CountryID");
-
-                    b.ToTable("Author");
-                });
-
             modelBuilder.Entity("BKStore_MVC.Models.Book", b =>
                 {
                     b.Property<int>("BookID")
@@ -128,42 +98,43 @@ namespace BKStore_MVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookID"));
 
-                    b.Property<int>("AuthorID")
-                        .HasColumnType("int");
+                    b.Property<string>("AuthorName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("ISBN")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("PublisherID")
-                        .HasColumnType("int");
+                    b.Property<string>("PublisherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("BookID");
 
-                    b.HasIndex("AuthorID");
-
                     b.HasIndex("CategoryID");
-
-                    b.HasIndex("PublisherID");
 
                     b.ToTable("Book");
                 });
@@ -200,6 +171,7 @@ namespace BKStore_MVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
@@ -248,6 +220,38 @@ namespace BKStore_MVC.Migrations
                     b.ToTable("Customer");
                 });
 
+            modelBuilder.Entity("BKStore_MVC.Models.DeliveryClients", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("IsLocked")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NationalID")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("DeliveryClients");
+                });
+
             modelBuilder.Entity("BKStore_MVC.Models.Governorate", b =>
                 {
                     b.Property<int>("Id")
@@ -285,6 +289,9 @@ namespace BKStore_MVC.Migrations
                     b.Property<bool>("DelivaryStatus")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("DeliveryClientsID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");
 
@@ -294,6 +301,8 @@ namespace BKStore_MVC.Migrations
                     b.HasKey("OrderId");
 
                     b.HasIndex("CustomerID");
+
+                    b.HasIndex("DeliveryClientsID");
 
                     b.ToTable("Order");
                 });
@@ -319,31 +328,6 @@ namespace BKStore_MVC.Migrations
                     b.ToTable("OrderBook");
                 });
 
-            modelBuilder.Entity("BKStore_MVC.Models.Publisher", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int?>("CountryID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Publisher");
-                });
-
             modelBuilder.Entity("BKStore_MVC.Models.Reviews", b =>
                 {
                     b.Property<int>("ReviewId")
@@ -356,14 +340,15 @@ namespace BKStore_MVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(2, 1)
+                        .HasColumnType("decimal(2,1)");
 
                     b.Property<DateTime>("ReviewDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ReviewText")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
@@ -377,6 +362,38 @@ namespace BKStore_MVC.Migrations
                         .HasFilter("[UserID] IS NOT NULL");
 
                     b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("BKStore_MVC.Models.ReviewsDelivery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DeliveryID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Rating")
+                        .HasPrecision(2, 1)
+                        .HasColumnType("decimal(2,1)");
+
+                    b.Property<string>("ReviewText")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerID");
+
+                    b.HasIndex("DeliveryID")
+                        .IsUnique();
+
+                    b.ToTable("ReviewsDelivery");
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Shipping", b =>
@@ -542,40 +559,15 @@ namespace BKStore_MVC.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BKStore_MVC.Models.Author", b =>
-                {
-                    b.HasOne("BKStore_MVC.Models.Country", "Country")
-                        .WithMany("author")
-                        .HasForeignKey("CountryID");
-
-                    b.Navigation("Country");
-                });
-
             modelBuilder.Entity("BKStore_MVC.Models.Book", b =>
                 {
-                    b.HasOne("BKStore_MVC.Models.Author", "Author")
-                        .WithMany("books")
-                        .HasForeignKey("AuthorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BKStore_MVC.Models.Category", "Category")
                         .WithMany("Book")
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BKStore_MVC.Models.Publisher", "Publisher")
-                        .WithMany("books")
-                        .HasForeignKey("PublisherID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-
                     b.Navigation("Category");
-
-                    b.Navigation("Publisher");
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Customer", b =>
@@ -589,6 +581,17 @@ namespace BKStore_MVC.Migrations
                         .HasForeignKey("BKStore_MVC.Models.Customer", "UserID");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BKStore_MVC.Models.DeliveryClients", b =>
+                {
+                    b.HasOne("BKStore_MVC.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Governorate", b =>
@@ -606,7 +609,13 @@ namespace BKStore_MVC.Migrations
                         .WithMany("Order")
                         .HasForeignKey("CustomerID");
 
+                    b.HasOne("BKStore_MVC.Models.DeliveryClients", "DeliveryClients")
+                        .WithMany()
+                        .HasForeignKey("DeliveryClientsID");
+
                     b.Navigation("Customer");
+
+                    b.Navigation("DeliveryClients");
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.OrderBook", b =>
@@ -643,6 +652,25 @@ namespace BKStore_MVC.Migrations
                     b.Navigation("Book");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BKStore_MVC.Models.ReviewsDelivery", b =>
+                {
+                    b.HasOne("BKStore_MVC.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BKStore_MVC.Models.DeliveryClients", "DeliveryClients")
+                        .WithOne("ReviewsDelivery")
+                        .HasForeignKey("BKStore_MVC.Models.ReviewsDelivery", "DeliveryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("DeliveryClients");
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Shipping", b =>
@@ -714,11 +742,6 @@ namespace BKStore_MVC.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BKStore_MVC.Models.Author", b =>
-                {
-                    b.Navigation("books");
-                });
-
             modelBuilder.Entity("BKStore_MVC.Models.Book", b =>
                 {
                     b.Navigation("books");
@@ -734,13 +757,17 @@ namespace BKStore_MVC.Migrations
             modelBuilder.Entity("BKStore_MVC.Models.Country", b =>
                 {
                     b.Navigation("Governorate");
-
-                    b.Navigation("author");
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Customer", b =>
                 {
                     b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("BKStore_MVC.Models.DeliveryClients", b =>
+                {
+                    b.Navigation("ReviewsDelivery")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Governorate", b =>
@@ -752,13 +779,7 @@ namespace BKStore_MVC.Migrations
                 {
                     b.Navigation("OrderBook");
 
-                    b.Navigation("Shipping")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BKStore_MVC.Models.Publisher", b =>
-                {
-                    b.Navigation("books");
+                    b.Navigation("Shipping");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,8 +12,11 @@ namespace BKStore_MVC.Models
         [ForeignKey("Customer")]
         public int? CustomerID { get; set; }
         public bool DelivaryStatus { get; set; }
-        public Customer Customer { get; set; }
-        public ICollection<OrderBook> OrderBook{ get; set; }
-        public Shipping Shipping { get; set; }
+        [ForeignKey(nameof(DeliveryClients))]
+        public int? DeliveryClientsID { get; set; }
+        public DeliveryClients? DeliveryClients { get; set; }
+        public Customer? Customer { get; set; }
+        public ICollection<OrderBook>? OrderBook{ get; set; }
+        public Shipping? Shipping { get; set; }
     }
 }

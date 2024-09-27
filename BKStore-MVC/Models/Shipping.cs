@@ -13,6 +13,6 @@ namespace BKStore_MVC.Models
         public string? ShippingMethod { get; set; }
         public DateTime? ShippingDate { get; set; }
         public int? TrackingNumber { get; set; }
-        public Order Order { get; set; }
+        public Order? Order { get; set; }
     }
 }

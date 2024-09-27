@@ -10,7 +10,7 @@ namespace BKStore_MVC.Models
         public string Name { get; set; }
         [ForeignKey(nameof(Country))]
         public int? CountryID { get; set; }
-        public ICollection<Customer> customers { get; set; }
-        public Country Country { get; set; }
+        public ICollection<Customer>? customers { get; set; }
+        public Country? Country { get; set; }
     }
 }
