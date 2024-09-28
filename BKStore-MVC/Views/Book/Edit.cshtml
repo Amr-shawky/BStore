@@ -1,0 +1,69 @@
+﻿@model BKStore_MVC.ViewModel.BookWithAuthorWithPuplisherWithCategVM
+
+@{
+    ViewData["Title"] = "Edit Book";
+}
+
+<h2>Edit Book</h2>
+
+<form asp-action="SaveEdit" asp-controller="Book" method="post" asp-route-id="@Model.BookID">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StockQuantity"></label>
+        <input asp-for="StockQuantity" class="form-control" />
+        <span asp-validation-for="StockQuantity" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AuthorName"></label>
+        <input asp-for="AuthorName" class="form-control" />
+        <span asp-validation-for="AuthorName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PublisherName"></label>
+        <input asp-for="PublisherName" class="form-control" />
+        <span asp-validation-for="PublisherName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BookImagePath"></label>
+        <input asp-for="BookImagePath" class="form-control" />
+        <span asp-validation-for="BookImagePath" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CategoryID"> Category </label>
+        <select asp-for="CategoryID" class="form-control">
+            @foreach (var category in Model.categories)
+            {
+                <option value="@category.CategoryID">@category.Name</option>
+            }
+        </select>
+        <span asp-validation-for="CategoryID" class="text-danger"></span>
+    </div>
+    <input type="submit" value="Save" class="btn btn-primary" />
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
