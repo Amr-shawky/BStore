@@ -9,8 +9,8 @@ namespace BKStore_MVC.Controllers
     public class BookController : Controller
     {
         IBookRepository bookRepository;
-
         ICategoryRepository categoryRepository;
+
         public BookController(IBookRepository _bookRepository, ICategoryRepository _categoryRepository)
         {
             bookRepository = _bookRepository;
@@ -134,11 +134,39 @@ namespace BKStore_MVC.Controllers
             return View("Edit", bookFromRequest);
         }
 
+        // Delete
+        public IActionResult Delete(int id)
+        {
+            // Fetch the book to delete
+            Book bookFromDB = bookRepository.GetByID(id);
 
+            // If the book does not exist, return a NotFound view or error
+            if (bookFromDB == null)
+            {
+                return NotFound();
+            }
 
+            return View("Delete", bookFromDB); // Display confirmation before deletion
+        }
 
+        public IActionResult DeleteConfirmed(int id)
+        {
+            // Fetch the book to delete
+            Book bookFromDB = bookRepository.GetByID(id);
 
+            // Check if the book exists
+            if (bookFromDB != null)
+            {
+                // Delete the book from the database
+                bookRepository.Delete(id);
 
+                // Save changes to the database
+                bookRepository.Save();
+            }
+
+            // Redirect to Index after deletion
+            return RedirectToAction("Index");
+        }
 
     }
 }
