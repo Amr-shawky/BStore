@@ -514,3 +514,5 @@ F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-MVC.
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\ref\BKStore-MVC.dll
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\dotnet-aspnet-codegenerator-design.dll
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+C:\Users\MG\Desktop\DEPI_Project\BookStoreProject\BStore\BKStore-MVC\bin\Debug\net8.0\dotnet-aspnet-codegenerator-design.dll
+C:\Users\MG\Desktop\DEPI_Project\BookStoreProject\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll

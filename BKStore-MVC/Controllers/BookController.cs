@@ -81,19 +81,64 @@ namespace BKStore_MVC.Controllers
 
         public IActionResult Edit(int id)
         {
-            return View();
+           Book bookModel =  bookRepository.GetByID(id);
+
+            BookWithAuthorWithPuplisherWithCategVM bookVM =
+                new BookWithAuthorWithPuplisherWithCategVM();
+
+            bookVM.BookID = bookModel.BookID;
+            bookVM.Title = bookModel.Title;
+            bookVM.AuthorName = bookModel.AuthorName;
+            bookVM.StockQuantity = bookModel.StockQuantity;
+            bookVM.Price = bookModel.Price;
+            bookVM.BookImagePath = bookModel.ImagePath;
+            bookVM.categories = categoryRepository.GetAll(); 
+            bookVM.PublisherName = bookModel.PublisherName;
+            bookVM.Description = bookModel.Description;
+            bookVM.CategoryID = bookModel.CategoryID;
+            bookVM.categories = categoryRepository.GetAll();
+
+            return View("Edit", bookVM);
         }
 
-        public IActionResult SaveEdit(Book bookFromRequest)
+        [HttpPost]
+        public IActionResult SaveEdit(int id, BookWithAuthorWithPuplisherWithCategVM bookFromRequest)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Book bookFromDB = 
+                        bookRepository.GetByID(id);
+
+                    bookFromDB.Title = bookFromRequest.Title;
+                    bookFromDB.AuthorName = bookFromRequest.AuthorName;
+                    bookFromDB.StockQuantity = bookFromRequest.StockQuantity;
+                    bookFromDB.Price = bookFromRequest.Price;
+                    bookFromDB.PublisherName = bookFromRequest.PublisherName;
+                    bookFromDB.Description = bookFromRequest.Description;
+                    bookFromDB.ImagePath = bookFromRequest.BookImagePath;
+                    bookFromDB.CategoryID = bookFromRequest.CategoryID;
+
+                    bookRepository.Save();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    string errorMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                    ModelState.AddModelError(string.Empty, errorMessage);
+                }
+            }
+
+            bookFromRequest.categories = categoryRepository.GetAll();
+            return View("Edit", bookFromRequest);
         }
 
 
-        //public IActionResult Delete(int id)
-        //{
-        //    return View();
-        //} // Later
+
+
+
+
 
     }
 }
