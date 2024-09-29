@@ -1,0 +1,70 @@
+﻿@model List<BKStore_MVC.ViewModel.BookCartItem>
+
+@{
+    ViewData["Title"] = "Cart";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h3>Your Cart</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/assets/img/@item.ImagePath" class="img-thumbnail" alt="@item.Title" style="width: 100px;">
+                                <span>@item.Title</span>
+                            </td>
+                            <td>@item.Price EGP</td>
+                            <td>
+                                <input type="number" value="@item.Quantity" min="1" class="form-control w-50" onchange="updateQuantity('@item.BookId', this.value)">
+                            </td>
+                            <td>@(item.Price * item.Quantity) EGP</td>
+                            <td>
+                                <button class="btn btn-danger" onclick="removeFromCart('@item.BookId')">Remove</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <h3>Cart Totals</h3>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Subtotal</span>
+                    <span>@Model.Sum(item => item.Price * item.Quantity) EGP</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Shipping (Cairo & Giza)</span>
+                    <span>50 EGP</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <strong>Total</strong>
+                    <strong>@(Model.Sum(item => item.Price * item.Quantity) + 50) EGP</strong>
+                </li>
+            </ul>
+            <a href="@Url.Action("Checkout", "Order")" class="btn btn-primary btn-block mt-3">Proceed to Checkout</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateQuantity(bookId, quantity) {
+        // Your logic to update the quantity
+    }
+
+    function removeFromCart(bookId) {
+        // Your logic to remove the item from the cart
+    }
+</script>

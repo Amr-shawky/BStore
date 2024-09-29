@@ -106,6 +106,10 @@ namespace BKStore_MVC.Migrations
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
+                    b.Property<string>("ISBN")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("ImagePath")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -124,6 +128,9 @@ namespace BKStore_MVC.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<double?>("discount")
+                        .HasColumnType("float");
 
                     b.HasKey("BookID");
 
@@ -279,8 +286,8 @@ namespace BKStore_MVC.Migrations
                     b.Property<int?>("CustomerID")
                         .HasColumnType("int");
 
-                    b.Property<bool>("DelivaryStatus")
-                        .HasColumnType("bit");
+                    b.Property<string>("DelivaryStatus")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DeliveryClientsID")
                         .HasColumnType("int");
@@ -288,8 +295,8 @@ namespace BKStore_MVC.Migrations
                     b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TotalAmount")
-                        .HasColumnType("int");
+                    b.Property<double?>("TotalAmount")
+                        .HasColumnType("float");
 
                     b.HasKey("OrderId");
 
@@ -311,8 +318,8 @@ namespace BKStore_MVC.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("TSubPrice")
-                        .HasColumnType("int");
+                    b.Property<double>("TSubPrice")
+                        .HasColumnType("float");
 
                     b.HasKey("OrderID", "BookID");
 

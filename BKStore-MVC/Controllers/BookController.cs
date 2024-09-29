@@ -1,8 +1,8 @@
 ﻿using BKStore_MVC.Models;
-using BKStore_MVC.Repository;
 using BKStore_MVC.Repository.Interfaces;
 using BKStore_MVC.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BKStore_MVC.Controllers
 {
@@ -19,12 +19,15 @@ namespace BKStore_MVC.Controllers
 
         public IActionResult Index()
         {
-            return View("Index", bookRepository.GetAll());  
+            BookCategVM bookCategVM = new BookCategVM();
+            bookCategVM.categories = categoryRepository.GetAll();
+            bookCategVM.books = bookRepository.GetAll();
+            return View("Index", bookCategVM);
         } // Show All Books
 
-        public  IActionResult Details(int Bookid)
+        public IActionResult Details(int Bookid)
         {
-             Book book =  bookRepository.GetByID(Bookid);
+            Book book = bookRepository.GetByID(Bookid);
             if (book == null)
             {
                 return NotFound("Book not found.");
@@ -52,7 +55,7 @@ namespace BKStore_MVC.Controllers
         public IActionResult New()
         {
             ViewData["Categories"] = categoryRepository.GetAll();
-           //  ViewData["DeptList"] =DepartmentRepository.GetAll();
+            //  ViewData["DeptList"] =DepartmentRepository.GetAll();
 
             return View("New");
         } // Add New Book
@@ -81,7 +84,7 @@ namespace BKStore_MVC.Controllers
 
         public IActionResult Edit(int id)
         {
-           Book bookModel =  bookRepository.GetByID(id);
+            Book bookModel = bookRepository.GetByID(id);
 
             BookWithAuthorWithPuplisherWithCategVM bookVM =
                 new BookWithAuthorWithPuplisherWithCategVM();
@@ -92,7 +95,7 @@ namespace BKStore_MVC.Controllers
             bookVM.StockQuantity = bookModel.StockQuantity;
             bookVM.Price = bookModel.Price;
             bookVM.BookImagePath = bookModel.ImagePath;
-            bookVM.categories = categoryRepository.GetAll(); 
+            bookVM.categories = categoryRepository.GetAll();
             bookVM.PublisherName = bookModel.PublisherName;
             bookVM.Description = bookModel.Description;
             bookVM.CategoryID = bookModel.CategoryID;
@@ -108,7 +111,7 @@ namespace BKStore_MVC.Controllers
             {
                 try
                 {
-                    Book bookFromDB = 
+                    Book bookFromDB =
                         bookRepository.GetByID(id);
 
                     bookFromDB.Title = bookFromRequest.Title;
@@ -166,6 +169,52 @@ namespace BKStore_MVC.Controllers
 
             // Redirect to Index after deletion
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public IActionResult AddToCart(int bookId)
+        {
+            // Set the cookie with the book ID
+            CookieOptions options = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(7) // Set the cookie to expire in 7 days
+            };
+            Response.Cookies.Append("BookID", bookId.ToString(), options);
+
+            // Redirect to the Cart action
+            return RedirectToAction("Cart");
+        }
+        public IActionResult Cart()
+        {
+            //var cart = Request.Cookies["cart"];
+            //var cartItems = string.IsNullOrEmpty(cart) ? new List<BookCartItem>() : JsonConvert.DeserializeObject<List<BookCartItem>>(cart);
+            //var bookId = Request.Cookies["BookID"];
+
+            // Your logic to get the book details using the bookId
+            //var book = bookRepository.GetByID(int.Parse(bookId??"0"));
+            //BookCartItem cartItem1 = new BookCartItem();
+            //cartItem1.Title = book.Title;
+            //cartItem1.Price= book.Price;
+            //cartItem1.ImagePath = book.ImagePath;
+            //cartItem1.BookId = book.BookID;
+            //cartItem1.Quantity = 1;
+            var bookId = Request.Cookies["BookID"];
+
+            // Your logic to get the book details using the bookId
+            var book = bookRepository.GetByID(int.Parse(bookId ?? "0"));
+
+            // Create a list of BookCartItem objects
+            var cartItems = new List<BookCartItem>
+        {
+            new BookCartItem
+            {
+                BookId = book.BookID,
+                Title = book.Title??"",
+                Price = book.Price,
+                Quantity = 1 // Example quantity
+            }
+        };
+
+            return View("Cart", cartItems);
         }
 
     }

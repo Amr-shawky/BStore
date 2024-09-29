@@ -5,7 +5,7 @@ namespace BKStore_MVC.ViewModel
 {
     public class RegisterBS
     {
-        [Unique]
+        //[Unique]
         public string UserName { get; set; }
         
         public string Email { get; set; }

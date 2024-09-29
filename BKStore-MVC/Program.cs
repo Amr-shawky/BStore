@@ -1,10 +1,13 @@
-using BKStore_MVC.Models;
 using BKStore_MVC.Models.Context;
-using BKStore_MVC.Repository;
+using BKStore_MVC.Models;
 using BKStore_MVC.Repository.Interfaces;
+using BKStore_MVC.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol.Core.Types;
+using BKStore_MVC.Models.Context;
+using BKStore_MVC.Models;
+using BKStore_MVC.Repository.Interfaces;
+using BKStore_MVC.Repository;
 
 namespace BKStore_MVC
 {
@@ -32,6 +35,7 @@ namespace BKStore_MVC
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IShippingRepository, ShippingRepository>();
             builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+            builder.Services.AddScoped<IOrderBookRepository, OrderBookRepository>();
 
 
             builder.Services.AddDbContext<BKstore_System>(Options => {

@@ -3,7 +3,7 @@ using BKStore_MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
+using BKStore_MVC.ViewModels;
 
 namespace BKStore_MVC.Controllers
 {
@@ -11,11 +11,15 @@ namespace BKStore_MVC.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+
+        public RoleManager<IdentityRole> RoleManager { get; }
+
         public AccountController(UserManager<ApplicationUser> userManager,
-              SignInManager<ApplicationUser> signInManager)
+              SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            RoleManager = roleManager;
         }
         public IActionResult Register()
         {
@@ -32,7 +36,8 @@ namespace BKStore_MVC.Controllers
                 IdentityResult result = await userManager.CreateAsync(applicationUser, viewModel.Password);
                 if (result.Succeeded)
                 {
-                    //     await userManager.AddToRoleAsync(applicationUser, "Admin");
+                    if (userManager.Users.Count() < 2)
+                        await userManager.AddToRoleAsync(applicationUser, "Admin");
                     await signInManager.SignInAsync(applicationUser, false);
                     return RedirectToAction("Index", "Home");
                 }
@@ -56,12 +61,15 @@ namespace BKStore_MVC.Controllers
 
                 if (appuser != null)
                 {
-                    bool found =
-                        await userManager.CheckPasswordAsync(appuser, loginBS.Password);
-                    if (found == true)
+                    if(appuser.LockoutEnabled != true)
                     {
-                        await signInManager.SignInAsync(appuser, loginBS.RememberMe);
-                        return RedirectToAction("Index", "Home");
+                        bool found =
+                        await userManager.CheckPasswordAsync(appuser, loginBS.Password);
+                        if (found == true)
+                        {
+                            await signInManager.SignInAsync(appuser, loginBS.RememberMe);
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
                 }
                 ModelState.AddModelError("", "Username OR Password Wrong");
@@ -74,11 +82,17 @@ namespace BKStore_MVC.Controllers
             await signInManager.SignOutAsync();
             return View(nameof(Register));
         }
-        public IActionResult AddAdminAccount()
+        [Authorize(Roles = "Admin")]
+        public IActionResult AddAdmin()
         {
-            return View("Register");
+            var lstrole = RoleManager.Roles.ToList();
+            List<string?> roles = lstrole.Select(x => x.Name).ToList();
+            ViewData["RoleList"] = roles;
+            return View("AddAdmin");
         }
-        public async Task<IActionResult> SaveAdmin(RegisterBS viewModel)
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> SaveAdmin(RegistersRoles viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -86,11 +100,14 @@ namespace BKStore_MVC.Controllers
                 applicationUser.UserName = viewModel.UserName;
                 applicationUser.PasswordHash = viewModel.Password;
                 applicationUser.Email = viewModel.Email;
+                if(viewModel.Role== "Delivery")
+                {
+                    applicationUser.LockoutEnabled = true;
+                }
                 IdentityResult result = await userManager.CreateAsync(applicationUser, viewModel.Password);
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(applicationUser, "Admin");
-                    await signInManager.SignInAsync(applicationUser, false);
+                    await userManager.AddToRoleAsync(applicationUser, viewModel.Role);
                     return RedirectToAction("Index", "Home");
                 }
                 foreach (var item in result.Errors)

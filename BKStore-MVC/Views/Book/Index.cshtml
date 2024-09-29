@@ -1,11 +1,89 @@
-﻿@model List<Book>
+﻿@model BKStore_MVC.ViewModel.BookCategVM
 
 @{
     ViewData["Title"] = "Index";
 }
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Categories</h3>
+            <ul class="list-group">
+                @if (Model.categories != null && Model.categories.Any())
+                {
+                    @foreach (var category in Model.categories)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="#" class="text-decoration-none">@category.Name</a>
+                            <span class="badge badge-primary badge-pill">@category.Book.Count</span>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li class="list-group-item">No categories available</li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <h3>Books</h3>
+            <div class="row">
+                @if (Model.books != null && Model.books.Any())
+                {
+                    @foreach (var book in Model.books)
+                    {
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <a href="@Url.Action("Details", "Book", new { Bookid = book.BookID })">
+                                    <img src="~/assets/img/@book.ImagePath" class="card-img-top" alt="@book.Title">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@book.Title</h5>
+                                        <p class="card-text">Author: @book.AuthorName</p>
+                                        <p class="card-text">Price: <strong>@book.Price</strong></p>
+                                        @*                                 @if (book.Discount > 0)
+                                {
+                                <span class="badge badge-danger">-@book.Discount%</span>
+                                }
+                                *@
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No books available</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 
-<h1> Books </h1>
+<style>
+    .list-group-item a {
+        color: #000;
+    }
 
+        .list-group-item a:hover {
+            color: #007bff;
+            text-decoration: underline;
+        }
+
+    .badge-pill {
+        background-color: #007bff;
+    }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .badge-danger {
+        background-color: #dc3545;
+    }
+</style>
+
+@*
 <a asp-action="New" asp-controller="Book" class="btn btn-success">NEw</a>
 
 <table class="table table-bordered table-hover">
@@ -30,3 +108,4 @@
         </tr>
     }
 </table>
+ *@

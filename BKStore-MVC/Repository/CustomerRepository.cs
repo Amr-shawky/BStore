@@ -2,9 +2,10 @@
 using BKStore_MVC.Models;
 using BKStore_MVC.Repository.Interfaces;
 
+
 namespace BKStore_MVC.Repository
 {
-    public class CustomerRepository:ICustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
         BKstore_System context;
         public CustomerRepository(BKstore_System _context)
@@ -29,9 +30,12 @@ namespace BKStore_MVC.Repository
 
         public Customer GetByID(int ID)
         {
-            return context.Customer.FirstOrDefault(c => c.ID== ID) ?? new Customer();
+            return context.Customer.FirstOrDefault(c => c.ID == ID) ?? new Customer();
         }
-
+        public Customer GetByName(string name)
+        {
+            return context.Customer.FirstOrDefault(c => c.Name == name) ?? new Customer();
+        }
         public void Save()
         {
             context.SaveChanges();
