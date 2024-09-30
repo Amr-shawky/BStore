@@ -24,12 +24,6 @@ namespace BKStore_MVC.Controllers
             this.orderBookRepository = orderBookRepository;
             this.orderRepository = orderRepository;
         }
-
-        public IActionResult Index()
-        {
-            return View("Index", customerRepository.GetAll());
-        }
-
         public IActionResult AddCustomer(int BookId, int Quantity)
         {
             ViewData["Governoratelst"] = governorateRepository.GetAll();

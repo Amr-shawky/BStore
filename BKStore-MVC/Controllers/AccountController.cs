@@ -7,6 +7,7 @@ using BKStore_MVC.ViewModels;
 
 namespace BKStore_MVC.Controllers
 {
+
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -61,7 +62,7 @@ namespace BKStore_MVC.Controllers
 
                 if (appuser != null)
                 {
-                    if(appuser.LockoutEnabled == true)
+                    if (appuser.LockoutEnabled == true)
                     {
                         bool found =
                         await userManager.CheckPasswordAsync(appuser, loginBS.Password);

@@ -12,7 +12,7 @@ namespace BKStore_MVC.Controllers
         private readonly IDeliveryClientRepository deliveryClientRepository;
 
         public DeliveryController(UserManager<ApplicationUser> userManager,
-            IDeliveryClientRepository deliveryClientRepository) 
+            IDeliveryClientRepository deliveryClientRepository)
         {
             UserManager = userManager;
             this.deliveryClientRepository = deliveryClientRepository;
@@ -25,12 +25,12 @@ namespace BKStore_MVC.Controllers
         {
             //string userId = Request.Cookies["UserId"]??"";
             ApplicationUser appuser = await UserManager.FindByIdAsync(UserId);
-            if (appuser != null) 
+            if (appuser != null)
             {
                 DeliveryVM deliveryVM = new DeliveryVM();
                 deliveryVM.Email = appuser.Email;
                 deliveryVM.UserName = appuser.UserName;
-                deliveryVM.UserID= UserId;
+                deliveryVM.UserID = UserId;
                 return View("AddDelivery", deliveryVM);
 
             }
@@ -58,7 +58,7 @@ namespace BKStore_MVC.Controllers
                 deliveryClientRepository.Save();
                 return RedirectToAction("Index", "Home");
             }
-            return View(nameof(AddDelivery),deliveryVM);
+            return View(nameof(AddDelivery), deliveryVM);
         }
     }
 }

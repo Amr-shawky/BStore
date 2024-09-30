@@ -29,8 +29,8 @@ namespace BKStore_MVC.Controllers
             }
             return Content("Identity cookie not found or invalid.");
         }
-    
-    public IActionResult AddDeliveryIDCookie(string UserID)
+
+        public IActionResult AddDeliveryIDCookie(string UserID)
         {
             string DeliveryIDValue = UserID;
             CookieOptions options = new CookieOptions

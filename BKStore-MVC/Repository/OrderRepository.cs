@@ -4,7 +4,7 @@ using BKStore_MVC.Repository.Interfaces;
 
 namespace BKStore_MVC.Repository
 {
-    public class OrderRepository:IOrderRepository
+    public class OrderRepository : IOrderRepository
     {
         BKstore_System context;
         public OrderRepository(BKstore_System _context)
@@ -29,11 +29,15 @@ namespace BKStore_MVC.Repository
 
         public Order GetByID(int ID)
         {
-            return context.Order.FirstOrDefault(c => c.OrderId== ID) ?? new Order();
+            return context.Order.FirstOrDefault(c => c.OrderId == ID) ?? new Order();
         }
         public Order GetByCustomerID(int ID)
         {
             return context.Order.FirstOrDefault(c => c.CustomerID == ID) ?? new Order();
+        }
+        public Order GetBydeliveryID(int deliveryID, int OrderID)
+        {
+            return context.Order.FirstOrDefault(o => o.DeliveryClientsID == deliveryID && o.OrderId == OrderID) ?? new Order();
         }
         public void Save()
         {
