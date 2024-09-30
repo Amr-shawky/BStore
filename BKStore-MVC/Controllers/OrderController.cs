@@ -2,8 +2,11 @@
 using BKStore_MVC.Repository;
 using BKStore_MVC.Repository.Interfaces;
 using BKStore_MVC.ViewModel;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BKStore_MVC.Controllers
 {
@@ -15,7 +18,9 @@ namespace BKStore_MVC.Controllers
         ICustomerRepository customerRepository;
         IBookRepository bookRepository;
         IGovernorateRepository governorateRepository;
-        public OrderController(IOrderRepository orderRepository ,
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public OrderController(SignInManager<ApplicationUser> signInManager
+            , IOrderRepository orderRepository ,
             ICustomerRepository customerRepository ,IBookRepository bookRepository,
             IOrderBookRepository orderBookRepository,IDeliveryClientRepository deliveryClientRepository
             ,IGovernorateRepository governorateRepository)
@@ -26,6 +31,7 @@ namespace BKStore_MVC.Controllers
             this.customerRepository = customerRepository;
             this.bookRepository = bookRepository;
             this.governorateRepository = governorateRepository;
+            _signInManager = signInManager;
         }
         //[Authorize(Roles = "Delivery")]
         public IActionResult GetAll()
@@ -42,16 +48,29 @@ namespace BKStore_MVC.Controllers
             orderDetailVM.Governorate = governorateRepository.GetByID(customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).GovernorateID??0).Name;
             return View("DetailedOrder", orderDetailVM);
         }
-        public IActionResult DeliverOrder(string CustomerName)
+        public async Task<IActionResult> DeliverOrder(string CustomerName)
         {
 
             Order order = orderRepository.GetByCustomerID(customerRepository.GetByName(CustomerName).ID);
             order.DelivaryStatus = "Delivering";
-            var userIdCookie = Request.Cookies["UserID"];
-            order.DeliveryClientsID = deliveryClientRepository.GetByUserID(userIdCookie).ID;
-            orderRepository.Update(order);
-            orderRepository.Save();
-            return View("GetAll", orderRepository.GetAll());
+            var cookie = Request.Cookies[".AspNetCore.Identity.Application"];
+            if (cookie != null)
+            {
+                var ticket = await _signInManager.Context.AuthenticateAsync(IdentityConstants.ApplicationScheme);
+                if (ticket != null)
+                {
+                    var userId = ticket.Principal.FindFirstValue(ClaimTypes.NameIdentifier);
+                    order.DeliveryClientsID = deliveryClientRepository.GetByUserID(userId).ID;
+                    orderRepository.Update(order);
+                    orderRepository.Save();
+                    return View("GetAll", orderRepository.GetAll());
+                }
+            }
+            //order.DeliveryClientsID = deliveryClientRepository.GetByUserID(userIdCookie).ID;
+            //orderRepository.Update(order);
+            //orderRepository.Save();
+            //return View("GetAll", orderRepository.GetAll());
+            return Content("Error");
         }
     }
 }

@@ -46,8 +46,7 @@
               "RelativeToolTip": "Views\\Category\\Delete.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-30T17:51:56.119Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-30T17:51:56.119Z"
             },
             {
               "$type": "Document",
@@ -81,7 +80,7 @@
               "RelativeDocumentMoniker": "Controllers\\CategoryController.cs",
               "ToolTip": "C:\\Users\\MG\\Desktop\\DEPI_Project\\BookStoreProject\\BStore\\BKStore-MVC\\Controllers\\CategoryController.cs",
               "RelativeToolTip": "Controllers\\CategoryController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAG8AAAARAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowG8AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-30T14:03:43.192Z",
               "EditorCaption": ""
@@ -96,8 +95,7 @@
               "RelativeToolTip": "Controllers\\BookController.cs",
               "ViewState": "AgIAAJQAAAAAAAAAAAAAwJAAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-30T09:27:28.998Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-30T09:27:28.998Z"
             },
             {
               "$type": "Document",
