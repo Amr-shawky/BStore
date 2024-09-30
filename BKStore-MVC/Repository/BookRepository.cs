@@ -26,7 +26,10 @@ namespace BKStore_MVC.Repository
         {
             return context.Book.ToList();
         }
-
+        public List<Book> GetBooksByCatgyId(int id)
+        {
+            return context.Book.Where(B => B.CategoryID == id).ToList();
+        }
         public Book GetByID(int ID)
         {
             return context.Book.FirstOrDefault(c => c.BookID== ID);

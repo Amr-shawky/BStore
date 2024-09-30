@@ -78,7 +78,6 @@ namespace BKStore_MVC.Controllers
                 }
             }
             ViewData["CategoryName"] = categoryRepository.GetAll();
-
             return RedirectToAction("New", bookFromRequest);
         } // Save Data
 

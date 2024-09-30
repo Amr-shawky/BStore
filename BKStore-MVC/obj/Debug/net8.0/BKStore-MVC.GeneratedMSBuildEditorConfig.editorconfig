@@ -17,95 +17,119 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BKStore_MVC
 build_property.RootNamespace = BKStore_MVC
-build_property.ProjectDir = F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\
+build_property.ProjectDir = C:\Users\MG\Desktop\DEPI_Project\BookStoreProject\BStore\BKStore-MVC\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC
+build_property.MSBuildProjectDirectory = C:\Users\MG\Desktop\DEPI_Project\BookStoreProject\BStore\BKStore-MVC
 build_property._RazorSourceGeneratorDebug = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Account/AddAdmin.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Account/AddAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBZGRBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Account/Login.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Account/Register.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Book/Cart.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Book/Cart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xDYXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Book/Delete.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Book/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Book/Details.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Book/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Book/Edit.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Book/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Book/Index.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Book/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Book/New.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Book/New.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xOZXcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Customer/AddCustomer.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Category/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Category/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Category/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Category/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Category/New.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcTmV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Customer/AddCustomer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQWRkQ3VzdG9tZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Delivery/AddDelivery.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Customer/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Delivery/AddDelivery.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVsaXZlcnlcQWRkRGVsaXZlcnkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Home/Index.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Home/Privacy.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Order/DetailedOrder.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Order/DetailedOrder.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRGV0YWlsZWRPcmRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Order/GetAll.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Order/GetAll.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcR2V0QWxsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Role/AddRole.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Role/AddRole.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxBZGRSb2xlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Shared/Error.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/_ViewImports.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/_ViewStart.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Shared/_Layout.cshtml]
+[C:/Users/MG/Desktop/DEPI_Project/BookStoreProject/BStore/BKStore-MVC/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-1pvbwsyrux
