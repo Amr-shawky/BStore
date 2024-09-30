@@ -4,6 +4,7 @@ namespace BKStore_MVC.ViewModel
 {
     public class DeliveryVM
     {
+        public string? UserID { get; set; }
         public string? FullName { get; set; }
         public string? NationalID { get; set; }
 
@@ -21,6 +22,7 @@ namespace BKStore_MVC.ViewModel
         [Display(Name = "Confirm Password")]
         [DataType(DataType.Password)]
         public string? ConfirmPassword { get; set; }
+        public string? Phone {  get; set; }
 
     }
 }

@@ -75,7 +75,7 @@ namespace BKStore_MVC.Controllers
                     {
                         if (await userManager.IsInRoleAsync(appuser, "Delivery"))
                         {
-                            return RedirectToAction("AddDelivery", "Delivery");
+                            return RedirectToAction("AddDelivery", "Delivery", new { UserId = appuser.Id });
                         }
                     }
                 }

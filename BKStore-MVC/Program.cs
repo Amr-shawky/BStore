@@ -36,7 +36,7 @@ namespace BKStore_MVC
             builder.Services.AddScoped<IShippingRepository, ShippingRepository>();
             builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
             builder.Services.AddScoped<IOrderBookRepository, OrderBookRepository>();
-
+            builder.Services.AddScoped<IDeliveryClientRepository, DeliveryClientRepository>();
 
             builder.Services.AddDbContext<BKstore_System>(Options => {
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("BK1"));
