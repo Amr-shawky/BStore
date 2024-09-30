@@ -10,15 +10,18 @@ namespace BKStore_MVC.Controllers
     public class OrderController : Controller
     {
         IOrderBookRepository orderBookRepository;
+        IDeliveryClientRepository deliveryClientRepository;
         IOrderRepository orderRepository;
         ICustomerRepository customerRepository;
         IBookRepository bookRepository;
         IGovernorateRepository governorateRepository;
         public OrderController(IOrderRepository orderRepository ,
             ICustomerRepository customerRepository ,IBookRepository bookRepository,
-            IOrderBookRepository orderBookRepository, IGovernorateRepository governorateRepository)
+            IOrderBookRepository orderBookRepository,IDeliveryClientRepository deliveryClientRepository
+            ,IGovernorateRepository governorateRepository)
         {
             this.orderBookRepository = orderBookRepository;
+            this.deliveryClientRepository = deliveryClientRepository;
             this.orderRepository = orderRepository;
             this.customerRepository = customerRepository;
             this.bookRepository = bookRepository;
@@ -44,8 +47,10 @@ namespace BKStore_MVC.Controllers
 
             Order order = orderRepository.GetByCustomerID(customerRepository.GetByName(CustomerName).ID);
             order.DelivaryStatus = "Delivering";
-            order.DeliveryClientsID = customerRepository.GetByName(CustomerName).ID;
+            var userIdCookie = Request.Cookies["UserID"];
+            order.DeliveryClientsID = deliveryClientRepository.GetByUserID(userIdCookie).ID;
             orderRepository.Update(order);
+            orderRepository.Save();
             return View("GetAll", orderRepository.GetAll());
         }
     }

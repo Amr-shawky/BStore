@@ -31,6 +31,10 @@ namespace BKStore_MVC.Repository
         {
             return context.DeliveryClients.FirstOrDefault(c => c.ID == ID)??new DeliveryClients();
         }
+        public DeliveryClients GetByUserID(string ID)
+        {
+            return context.DeliveryClients.FirstOrDefault(c => c.UserID == ID) ?? new DeliveryClients();
+        }
 
         public void Save()
         {

@@ -47,6 +47,7 @@ namespace BKStore_MVC.Controllers
                 appuser.Email = deliveryVM.Email;
                 appuser.UserName = deliveryVM.UserName;
                 appuser.PhoneNumber = deliveryVM.Phone;
+                appuser.LockoutEnabled = true;
                 await UserManager.UpdateAsync(appuser);
                 DeliveryClients deliveryClients = new DeliveryClients();
                 deliveryClients.FullName = deliveryVM.FullName;
