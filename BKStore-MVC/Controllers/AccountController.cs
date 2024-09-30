@@ -61,7 +61,7 @@ namespace BKStore_MVC.Controllers
 
                 if (appuser != null)
                 {
-                    if(appuser.LockoutEnabled != true)
+                    if(appuser.LockoutEnabled == true)
                     {
                         bool found =
                         await userManager.CheckPasswordAsync(appuser, loginBS.Password);
@@ -69,6 +69,13 @@ namespace BKStore_MVC.Controllers
                         {
                             await signInManager.SignInAsync(appuser, loginBS.RememberMe);
                             return RedirectToAction("Index", "Home");
+                        }
+                    }
+                    else
+                    {
+                        if (await userManager.IsInRoleAsync(appuser, "Delivery"))
+                        {
+                            return RedirectToAction("AddDelivery", "Delivery");
                         }
                     }
                 }
@@ -96,18 +103,25 @@ namespace BKStore_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser applicationUser = new ApplicationUser();
-                applicationUser.UserName = viewModel.UserName;
-                applicationUser.PasswordHash = viewModel.Password;
-                applicationUser.Email = viewModel.Email;
-                if(viewModel.Role== "Delivery")
+                ApplicationUser applicationUser = new ApplicationUser
                 {
-                    applicationUser.LockoutEnabled = true;
-                }
+                    UserName = viewModel.UserName,
+                    Email = viewModel.Email,
+                    LockoutEnabled = viewModel.Role != "Delivery"
+                };
+
                 IdentityResult result = await userManager.CreateAsync(applicationUser, viewModel.Password);
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(applicationUser, viewModel.Role);
+
+                    // Explicitly update the LockoutEnabled property if necessary
+                    if (viewModel.Role == "Delivery")
+                    {
+                        applicationUser.LockoutEnabled = false;
+                        await userManager.UpdateAsync(applicationUser);
+                    }
+
                     return RedirectToAction("Index", "Home");
                 }
                 foreach (var item in result.Errors)
@@ -117,6 +131,32 @@ namespace BKStore_MVC.Controllers
             }
             return View("Register", viewModel);
         }
+
+        //public async Task<IActionResult> SaveAdmin(RegistersRoles viewModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        ApplicationUser applicationUser = new ApplicationUser();
+        //        applicationUser.UserName = viewModel.UserName;
+        //        applicationUser.PasswordHash = viewModel.Password;
+        //        applicationUser.Email = viewModel.Email;
+        //        if(viewModel.Role== "Delivery")
+        //        {
+        //            applicationUser.LockoutEnabled = false;
+        //        }
+        //        IdentityResult result = await userManager.CreateAsync(applicationUser, viewModel.Password);
+        //        if (result.Succeeded)
+        //        {
+        //            await userManager.AddToRoleAsync(applicationUser, viewModel.Role);
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //        foreach (var item in result.Errors)
+        //        {
+        //            ModelState.AddModelError("", item.Description);
+        //        }
+        //    }
+        //    return View("Register", viewModel);
+        //}
 
     }
 }
