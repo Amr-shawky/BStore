@@ -1,6 +1,7 @@
 ﻿using BKStore_MVC.Models;
 using BKStore_MVC.Models.Context;
 using BKStore_MVC.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BKStore_MVC.Repository
 {
@@ -34,7 +35,14 @@ namespace BKStore_MVC.Repository
         {
             return context.Book.FirstOrDefault(c => c.BookID== ID);
         }
-
+        public List<Book> GetByName(string name)
+        {
+            //if (string.IsNullOrEmpty(name))
+            //{
+            //    return GetAll();
+           // }
+            return context.Book.Where(b => b.Title.Contains(name)).ToList();
+        }
         public void Save()
         {
             context.SaveChanges();

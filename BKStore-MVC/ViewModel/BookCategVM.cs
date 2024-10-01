@@ -6,5 +6,6 @@ namespace BKStore_MVC.ViewModel
     {
         public List<Book> books {  get; set; }
         public List<Category> categories { get; set; }
+        public string? SearchName { get; set; }
     }
 }

@@ -60,6 +60,17 @@ namespace BKStore_MVC.Controllers
             return View("New");
         } // Add New Book
 
+        [HttpGet]
+        public IActionResult SearchByName(string name)
+        {
+            BookCategVM bookViewModel = new BookCategVM();
+            bookViewModel.categories = categoryRepository.GetAll();
+            bookViewModel.books = bookRepository.GetByName(name);
+            bookViewModel.SearchName = name;
+
+            return View("Index", bookViewModel);
+        }
+
         [HttpPost]
         public IActionResult SaveNew(Book bookFromRequest)
         {

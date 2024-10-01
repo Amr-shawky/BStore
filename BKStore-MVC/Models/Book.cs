@@ -11,7 +11,7 @@ namespace BKStore_MVC.Models
         public int BookID { get; set; }
         [StringLength(50, ErrorMessage = " Title cannot exceed 50 characters.")]
         [Required(ErrorMessage = "*")]
-        public string? Title { get; set; }
+        public string Title { get; set; }
         [StringLength(50, ErrorMessage = "Author Name cannot exceed 50 characters.")]
         [Display(Name = "Author Name")]
         public string? AuthorName { get; set; }
