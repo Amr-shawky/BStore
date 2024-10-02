@@ -31,7 +31,7 @@
                             </td>
                             <td>@(item.Price * item.Quantity) EGP</td>
                             <td>
-                                <button class="btn btn-danger" onclick="removeFromCart('@item.BookId')">Remove</button>
+                                <button class="btn btn-danger" onclick="removeFromCart(@item.BookId)">Remove</button>
                             </td>
                         </tr>
                     }
@@ -65,6 +65,17 @@
     }
 
     function removeFromCart(bookId) {
-        // Your logic to remove the item from the cart
+        $.ajax({
+            url: '@Url.Action("RemoveFromCart", "Book")',
+            type: 'POST',
+            data: { bookId: bookId },
+            success: function (response) {
+                // Optionally, you can refresh the cart display or perform other actions here
+                location.reload(); // Reload the page to reflect the changes
+            },
+            error: function (xhr, status, error) {
+                console.error('Error removing item from cart:', error);
+            }
+        });
     }
 </script>
