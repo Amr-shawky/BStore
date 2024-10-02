@@ -136,7 +136,7 @@ namespace BKStore_MVC.Migrations
 
                     b.HasIndex("CategoryID");
 
-                    b.ToTable("Book");
+                    b.ToTable("Book", (string)null);
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Category", b =>
@@ -159,7 +159,7 @@ namespace BKStore_MVC.Migrations
 
                     b.HasKey("CategoryID");
 
-                    b.ToTable("Category");
+                    b.ToTable("Category", (string)null);
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Country", b =>
@@ -177,7 +177,7 @@ namespace BKStore_MVC.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Country");
+                    b.ToTable("Country", (string)null);
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Customer", b =>
@@ -217,7 +217,7 @@ namespace BKStore_MVC.Migrations
                         .IsUnique()
                         .HasFilter("[UserID] IS NOT NULL");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customer", (string)null);
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.DeliveryClients", b =>
@@ -249,7 +249,7 @@ namespace BKStore_MVC.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("DeliveryClients");
+                    b.ToTable("DeliveryClients", (string)null);
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Governorate", b =>
@@ -272,7 +272,7 @@ namespace BKStore_MVC.Migrations
 
                     b.HasIndex("CountryID");
 
-                    b.ToTable("governorate");
+                    b.ToTable("governorate", (string)null);
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Order", b =>
@@ -304,7 +304,7 @@ namespace BKStore_MVC.Migrations
 
                     b.HasIndex("DeliveryClientsID");
 
-                    b.ToTable("Order");
+                    b.ToTable("Order", (string)null);
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.OrderBook", b =>
@@ -325,7 +325,7 @@ namespace BKStore_MVC.Migrations
 
                     b.HasIndex("BookID");
 
-                    b.ToTable("OrderBook");
+                    b.ToTable("OrderBook", (string)null);
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Reviews", b =>
@@ -361,7 +361,7 @@ namespace BKStore_MVC.Migrations
                         .IsUnique()
                         .HasFilter("[UserID] IS NOT NULL");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.ReviewsDelivery", b =>
@@ -393,7 +393,7 @@ namespace BKStore_MVC.Migrations
                     b.HasIndex("DeliveryID")
                         .IsUnique();
 
-                    b.ToTable("ReviewsDelivery");
+                    b.ToTable("ReviewsDelivery", (string)null);
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Shipping", b =>
@@ -423,7 +423,7 @@ namespace BKStore_MVC.Migrations
                         .IsUnique()
                         .HasFilter("[OrderID] IS NOT NULL");
 
-                    b.ToTable("Shipping");
+                    b.ToTable("Shipping", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

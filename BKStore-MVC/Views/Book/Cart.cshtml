@@ -20,16 +20,16 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        <tr id="cart-item-@item.BookId">
                             <td>
                                 <img src="~/assets/img/@item.ImagePath" class="img-thumbnail" alt="@item.Title" style="width: 100px;">
                                 <span>@item.Title</span>
                             </td>
-                            <td>@item.Price EGP</td>
+                            <td id="price-@item.BookId">@item.Price EGP</td>
                             <td>
                                 <input type="number" value="@item.Quantity" min="1" class="form-control w-50" onchange="updateQuantity('@item.BookId', this.value)">
                             </td>
-                            <td>@(item.Price * item.Quantity) EGP</td>
+                            <td id="subtotal-@item.BookId">@(@item.Price * @item.Quantity) EGP</td>
                             <td>
                                 <button class="btn btn-danger" onclick="removeFromCart(@item.BookId)">Remove</button>
                             </td>
@@ -43,7 +43,7 @@
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span>Subtotal</span>
-                    <span>@Model.Sum(item => item.Price * item.Quantity) EGP</span>
+                    <span id="cart-subtotal">@Model.Sum(item => item.Price * item.Quantity) EGP</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span>Shipping (Cairo & Giza)</span>
@@ -51,7 +51,7 @@
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <strong>Total</strong>
-                    <strong>@(Model.Sum(item => item.Price * item.Quantity) + 50) EGP</strong>
+                    <strong id="cart-total">@(@Model.Sum(item => item.Price * item.Quantity) + 50) EGP</strong>
                 </li>
             </ul>
             <a href="@Url.Action("Checkout", "Order")" class="btn btn-primary btn-block mt-3">Proceed to Checkout</a>
@@ -60,22 +60,26 @@
 </div>
 
 <script>
-    function updateQuantity(bookId, quantity) {
-        // Your logic to update the quantity
-    }
-
     function removeFromCart(bookId) {
         $.ajax({
             url: '@Url.Action("RemoveFromCart", "Book")',
             type: 'POST',
             data: { bookId: bookId },
             success: function (response) {
-                // Optionally, you can refresh the cart display or perform other actions here
-                location.reload(); // Reload the page to reflect the changes
+                // Remove the item from the cart display
+                document.getElementById('cart-item-' + bookId).remove();
+
+                // Update the cart totals
+                updateCartTotals(response.newSubtotal, response.newTotal);
             },
             error: function (xhr, status, error) {
                 console.error('Error removing item from cart:', error);
             }
         });
+    }
+
+    function updateCartTotals(newSubtotal, newTotal) {
+        document.getElementById('cart-subtotal').innerText = newSubtotal + ' EGP';
+        document.getElementById('cart-total').innerText = newTotal + ' EGP';
     }
 </script>

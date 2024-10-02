@@ -243,6 +243,41 @@ namespace BKStore_MVC.Controllers
             // Pass the ViewModel to the view
             return View("Cart",cartItems);
         }
+        //public IActionResult RemoveFromCart(int bookId)
+        //{
+        //    // Retrieve the existing cookie
+        //    var cookie = Request.Cookies["Cart"];
+        //    List<BookCartItem> cartItems;
+
+        //    if (cookie != null)
+        //    {
+        //        // Deserialize the existing cookie value
+        //        cartItems = JsonConvert.DeserializeObject<List<BookCartItem>>(cookie);
+        //    }
+        //    else
+        //    {
+        //        // Initialize an empty list if the cookie does not exist
+        //        cartItems = new List<BookCartItem>();
+        //    }
+
+        //    // Find the item to remove
+        //    var itemToRemove = cartItems.Find(item => item.BookId == bookId);
+        //    if (itemToRemove != null)
+        //    {
+        //        cartItems.Remove(itemToRemove);
+        //    }
+
+        //    // Serialize the updated list
+        //    string serializedCartItems = JsonConvert.SerializeObject(cartItems);
+
+        //    // Create or update the cookie
+        //    Response.Cookies.Append("Cart", serializedCartItems, new CookieOptions
+        //    {
+        //        Expires = DateTimeOffset.Now.AddDays(7) // Set the cookie to expire in 7 days
+        //    });
+
+        //    return RedirectToAction("ShowCart");
+        //}
         public IActionResult RemoveFromCart(int bookId)
         {
             // Retrieve the existing cookie
@@ -276,7 +311,12 @@ namespace BKStore_MVC.Controllers
                 Expires = DateTimeOffset.Now.AddDays(7) // Set the cookie to expire in 7 days
             });
 
-            return RedirectToAction("ShowCart");
+            // Calculate new totals
+            var newSubtotal = cartItems.Sum(item => item.Price * item.Quantity);
+            var newTotal = newSubtotal + 50; // Assuming a fixed shipping cost of 50 EGP
+
+            // Return the new totals as JSON
+            return Json(new { newSubtotal, newTotal });
         }
 
 
