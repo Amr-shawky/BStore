@@ -7892,19 +7892,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MG\\.nuget\\packages\\": {}
+    "C:\\Users\\my computer\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MG\\Desktop\\DEPI_Project\\BookStoreProject\\BStore\\BKStore-MVC\\BKStore-MVC.csproj",
+      "projectUniqueName": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\BKStore-MVC.csproj",
       "projectName": "BKStore-MVC",
-      "projectPath": "C:\\Users\\MG\\Desktop\\DEPI_Project\\BookStoreProject\\BStore\\BKStore-MVC\\BKStore-MVC.csproj",
-      "packagesPath": "C:\\Users\\MG\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MG\\Desktop\\DEPI_Project\\BookStoreProject\\BStore\\BKStore-MVC\\obj\\",
+      "projectPath": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\BKStore-MVC.csproj",
+      "packagesPath": "C:\\Users\\my computer\\.nuget\\packages\\",
+      "outputPath": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\MG\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\my computer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

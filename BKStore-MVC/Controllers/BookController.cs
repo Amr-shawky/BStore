@@ -1,8 +1,10 @@
 ﻿using BKStore_MVC.Models;
 using BKStore_MVC.Repository.Interfaces;
 using BKStore_MVC.ViewModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace BKStore_MVC.Controllers
 {
@@ -181,51 +183,147 @@ namespace BKStore_MVC.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public IActionResult AddToCart(int bookId)
+        public IActionResult AddToCart(int bookId ,int Quantity)
         {
-            // Set the cookie with the book ID
-            CookieOptions options = new CookieOptions
+            var cookie = Request.Cookies["Cart"];
+            List<BookCartItem> cartItems;
+
+            if (cookie != null)
             {
-                Expires = DateTime.Now.AddDays(7) // Set the cookie to expire in 7 days
-            };
-            Response.Cookies.Append("BookID", bookId.ToString(), options);
-
-            // Redirect to the Cart action
-            return RedirectToAction("Cart");
-        }
-        public IActionResult Cart()
-        {
-            //var cart = Request.Cookies["cart"];
-            //var cartItems = string.IsNullOrEmpty(cart) ? new List<BookCartItem>() : JsonConvert.DeserializeObject<List<BookCartItem>>(cart);
-            //var bookId = Request.Cookies["BookID"];
-
-            // Your logic to get the book details using the bookId
-            //var book = bookRepository.GetByID(int.Parse(bookId??"0"));
-            //BookCartItem cartItem1 = new BookCartItem();
-            //cartItem1.Title = book.Title;
-            //cartItem1.Price= book.Price;
-            //cartItem1.ImagePath = book.ImagePath;
-            //cartItem1.BookId = book.BookID;
-            //cartItem1.Quantity = 1;
-            var bookId = Request.Cookies["BookID"];
-
-            // Your logic to get the book details using the bookId
-            var book = bookRepository.GetByID(int.Parse(bookId ?? "0"));
-
-            // Create a list of BookCartItem objects
-            var cartItems = new List<BookCartItem>
-        {
-            new BookCartItem
-            {
-                BookId = book.BookID,
-                Title = book.Title??"",
-                Price = book.Price,
-                Quantity = 1 // Example quantity
+                // Deserialize the existing cookie value
+                cartItems = JsonConvert.DeserializeObject<List<BookCartItem>>(cookie);
             }
-        };
+            else
+            {
+                // Initialize a new list if the cookie does not exist
+                cartItems = new List<BookCartItem>();
+            }
+            Book book = bookRepository.GetByID(bookId);
+            // Add the new item to the list
+            cartItems.Add(new BookCartItem { BookId = bookId,Quantity = Quantity ,
+                ImagePath= book.ImagePath,Title=book.Title,Price=book.Price
+            });
+
+            // Serialize the updated list
+            string serializedCartItems = JsonConvert.SerializeObject(cartItems);
+
+            // Create or update the cookie
+            Response.Cookies.Append("Cart", serializedCartItems, new CookieOptions
+            {
+                Expires = DateTimeOffset.Now.AddDays(7) // Set the cookie to expire in 7 days
+            });
 
             return View("Cart", cartItems);
+            //return RedirectToAction(nameof(ShowCart));
+
         }
+        public IActionResult ShowCart()
+        {
+            // Retrieve the existing cookie
+            var cookie = Request.Cookies["Cart"];
+            List<BookCartItem> cartItems;
+
+            if (cookie != null)
+            {
+                // Deserialize the existing cookie value
+                cartItems = JsonConvert.DeserializeObject<List<BookCartItem>>(cookie);
+            }
+            else
+            {
+                // Initialize an empty list if the cookie does not exist
+                cartItems = new List<BookCartItem>();
+            }
+
+            //// Create the ViewModel and populate it with the cart items
+            //var viewModel = new CartViewModel
+            //{
+            //    Items = cartItems
+            //};
+
+            // Pass the ViewModel to the view
+            return View("Cart",cartItems);
+        }
+
 
     }
 }
+#region MyImportantTests
+//public IActionResult Cart(int Quantity)
+//{
+
+//var bookID = Request.Cookies["BookID"].ToList();
+//var cartitem = new List<BookCartItem>();
+//foreach (var item in bookID) {
+//    Book book = bookRepository.GetByID(item);
+//    BookCartItem Cart = new BookCartItem
+//    {
+//        BookId = book.BookID,
+//        Title = book.Title ?? "",
+//        Price = book.Price,
+//        Quantity = Quantity // Example quantity
+//    };
+//    cartitem.Add(Cart);
+//}
+
+//return View("Cart", cartitem);
+
+//    var cartItems = new List<BookCartItem>
+//{
+//    new BookCartItem
+//    {
+//        BookId = book.BookID,
+//        Title = book.Title??"",
+//        Price = book.Price,
+//        Quantity = Quantity // Example quantity
+//    }
+//};
+
+//    string DeliveryIDValue = UserID;
+//    CookieOptions options = new CookieOptions
+//    {
+//        Expires = DateTime.Now.AddDays(1)
+//    };
+//    Response.Cookies.Append("Did", DeliveryIDValue, options);
+
+
+//    var bookId = Request.Cookies["BookID"];
+
+//    // Your logic to get the book details using the bookId
+//    var book = bookRepository.GetByID(int.Parse(bookId ?? "0"));
+
+//    // Create a list of BookCartItem objects
+//    var cartItems = new List<BookCartItem>
+//{
+//    new BookCartItem
+//    {
+//        BookId = book.BookID,
+//        Title = book.Title??"",
+//        Price = book.Price,
+//        Quantity = 1 // Example quantity
+//    }
+//};
+
+//}
+
+// Set the cookie with the book ID
+//CookieOptions options = new CookieOptions
+//{
+//    Expires = DateTime.Now.AddDays(7) // Set the cookie to expire in 7 days
+//};
+//Response.Cookies.Append("BookID", bookId.ToString(), options);
+
+//Book book = bookRepository.GetByID(bookId);
+
+//BookCartItem cart =
+//    new BookCartItem
+//    {
+//        BookId = book.BookID,
+//        Title = book.Title ?? "",
+//        Price = book.Price,
+//        Quantity = Quantity // Example quantity
+//    };
+//var cartItems =new List<BookCartItem>();
+//cartItems.Add(cart);
+//return View("Cart", cartItems);
+////return RedirectToAction("Cart", Quantity);
+#endregion
