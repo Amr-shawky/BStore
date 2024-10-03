@@ -57,10 +57,13 @@ namespace BKStore_MVC.Controllers
         public IActionResult New()
         {
             ViewData["Categories"] = categoryRepository.GetAll();
-            //  ViewData["DeptList"] =DepartmentRepository.GetAll();
 
             return View("New");
         } // Add New Book
+        public IActionResult GetAllToAdmin()
+        {
+            return View("GetAllToAdmin",bookRepository.GetAll());
+        }
 
         [HttpGet]
         public IActionResult SearchByName(string? name)
@@ -104,7 +107,7 @@ namespace BKStore_MVC.Controllers
             BookWithAuthorWithPuplisherWithCategVM bookVM =
                 new BookWithAuthorWithPuplisherWithCategVM();
 
-            bookVM.BookID = bookModel.BookID;
+            bookVM.BookID = id;
             bookVM.Title = bookModel.Title;
             bookVM.AuthorName = bookModel.AuthorName;
             bookVM.StockQuantity = bookModel.StockQuantity;
@@ -163,8 +166,10 @@ namespace BKStore_MVC.Controllers
             {
                 return NotFound();
             }
+            bookRepository.Delete(id);
+            bookRepository.Save();
 
-            return View("Delete", bookFromDB); // Display confirmation before deletion
+            return RedirectToAction("GetAllToAdmin"); // Display confirmation before deletion
         }
 
         public IActionResult DeleteConfirmed(int id)
@@ -327,6 +332,10 @@ namespace BKStore_MVC.Controllers
             bookCategVM.categories = categoryRepository.GetAll();
             bookCategVM.books = bookRepository.GetBooksByCatgyId(ID);
             return View("Index", bookCategVM);
+        }
+        public IActionResult DetailedBookForAdmin(int ID)
+        {
+            return View("DetailedBookForAdmin",bookRepository.GetByID(ID));
         }
 
     }

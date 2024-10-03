@@ -46,12 +46,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Book/DetailedBookForAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xEZXRhaWxlZEJvb2tGb3JBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Book/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Book/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Book/GetAllToAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xHZXRBbGxUb0FkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/FULL Projects/DPI/Book-Store/BStore/BKStore-MVC/Views/Book/Index.cshtml]
