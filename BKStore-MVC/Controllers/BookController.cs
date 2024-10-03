@@ -63,14 +63,17 @@ namespace BKStore_MVC.Controllers
         } // Add New Book
 
         [HttpGet]
-        public IActionResult SearchByName(string name)
+        public IActionResult SearchByName(string? name)
         {
-            BookCategVM bookViewModel = new BookCategVM();
-            bookViewModel.categories = categoryRepository.GetAll();
-            bookViewModel.books = bookRepository.GetByName(name);
-            bookViewModel.SearchName = name;
-
-            return View("Index", bookViewModel);
+            if (name != null)
+            {
+                BookCategVM bookViewModel = new BookCategVM();
+                bookViewModel.categories = categoryRepository.GetAll();
+                bookViewModel.books = bookRepository.GetByName(name);
+                bookViewModel.SearchName = name;
+                return View("Index", bookViewModel);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -318,7 +321,13 @@ namespace BKStore_MVC.Controllers
             // Return the new totals as JSON
             return Json(new { newSubtotal, newTotal });
         }
-
+        public IActionResult GetBooksCategory(int ID)
+        {
+            BookCategVM bookCategVM = new BookCategVM();
+            bookCategVM.categories = categoryRepository.GetAll();
+            bookCategVM.books = bookRepository.GetBooksByCatgyId(ID);
+            return View("Index", bookCategVM);
+        }
 
     }
 }
