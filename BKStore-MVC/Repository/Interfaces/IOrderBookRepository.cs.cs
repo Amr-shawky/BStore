@@ -9,7 +9,7 @@ namespace BKStore_MVC.Repository.Interfaces
         public void Delete(int ID);
         public OrderBook GetByBookID(int ID);
         public List<OrderBook> GetAll();
-        public OrderBook GetByID(int ID);
+        public List<OrderBook> GetByID(int ID);
         public void Save();
     }
 }

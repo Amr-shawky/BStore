@@ -18,7 +18,7 @@ namespace BKStore_MVC.Repository
 
             public void Delete(int ID)
             {
-                OrderBook orderBook = GetByID(ID);
+                List<OrderBook> orderBook = GetByID(ID);
                 context.Remove(orderBook);
             }
 
@@ -27,9 +27,9 @@ namespace BKStore_MVC.Repository
                 return context.OrderBook.ToList();
             }
 
-            public OrderBook GetByID(int ID)
+            public List<OrderBook> GetByID(int ID)
             {
-                return context.OrderBook.FirstOrDefault(c => c.OrderID == ID) ?? new OrderBook();
+                return context.OrderBook.Where(c => c.OrderID == ID).ToList();
             }
             public OrderBook GetByBookID(int ID)
             {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Security.Claims;
 
 namespace BKStore_MVC.Controllers
@@ -40,10 +41,26 @@ namespace BKStore_MVC.Controllers
         }
         public IActionResult DetailedOrder(int OrderId)
         {
+            List<OrderBook> orderBook= orderBookRepository.GetByID(OrderId);
+            List<BookCartItem> bookCartItems= new List<BookCartItem>();
             OrderDetailVM orderDetailVM = new OrderDetailVM();
-            orderDetailVM.BookName = bookRepository.GetByID(orderBookRepository.GetByID(OrderId).BookID).Title ?? "nothing";
+            if (orderBook != null)
+            {
+                foreach (var item in orderBook.ToList())
+                {
+                    BookCartItem bookCart = new BookCartItem();
+                    bookCart.Title = bookRepository.GetByID(item.BookID).Title;
+                    bookCart.Quantity = item.Quantity;
+                    bookCart.Price = bookRepository.GetByID(item.BookID).Price;
+                    bookCart.ImagePath = bookRepository.GetByID(item.BookID).ImagePath;
+                    bookCart.BookId = item.BookID;
+                    
+                    bookCartItems.Add(bookCart);
+                }
+            }
+
+            orderDetailVM.bookCartItems = bookCartItems ;
             orderDetailVM.CustomerName = customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).Name;
-            orderDetailVM.Quantity = orderBookRepository.GetByID(OrderId).Quantity;
             orderDetailVM.TotalPrice = orderRepository.GetByID(OrderId).TotalAmount ?? 0;
             orderDetailVM.CustomerAddress = customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).Address;
             orderDetailVM.Governorate = governorateRepository.GetByID(customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).GovernorateID ?? 0).Name;
