@@ -2,6 +2,7 @@
 using BKStore_MVC.Repository.Interfaces;
 using BKStore_MVC.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Net;
 
 namespace BKStore_MVC.Controllers
@@ -24,12 +25,39 @@ namespace BKStore_MVC.Controllers
             this.orderBookRepository = orderBookRepository;
             this.orderRepository = orderRepository;
         }
-        public IActionResult AddCustomer(int BookId, int Quantity)
+        //public IActionResult AddCustomer(int BookId, int Quantity,double total)
+        //{
+        //    ViewData["Governoratelst"] = governorateRepository.GetAll();
+        //    CustomerOrderVM customerOrderVM = new CustomerOrderVM();
+        //    customerOrderVM.Quantity = Quantity;
+        //    customerOrderVM.Book = bookRepository.GetByID(BookId);
+        //    customerOrderVM.TotalAmount= total;
+        //    return View("AddCustomer", customerOrderVM);
+        //}
+        public IActionResult AddCustomer(decimal TotalAmount)
         {
+            // Retrieve the existing cookie
+            var cookie = Request.Cookies["Cart"];
+            List<BookCartItem> cartItems;
+
+            if (cookie != null)
+            {
+                // Deserialize the existing cookie value
+                cartItems = JsonConvert.DeserializeObject<List<BookCartItem>>(cookie);
+            }
+            else
+            {
+                // Initialize an empty list if the cookie does not exist
+                cartItems = new List<BookCartItem>();
+            }
+
+
             ViewData["Governoratelst"] = governorateRepository.GetAll();
-            CustomerOrderVM customerOrderVM = new CustomerOrderVM();
-            customerOrderVM.Quantity = Quantity;
-            customerOrderVM.Book = bookRepository.GetByID(BookId);
+            CustomerOrderVM customerOrderVM = new CustomerOrderVM
+            {
+                BookItems = cartItems,
+                TotalAmount = TotalAmount
+            };
             return View("AddCustomer", customerOrderVM);
         }
         public IActionResult SaveAdd(CustomerOrderVM customerOrderVM)

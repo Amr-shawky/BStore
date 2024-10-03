@@ -28,25 +28,38 @@
                     <input asp-for="Phone" type="text" class="form form-control" />
                     <span asp-validation-for="Phone" class="text-danger"></span>
                 </div>
-                <div style="border-bottom:10px">
-                    <input asp-for="Quantity" type="hidden" value="@Model.Quantity" class="form form-control" />
-                </div>
-                <div style="border-bottom:10px">
-                    <input asp-for="BookID" type="hidden" value="@Model.Book.BookID" class="form form-control" />
-                </div>
+                @foreach (var item in Model.BookItems)
+                {
+                    <div style="border-bottom:10px">
+                        <input type="hidden" name="BookItems[@Model.BookItems.IndexOf(item)].BookId" value="@item.BookId" class="form form-control" />
+                        <input type="hidden" name="BookItems[@Model.BookItems.IndexOf(item)].Quantity" value="@item.Quantity" class="form form-control" />
+                    </div>
+                }
+                <input type="hidden" name="TotalAmount" value="@Model.TotalAmount" class="form form-control" />
                 <input type="submit" value="Place Order" class="form form-control" style="color:green" />
             </form>
         </div>
         <div class="col-md-6">
             <h3>Your Order</h3>
             <ul class="list-group">
+                @foreach (var item in Model.BookItems)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>@item.Title (@item.Quantity)</span>
+                        <span>@(item.Price * item.Quantity) EGP</span>
+                    </li>
+                }
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>@Model.Book.Title</span>
-                    <span>@Model.Book.Price EGP</span>
+                    <span>Subtotal</span>
+                    <span>@(Model.TotalAmount - 50) EGP</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Shipping (Cairo & Giza)</span>
+                    <span>50 EGP</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <strong>Total</strong>
-                    <strong>@Model.Book.Price EGP</strong>
+                    <strong>@(Model.TotalAmount) EGP</strong>
                 </li>
             </ul>
             <div class="mt-3">
@@ -66,47 +79,19 @@
     .container {
         margin-top: 20px;
     }
+
     .form-group label {
         font-weight: bold;
     }
+
     .list-group-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
+
     .btn-primary {
         background-color: #007bff;
         border-color: #007bff;
     }
 </style>
-
-@*  <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" class="form-control" id="fullName" name="FullName" required>
-                </div>
-                <div class="form-group">
-                    <label for="address">Full Address</label>
-                    <input type="text" class="form-control" id="address" name="Address" required>
-                </div>
-                <div class="form-group">
-                    <label for="governorate">Governorate</label>
-                    <input type="text" class="form-control" id="governorate" name="Governorate" required>
-                </div>
-                <div class="form-group">
-                    <label for="mobile">Mobile</label>
-                    <input type="text" class="form-control" id="mobile" name="Mobile" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="Email" required>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="createAccount" name="CreateAccount">
-                    <label class="form-check-label" for="createAccount">Create an account?</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="subscribeNewsletter" name="SubscribeNewsletter">
-                    <label class="form-check-label" for="subscribeNewsletter">Subscribe to newsletter</label>
-                </div>
-                *@
-

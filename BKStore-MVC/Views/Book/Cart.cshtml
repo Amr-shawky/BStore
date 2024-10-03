@@ -1,5 +1,4 @@
 ﻿@model List<BKStore_MVC.ViewModel.BookCartItem>
-
 @{
     ViewData["Title"] = "Cart";
 }
@@ -54,11 +53,10 @@
                     <strong id="cart-total">@(@Model.Sum(item => item.Price * item.Quantity) + 50) EGP</strong>
                 </li>
             </ul>
-            <a href="@Url.Action("Checkout", "Order")" class="btn btn-primary btn-block mt-3">Proceed to Checkout</a>
+            <a href="javascript:void(0);" onclick="proceedToCheckout()" class="btn btn-primary btn-block mt-3">Proceed to Checkout</a>
         </div>
     </div>
 </div>
-
 <script>
     function removeFromCart(bookId) {
         $.ajax({
@@ -81,5 +79,17 @@
     function updateCartTotals(newSubtotal, newTotal) {
         document.getElementById('cart-subtotal').innerText = newSubtotal + ' EGP';
         document.getElementById('cart-total').innerText = newTotal + ' EGP';
+    }
+
+    function proceedToCheckout() {
+        var totalAmount = parseFloat(document.getElementById('cart-total').innerText.replace(' EGP', ''));
+
+        if (isNaN(totalAmount) || totalAmount <= 0) {
+            console.error('Total amount is invalid:', totalAmount);
+            return;
+        }
+
+        var url = '@Url.Action("AddCustomer", "Customer")' + '?TotalAmount=' + totalAmount;
+        window.location.href = url;
     }
 </script>

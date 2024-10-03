@@ -21,9 +21,9 @@ namespace BKStore_MVC.ViewModel
         public Book? Book { get; set; }
         public int? BookID { get; set; }
         public DateTime? OrderDate { get; set; }
-        public double? TotalAmount { get; set; }
+        public decimal? TotalAmount { get; set; }
         
-
+        public List<BookCartItem> BookItems { get; set; }
         //public int? BookPrice { get; set; }
 
 
