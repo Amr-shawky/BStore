@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BKStore-MVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aa88b3991b57f20c4d359af6bfa4fbd17406e79e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9598e9ddf735032cc1824cef911014f1b491430")]
 [assembly: System.Reflection.AssemblyProductAttribute("BKStore-MVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BKStore-MVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

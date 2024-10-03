@@ -18,12 +18,10 @@ namespace BKStore_MVC.ViewModel
         [Required]
         public int? GovernorateID { get; set; }
         public int? Quantity { get; set; }
-        public Book? Book { get; set; }
-        public int? BookID { get; set; }
-        public DateTime? OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; } = DateTime.Now;
         public decimal? TotalAmount { get; set; }
         
-        public List<BookCartItem> BookItems { get; set; }
+        public List<BookCartItem>? BookItems { get; set; }
         //public int? BookPrice { get; set; }
 
 
