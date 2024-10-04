@@ -45,6 +45,10 @@
       "PackagePath": "staticwebassets\\assets\\img\\portfolio\\submarine.png"
     },
     {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\shopping-cart.png",
+      "PackagePath": "staticwebassets\\assets\\img\\shopping-cart.png"
+    },
+    {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

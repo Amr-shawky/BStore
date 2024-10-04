@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "CyZiop2D8TCbuLAqQ65Xab6zSoEWgtoAzlpAcoda5Is=",
+  "Hash": "1JdfCbmPoBa5Vti1hBYBOFpYhU/0UIXNau3UN0Rs3Ek=",
   "Source": "BKStore-MVC",
   "BasePath": "_content/BKStore-MVC",
   "Mode": "Default",
@@ -243,6 +243,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\portfolio\\submarine.png"
+    },
+    {
+      "Identity": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\shopping-cart.png",
+      "SourceId": "BKStore-MVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\",
+      "BasePath": "_content/BKStore-MVC",
+      "RelativePath": "assets/img/shopping-cart.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\shopping-cart.png"
     },
     {
       "Identity": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\css\\site.css",
