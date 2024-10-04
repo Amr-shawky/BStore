@@ -8,6 +8,7 @@ using BKStore_MVC.Models.Context;
 using BKStore_MVC.Models;
 using BKStore_MVC.Repository.Interfaces;
 using BKStore_MVC.Repository;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BKStore_MVC
 {
@@ -19,6 +20,9 @@ namespace BKStore_MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(Options =>
             {
                 Options.Password.RequiredLength = 4;
@@ -41,6 +45,7 @@ namespace BKStore_MVC
             builder.Services.AddDbContext<BKstore_System>(Options => {
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("BK1"));
             });
+
 
             var app = builder.Build();
 

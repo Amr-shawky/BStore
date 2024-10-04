@@ -1,4 +1,6 @@
-﻿using BKStore_MVC.Models;
+﻿using AutoMapper;
+using BKStore_MVC.Models;
+using BKStore_MVC.Repository;
 using BKStore_MVC.Repository.Interfaces;
 using BKStore_MVC.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +11,12 @@ namespace BKStore_MVC.Controllers
     {
         ICategoryRepository categoryRepository;
         IBookRepository bookRepository;
-        public CategoryController(ICategoryRepository _categoryRepository, IBookRepository _bookRepository)
+        IMapper _mapper;
+        public CategoryController(ICategoryRepository _categoryRepository, IMapper mapper, IBookRepository _bookRepository)
         {
             categoryRepository = _categoryRepository;
             bookRepository = _bookRepository;
+            _mapper = mapper;
         }
         // DONE !
         public IActionResult Index()
@@ -23,29 +27,24 @@ namespace BKStore_MVC.Controllers
         // DONE !
         public IActionResult Details(int id)
         {
-           Category categoryFromDB = categoryRepository.GetByID(id);
+            var categoryFromDB = categoryRepository.GetByID(id);
             if (categoryFromDB == null)
             {
                 return NotFound("Category Not Found");
             }
-            List<Book> Books = bookRepository.GetBooksByCatgyId(categoryFromDB.CategoryID);
 
-            if (Books == null)
+            var books = bookRepository.GetBooksByCatgyId(categoryFromDB.CategoryID);
+            if (books == null || !books.Any())
             {
-                return NotFound("There is no Books in this Category");
+                return NotFound("There are no books in this category");
             }
 
-            BookWithCategoryVM bookVM = new BookWithCategoryVM();
-
-            bookVM.CategoryId = categoryFromDB.CategoryID;
-            bookVM.CategoryName = categoryFromDB.Name;
-            bookVM.books = Books;
+            var bookVM = _mapper.Map<BookWithCategoryVM>(categoryFromDB);
+            bookVM.books = books;
 
             return View("Details", bookVM);
         }
-
-        // DONE !
-        public IActionResult New()
+                public IActionResult New()
         {
             return View("New");
         }
@@ -76,25 +75,28 @@ namespace BKStore_MVC.Controllers
         // DONE !
         public IActionResult SaveEdit(int id, Category categoryFromRequest)
         {
-            if (ModelState.IsValid)
-            {
-                Category categoryFromDB = categoryRepository.GetByID(id);
-                if (categoryFromDB == null)
+            
+                if (ModelState.IsValid)
                 {
-                    return NotFound("Not Found");
+                    var categoryFromDB = categoryRepository.GetByID(id);
+                    if (categoryFromDB == null)
+                    {
+                        return NotFound("Not Found");
+                    }
+
+                    // Map the properties from categoryFromRequest to categoryFromDB
+                    _mapper.Map(categoryFromRequest, categoryFromDB);
+
+                    // Save 
+                    categoryRepository.Update(categoryFromDB);
+                    categoryRepository.Save();
+
+                    // Redirect
+                    return RedirectToAction("Index");
                 }
-                categoryFromDB.Name = categoryFromRequest.Name;
-                categoryFromDB.Description = categoryFromRequest.Description;
-                
-                // Save 
-                categoryRepository.Update(categoryFromDB);
-                categoryRepository.Save();
 
-                // Redirect
-                return RedirectToAction("Index");
-            }
-
-            return View("Edit", categoryFromRequest);
+                return View("Edit", categoryFromRequest);
+            
         }
 
         // DONE !
@@ -126,3 +128,30 @@ namespace BKStore_MVC.Controllers
 
     }
 }
+#region Test
+//public IActionResult Details(int id)
+//{
+//   Category categoryFromDB = categoryRepository.GetByID(id);
+//    if (categoryFromDB == null)
+//    {
+//        return NotFound("Category Not Found");
+//    }
+//    List<Book> Books = bookRepository.GetBooksByCatgyId(categoryFromDB.CategoryID);
+
+//    if (Books == null)
+//    {
+//        return NotFound("There is no Books in this Category");
+//    }
+
+//    BookWithCategoryVM bookVM = new BookWithCategoryVM();
+
+//    bookVM.CategoryId = categoryFromDB.CategoryID;
+//    bookVM.CategoryName = categoryFromDB.Name;
+//    bookVM.books = Books;
+
+//    return View("Details", bookVM);
+//}
+
+// DONE !
+
+#endregion

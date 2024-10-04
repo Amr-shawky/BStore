@@ -11,7 +11,8 @@ namespace BKStore_MVC.Repository.Interfaces
         public List<Book> GetAll();
         public List<Book> GetByName(string name);
         public Book GetByID(int ID);
-        public List<Book> GetBooksByCatgyId (int id); 
+        public List<Book> GetBooksByCatgyId (int id);
+        public IEnumerable<Book> GetByNameList(string name);
         public void Save();
     }
 }

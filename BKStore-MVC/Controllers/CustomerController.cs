@@ -119,5 +119,9 @@ namespace BKStore_MVC.Controllers
         {
             return View();
         }
+        public IActionResult GetAll()
+        {
+            return View("GetAll",customerRepository.GetAll());
+        }
     }
 }

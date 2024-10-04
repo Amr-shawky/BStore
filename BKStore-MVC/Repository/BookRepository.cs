@@ -52,5 +52,9 @@ namespace BKStore_MVC.Repository
         {
             context.Update(book);
         }
+        public IEnumerable<Book> GetByNameList(string name)
+        {
+            return context.Book.Where(b => b.Title.ToLower().Contains(name.ToLower())).ToList();
+        }
     }
 }

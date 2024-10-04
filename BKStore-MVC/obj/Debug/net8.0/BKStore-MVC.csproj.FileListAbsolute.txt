@@ -516,3 +516,4 @@ F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\refint\BKSto
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-MVC.pdb
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-MVC.genruntimeconfig.cache
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\ref\BKStore-MVC.dll
+F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\AutoMapper.dll

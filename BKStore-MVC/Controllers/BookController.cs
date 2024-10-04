@@ -1,4 +1,6 @@
-﻿using BKStore_MVC.Models;
+﻿using AutoMapper;
+using BKStore_MVC.Models;
+using BKStore_MVC.Repository;
 using BKStore_MVC.Repository.Interfaces;
 using BKStore_MVC.ViewModel;
 using Microsoft.AspNetCore.Identity;
@@ -12,11 +14,13 @@ namespace BKStore_MVC.Controllers
     {
         IBookRepository bookRepository;
         ICategoryRepository categoryRepository;
-
-        public BookController(IBookRepository _bookRepository, ICategoryRepository _categoryRepository)
+        IMapper _mapper;
+        public BookController(IBookRepository _bookRepository,IMapper mapper,
+            ICategoryRepository _categoryRepository)
         {
             bookRepository = _bookRepository;
             categoryRepository = _categoryRepository;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -26,7 +30,6 @@ namespace BKStore_MVC.Controllers
             bookCategVM.books = bookRepository.GetAll();
             return View("Index", bookCategVM);
         } // Show All Books
-
         public IActionResult Details(int Bookid)
         {
             Book book = bookRepository.GetByID(Bookid);
@@ -36,22 +39,16 @@ namespace BKStore_MVC.Controllers
             }
 
             Category category = categoryRepository.GetByID(book.CategoryID);
+            if (category == null)
+            {
+                return NotFound("Category not found.");
+            }
 
-            BookWithAuthorWithPuplisherWithCategVM bookVM =
-                new BookWithAuthorWithPuplisherWithCategVM();
+            var bookVM = _mapper.Map<BookWithAuthorWithPuplisherWithCategVM>(book);
+            _mapper.Map(category, bookVM); // Map category properties to the view model
 
-            // Pass Book Props to Book View Model Class
-            bookVM.BookID = book.BookID;
-            bookVM.BookImagePath = book.ImagePath;
-            bookVM.Title = book.Title;
-            bookVM.Price = book.Price;
-            bookVM.StockQuantity = book.StockQuantity;
-            bookVM.Description = book.Description;
-            bookVM.CategoryID = category.CategoryID;
-            bookVM.CategoryName = category.Name;
-            
             return View("Details", bookVM);
-        } // Show Book by id
+        }
 
         [HttpGet]
         public IActionResult New()
@@ -66,18 +63,42 @@ namespace BKStore_MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult SearchByName(string? name)
+        public IActionResult SearchByName(string name)
         {
-            if (name != null)
+            if (!string.IsNullOrEmpty(name))
             {
-                BookCategVM bookViewModel = new BookCategVM();
-                bookViewModel.categories = categoryRepository.GetAll();
-                bookViewModel.books = bookRepository.GetByName(name);
-                bookViewModel.SearchName = name;
-                return View("Index", bookViewModel);
+                var categories = categoryRepository.GetAll();
+                var books = bookRepository.GetByNameList(name);
+
+                var bookCategVM = new BookCategVM
+                {
+                    categories = categories,
+                    books = _mapper.Map<List<Book>>(books),
+                    SearchName = name
+                };
+
+                return View("Index", bookCategVM);
             }
             return RedirectToAction(nameof(Index));
         }
+        //public IActionResult SearchByName(string name)
+        //{
+        //        if (name != null)
+        //        {
+        //            var categories = categoryRepository.GetAll();
+        //            var books = bookRepository.GetByName(name);
+
+        //            var bookCategVM = new BookCategVM
+        //            {
+        //                categories = categories,
+        //                books = _mapper.Map<List<Book>>(books),
+        //                SearchName = name
+        //            };
+
+        //            return View("Index", bookCategVM);
+        //        }
+        //        return RedirectToAction(nameof(Index));
+        //}
 
         [HttpPost]
         public IActionResult SaveNew(Book bookFromRequest)
@@ -99,29 +120,15 @@ namespace BKStore_MVC.Controllers
             ViewData["CategoryName"] = categoryRepository.GetAll();
             return RedirectToAction("New", bookFromRequest);
         } // Save Data
-
         public IActionResult Edit(int id)
         {
-            Book bookModel = bookRepository.GetByID(id);
+            var bookModel = bookRepository.GetByID(id);
 
-            BookWithAuthorWithPuplisherWithCategVM bookVM =
-                new BookWithAuthorWithPuplisherWithCategVM();
-
-            bookVM.BookID = id;
-            bookVM.Title = bookModel.Title;
-            bookVM.AuthorName = bookModel.AuthorName;
-            bookVM.StockQuantity = bookModel.StockQuantity;
-            bookVM.Price = bookModel.Price;
-            bookVM.BookImagePath = bookModel.ImagePath;
-            bookVM.categories = categoryRepository.GetAll();
-            bookVM.PublisherName = bookModel.PublisherName;
-            bookVM.Description = bookModel.Description;
-            bookVM.CategoryID = bookModel.CategoryID;
+            var bookVM = _mapper.Map<BookWithAuthorWithPuplisherWithCategVM>(bookModel);
             bookVM.categories = categoryRepository.GetAll();
 
             return View("Edit", bookVM);
         }
-
         [HttpPost]
         public IActionResult SaveEdit(int id, BookWithAuthorWithPuplisherWithCategVM bookFromRequest)
         {
@@ -129,17 +136,10 @@ namespace BKStore_MVC.Controllers
             {
                 try
                 {
-                    Book bookFromDB =
-                        bookRepository.GetByID(id);
+                    var bookFromDB = bookRepository.GetByID(id);
 
-                    bookFromDB.Title = bookFromRequest.Title;
-                    bookFromDB.AuthorName = bookFromRequest.AuthorName;
-                    bookFromDB.StockQuantity = bookFromRequest.StockQuantity;
-                    bookFromDB.Price = bookFromRequest.Price;
-                    bookFromDB.PublisherName = bookFromRequest.PublisherName;
-                    bookFromDB.Description = bookFromRequest.Description;
-                    bookFromDB.ImagePath = bookFromRequest.BookImagePath;
-                    bookFromDB.CategoryID = bookFromRequest.CategoryID;
+                    // Map the properties from bookFromRequest to bookFromDB
+                    _mapper.Map(bookFromRequest, bookFromDB);
 
                     bookRepository.Save();
                     return RedirectToAction("Index");
@@ -154,8 +154,6 @@ namespace BKStore_MVC.Controllers
             bookFromRequest.categories = categoryRepository.GetAll();
             return View("Edit", bookFromRequest);
         }
-
-        // Delete
         public IActionResult Delete(int id)
         {
             // Fetch the book to delete
@@ -251,41 +249,6 @@ namespace BKStore_MVC.Controllers
             // Pass the ViewModel to the view
             return View("Cart",cartItems);
         }
-        //public IActionResult RemoveFromCart(int bookId)
-        //{
-        //    // Retrieve the existing cookie
-        //    var cookie = Request.Cookies["Cart"];
-        //    List<BookCartItem> cartItems;
-
-        //    if (cookie != null)
-        //    {
-        //        // Deserialize the existing cookie value
-        //        cartItems = JsonConvert.DeserializeObject<List<BookCartItem>>(cookie);
-        //    }
-        //    else
-        //    {
-        //        // Initialize an empty list if the cookie does not exist
-        //        cartItems = new List<BookCartItem>();
-        //    }
-
-        //    // Find the item to remove
-        //    var itemToRemove = cartItems.Find(item => item.BookId == bookId);
-        //    if (itemToRemove != null)
-        //    {
-        //        cartItems.Remove(itemToRemove);
-        //    }
-
-        //    // Serialize the updated list
-        //    string serializedCartItems = JsonConvert.SerializeObject(cartItems);
-
-        //    // Create or update the cookie
-        //    Response.Cookies.Append("Cart", serializedCartItems, new CookieOptions
-        //    {
-        //        Expires = DateTimeOffset.Now.AddDays(7) // Set the cookie to expire in 7 days
-        //    });
-
-        //    return RedirectToAction("ShowCart");
-        //}
         public IActionResult RemoveFromCart(int bookId)
         {
             // Retrieve the existing cookie
@@ -341,6 +304,124 @@ namespace BKStore_MVC.Controllers
     }
 }
 #region MyImportantTests
+//[HttpPost]
+//public IActionResult SaveEdit(int id, BookWithAuthorWithPuplisherWithCategVM bookFromRequest)
+//{
+//    if (ModelState.IsValid)
+//    {
+//        try
+//        {
+//            Book bookFromDB =
+//                bookRepository.GetByID(id);
+
+//            bookFromDB.Title = bookFromRequest.Title;
+//            bookFromDB.AuthorName = bookFromRequest.AuthorName;
+//            bookFromDB.StockQuantity = bookFromRequest.StockQuantity;
+//            bookFromDB.Price = bookFromRequest.Price;
+//            bookFromDB.PublisherName = bookFromRequest.PublisherName;
+//            bookFromDB.Description = bookFromRequest.Description;
+//            bookFromDB.ImagePath = bookFromRequest.BookImagePath;
+//            bookFromDB.CategoryID = bookFromRequest.CategoryID;
+
+//            bookRepository.Save();
+//            return RedirectToAction("Index");
+//        }
+//        catch (Exception ex)
+//        {
+//            string errorMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+//            ModelState.AddModelError(string.Empty, errorMessage);
+//        }
+//    }
+
+//    bookFromRequest.categories = categoryRepository.GetAll();
+//    return View("Edit", bookFromRequest);
+//}
+
+// Delete
+//public IActionResult Edit(int id)
+//{
+//    Book bookModel = bookRepository.GetByID(id);
+
+//    BookWithAuthorWithPuplisherWithCategVM bookVM =
+//        new BookWithAuthorWithPuplisherWithCategVM();
+
+//    bookVM.BookID = id;
+//    bookVM.Title = bookModel.Title;
+//    bookVM.AuthorName = bookModel.AuthorName;
+//    bookVM.StockQuantity = bookModel.StockQuantity;
+//    bookVM.Price = bookModel.Price;
+//    bookVM.BookImagePath = bookModel.ImagePath;
+//    bookVM.categories = categoryRepository.GetAll();
+//    bookVM.PublisherName = bookModel.PublisherName;
+//    bookVM.Description = bookModel.Description;
+//    bookVM.CategoryID = bookModel.CategoryID;
+//    bookVM.categories = categoryRepository.GetAll();
+
+//    return View("Edit", bookVM);
+//}
+
+//public IActionResult RemoveFromCart(int bookId)
+//{
+//    // Retrieve the existing cookie
+//    var cookie = Request.Cookies["Cart"];
+//    List<BookCartItem> cartItems;
+
+//    if (cookie != null)
+//    {
+//        // Deserialize the existing cookie value
+//        cartItems = JsonConvert.DeserializeObject<List<BookCartItem>>(cookie);
+//    }
+//    else
+//    {
+//        // Initialize an empty list if the cookie does not exist
+//        cartItems = new List<BookCartItem>();
+//    }
+
+//    // Find the item to remove
+//    var itemToRemove = cartItems.Find(item => item.BookId == bookId);
+//    if (itemToRemove != null)
+//    {
+//        cartItems.Remove(itemToRemove);
+//    }
+
+//    // Serialize the updated list
+//    string serializedCartItems = JsonConvert.SerializeObject(cartItems);
+
+//    // Create or update the cookie
+//    Response.Cookies.Append("Cart", serializedCartItems, new CookieOptions
+//    {
+//        Expires = DateTimeOffset.Now.AddDays(7) // Set the cookie to expire in 7 days
+//    });
+
+//    return RedirectToAction("ShowCart");
+//}
+
+//public IActionResult Details(int Bookid)
+//{
+//    Book book = bookRepository.GetByID(Bookid);
+//    if (book == null)
+//    {
+//        return NotFound("Book not found.");
+//    }
+
+//    Category category = categoryRepository.GetByID(book.CategoryID);
+
+//    BookWithAuthorWithPuplisherWithCategVM bookVM =
+//        new BookWithAuthorWithPuplisherWithCategVM();
+
+//    // Pass Book Props to Book View Model Class
+//    bookVM.BookID = book.BookID;
+//    bookVM.BookImagePath = book.ImagePath;
+//    bookVM.Title = book.Title;
+//    bookVM.Price = book.Price;
+//    bookVM.StockQuantity = book.StockQuantity;
+//    bookVM.Description = book.Description;
+//    bookVM.CategoryID = category.CategoryID;
+//    bookVM.CategoryName = category.Name;
+
+//    return View("Details", bookVM);
+//} // Show Book by id
+
 //public IActionResult Cart(int Quantity)
 //{
 

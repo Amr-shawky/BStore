@@ -21,5 +21,6 @@ namespace BKStore_MVC.Models
         public int? GovernorateID { get; set; }
         public ICollection<Order>? Order { get; set; }
         public ApplicationUser? User { get; set; }
+        public Governorate Governorate { get; set; }
     }
 }

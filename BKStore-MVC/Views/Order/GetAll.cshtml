@@ -59,8 +59,8 @@
                     @Html.ActionLink("Details", "DetailedOrder", "Order", new { OrderId = item.OrderId }, null) |
                     @if (User.IsInRole("Admin"))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ })
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Edit ", "Edit", new {  /* id=item.PrimaryKey */  }) <text>|</text>
+                        @Html.ActionLink(" Delete", "Delete", new { /* id=item.PrimaryKey */ })
                     }
                 </td>
                 @if (item.DelivaryStatus == "Delivering")

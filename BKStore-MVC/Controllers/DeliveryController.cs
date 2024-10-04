@@ -17,9 +17,9 @@ namespace BKStore_MVC.Controllers
             UserManager = userManager;
             this.deliveryClientRepository = deliveryClientRepository;
         }
-        public IActionResult Index()
+        public IActionResult GetAll()
         {
-            return View();
+            return View("GetAll",deliveryClientRepository.GetAll());
         }
         public async Task<IActionResult> AddDelivery(string UserId)
         {
