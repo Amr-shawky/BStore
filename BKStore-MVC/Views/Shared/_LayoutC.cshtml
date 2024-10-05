@@ -51,6 +51,7 @@
                 padding: 5px; /* Increase padding for larger input */
                 margin-right: 200px;
             }
+
             .search-bar .icon {
                 margin-left: 10px;
             }
@@ -69,6 +70,28 @@
                 .auth-buttons a:hover {
                     text-decoration: underline;
                 }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            width: 100%;
+        }
+
+            .dropdown-menu.show {
+                display: block;
+            }
+
+        .dropdown-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+            .dropdown-item:hover {
+                background-color: #f1f1f1;
+            }
     </style>
 </head>
 <body>
@@ -108,7 +131,8 @@
                     </ul>
                     <div class="search-bar">
                         <form id="searchForm" asp-action="SearchByName" asp-controller="Book" method="get" class="form-inline">
-                            <input id="searchInput" type="text" name="name" value="@(Model?.SearchName ?? "")" class="form-control" placeholder="Search for books" />
+                            <input id="searchInput" type="text" name="name" class="form-control" placeholder="Search for books" autocomplete="off" />
+                            <div id="searchDropdown" class="dropdown-menu"></div>
                         </form>
                     </div>
                     <div class="auth-buttons">
@@ -152,7 +176,34 @@
 
         // Auto-submit search form on input
         document.getElementById('searchInput').addEventListener('input', function () {
-            document.getElementById('searchForm').submit();
+            var query = this.value;
+            if (query.length > 2) {
+                $.ajax({
+                    url: '@Url.Action("SearchBooks", "Book")',
+                    type: 'GET',
+                    data: { name: query },
+                    success: function (data) {
+                        var dropdown = document.getElementById('searchDropdown');
+                        dropdown.innerHTML = '';
+                        if (data.length > 0) {
+                            data.forEach(function (book) {
+                                var item = document.createElement('div');
+                                item.className = 'dropdown-item';
+                                item.textContent = book.title;
+                                item.onclick = function () {
+                                    window.location.href = '/Book/Details/' + book.id;
+                                };
+                                dropdown.appendChild(item);
+                            });
+                            dropdown.classList.add('show');
+                        } else {
+                            dropdown.classList.remove('show');
+                        }
+                    }
+                });
+            } else {
+                document.getElementById('searchDropdown').classList.remove('show');
+            }
         });
     </script>
     @RenderSection("Scripts", required: false)

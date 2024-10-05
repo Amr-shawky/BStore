@@ -262,6 +262,7 @@ F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-MVC.
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-MVC.AssemblyInfoInputs.cache
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-MVC.AssemblyInfo.cs
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-MVC.csproj.CoreCompileInputs.cache
+F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-MVC.MvcApplicationPartsAssemblyInfo.cs
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-MVC.MvcApplicationPartsAssemblyInfo.cache
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-MVC.RazorAssemblyInfo.cache
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-MVC.RazorAssemblyInfo.cs
@@ -351,6 +352,8 @@ F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\System.Runti
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\System.Security.Permissions.dll
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\System.Windows.Extensions.dll
+F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\X.PagedList.dll
+F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\X.PagedList.Mvc.Core.dll
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\af\Humanizer.resources.dll
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\ar\Humanizer.resources.dll
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\az\Humanizer.resources.dll

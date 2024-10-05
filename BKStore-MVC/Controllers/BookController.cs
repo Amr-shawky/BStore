@@ -5,7 +5,9 @@ using BKStore_MVC.Repository.Interfaces;
 using BKStore_MVC.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using X.PagedList;
 using System.Security.Claims;
 
 namespace BKStore_MVC.Controllers
@@ -26,11 +28,15 @@ namespace BKStore_MVC.Controllers
             this.governorateRepository = governorateRepository;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
+            int pageSize = 10; // Number of items per page
+            int pageNumber = (page ?? 1); // Default to page 1 if no page is specified
+
             BookCategVM bookCategVM = new BookCategVM();
             bookCategVM.categories = categoryRepository.GetAll();
-            bookCategVM.books = bookRepository.GetAll();
+            bookCategVM.books = bookRepository.GetAll().ToPagedList(pageNumber, pageSize);
+
             return View("Index", bookCategVM);
         } // Show All Books
         public IActionResult Details(int Bookid)
@@ -51,6 +57,16 @@ namespace BKStore_MVC.Controllers
             _mapper.Map(category, bookVM); // Map category properties to the view model
 
             return View("Details", bookVM);
+        }
+        [HttpGet]
+        public IActionResult SearchBooks(string name)
+        {
+            var books = bookRepository.GetAll()
+                .Where(b => b.Title.Contains(name))
+                .Select(b => new { b.BookID, b.Title })
+                .ToList();
+
+            return Json(books);
         }
 
         [HttpGet]
@@ -76,7 +92,7 @@ namespace BKStore_MVC.Controllers
                 var bookCategVM = new BookCategVM
                 {
                     categories = categories,
-                    books = _mapper.Map<List<Book>>(books),
+                    books = books.ToPagedList(1, 10), // Assuming you want the first page with 10 items per page
                     SearchName = name
                 };
 
@@ -84,6 +100,7 @@ namespace BKStore_MVC.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
         //public IActionResult SearchByName(string name)
         //{
         //        if (name != null)
@@ -313,7 +330,7 @@ namespace BKStore_MVC.Controllers
         {
             BookCategVM bookCategVM = new BookCategVM();
             bookCategVM.categories = categoryRepository.GetAll();
-            bookCategVM.books = bookRepository.GetBooksByCatgyId(ID);
+            bookCategVM.books = (IPagedList<Book>)bookRepository.GetBooksByCatgyId(ID);
             return View("Index", bookCategVM);
         }
         public IActionResult DetailedBookForAdmin(int ID)

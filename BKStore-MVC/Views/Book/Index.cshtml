@@ -1,5 +1,6 @@
 ﻿@model BKStore_MVC.ViewModel.BookCategVM
-
+@using X.PagedList.Mvc.Core
+@using X.PagedList
 @{
     ViewData["Title"] = "Index";
     Layout = "_LayoutC";
@@ -35,7 +36,7 @@
                         <div class="col-md-4">
                             <div class="card mb-4">
                                 <a href="@Url.Action("Details", "Book", new { Bookid = book.BookID })">
-                                    <img src="~/assets/img/@book.ImagePath " class="card-img-top" alt="@book.Title">
+                                    <img src="~/assets/img/@book.ImagePath" class="card-img-top" alt="@book.Title">
                                     <div class="card-body">
                                         <h5 class="card-title">@book.Title</h5>
                                         <p class="card-text">Author: @book.AuthorName</p>
@@ -51,6 +52,9 @@
                     <p>No books available</p>
                 }
             </div>
+            <div class="pagination-container">
+                @Html.PagedListPager(Model.books, page => Url.Action("Index", new { page }))
+            </div>
         </div>
     </div>
 </div>
@@ -60,10 +64,10 @@
         color: #000;
     }
 
-        .list-group-item a:hover {
-            color: #007bff;
-            text-decoration: underline;
-        }
+    .list-group-item a:hover {
+        color: #007bff;
+        text-decoration: underline;
+    }
 
     .badge-pill {
         background-color: #007bff;
@@ -76,5 +80,10 @@
 
     .badge-danger {
         background-color: #dc3545;
+    }
+
+    .pagination-container {
+        text-align: center;
+        margin-top: 20px;
     }
 </style>

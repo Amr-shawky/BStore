@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "m0euQeTPMnY=",
+  "dgSpecHash": "DprXAPXHLcI=",
   "success": true,
   "projectFilePath": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\BKStore-MVC.csproj",
   "expectedPackageFiles": [
@@ -168,7 +168,9 @@
     "C:\\Users\\my computer\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
     "C:\\Users\\my computer\\.nuget\\packages\\system.threading.tasks.dataflow\\7.0.0\\system.threading.tasks.dataflow.7.0.0.nupkg.sha512",
     "C:\\Users\\my computer\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\my computer\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512"
+    "C:\\Users\\my computer\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512",
+    "C:\\Users\\my computer\\.nuget\\packages\\x.pagedlist\\10.2.1\\x.pagedlist.10.2.1.nupkg.sha512",
+    "C:\\Users\\my computer\\.nuget\\packages\\x.pagedlist.mvc.core\\10.2.1\\x.pagedlist.mvc.core.10.2.1.nupkg.sha512"
   ],
   "logs": []
 }
