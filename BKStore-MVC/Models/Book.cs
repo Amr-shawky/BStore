@@ -32,6 +32,8 @@ namespace BKStore_MVC.Models
         public string? ImagePath { get; set; }
         [StringLength(2000, ErrorMessage = "Description cannot exceed 2000 characters.")]
         public string? Description { get; set; }
+        [Display(Name = "Publish date")]
+        public DateTime? Publishdate { get; set; }
         public double? discount { get; set; }
         public Category? Category { get; set; }
         public ICollection<OrderBook>? orderDetails { get; set; }

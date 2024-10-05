@@ -15,6 +15,7 @@ namespace BKStore_MVC.ViewModel
         public string? AuthorName { get; set; }
         public string? PublisherName { get; set; }
         public string? CategoryName { get; set; }
+        public DateTime? Publishdate { get; set; }
         public string? SearchName { get; set; }
         public List<Category>? categories { get; set; }
 

@@ -27,18 +27,52 @@ namespace BKStore_MVC.Controllers
             _mapper = mapper;
             this.governorateRepository = governorateRepository;
         }
-
-        public IActionResult Index(int? page)
+        public IActionResult Index(int? page, string sortOrder)
         {
             int pageSize = 10; // Number of items per page
             int pageNumber = (page ?? 1); // Default to page 1 if no page is specified
 
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "date_desc" : "";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
+
+            var books = from b in bookRepository.GetAll()
+                        select b;
+
+            switch (sortOrder)
+            {
+                case "date_desc":
+                    books = books.OrderByDescending(b => b.Publishdate);
+                    break;
+                case "Price":
+                    books = books.OrderBy(b => b.Price);
+                    break;
+                case "price_desc":
+                    books = books.OrderByDescending(b => b.Price);
+                    break;
+                default:
+                    books = books.OrderBy(b => b.Publishdate);
+                    break;
+            }
+
             BookCategVM bookCategVM = new BookCategVM();
             bookCategVM.categories = categoryRepository.GetAll();
-            bookCategVM.books = bookRepository.GetAll().ToPagedList(pageNumber, pageSize);
+            bookCategVM.books = books.ToPagedList(pageNumber, pageSize);
 
             return View("Index", bookCategVM);
-        } // Show All Books
+        }
+
+        //public IActionResult Index(int? page)
+        //{
+        //    int pageSize = 10; // Number of items per page
+        //    int pageNumber = (page ?? 1); // Default to page 1 if no page is specified
+
+        //    BookCategVM bookCategVM = new BookCategVM();
+        //    bookCategVM.categories = categoryRepository.GetAll();
+        //    bookCategVM.books = bookRepository.GetAll().ToPagedList(pageNumber, pageSize);
+
+        //    return View("Index", bookCategVM);
+        //} // Show All Books
         public IActionResult Details(int Bookid)
         {
             Book book = bookRepository.GetByID(Bookid);
@@ -128,6 +162,8 @@ namespace BKStore_MVC.Controllers
                 try
                 {
                     //save
+                    if (bookFromRequest.Publishdate==null)
+                    bookFromRequest.Publishdate= DateTime.Now;
                     bookRepository.Add(bookFromRequest);
                     bookRepository.Save();
                     return RedirectToAction("Index");

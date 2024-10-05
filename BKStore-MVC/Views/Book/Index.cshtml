@@ -5,6 +5,7 @@
     ViewData["Title"] = "Index";
     Layout = "_LayoutC";
 }
+
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -29,6 +30,14 @@
         <div class="col-md-9">
             <h3>Books</h3>
             <div class="row">
+                <div class="col-md-12 mb-3 d-flex justify-content-end">
+                    <select id="sortOrder" class="form-control custom-dropdown" onchange="location = this.value;">
+                        <option value="@Url.Action("Index", new { sortOrder = "" })">Sort by Publish Date</option>
+                        <option value="@Url.Action("Index", new { sortOrder = "date_desc" })">Sort by Publish Date (Desc)</option>
+                        <option value="@Url.Action("Index", new { sortOrder = "Price" })">Sort by Price (Low to High)</option>
+                        <option value="@Url.Action("Index", new { sortOrder = "price_desc" })">Sort by Price (High to Low)</option>
+                    </select>
+                </div>
                 @if (Model.books != null && Model.books.Any())
                 {
                     @foreach (var book in Model.books)
@@ -53,7 +62,7 @@
                 }
             </div>
             <div class="pagination-container">
-                @Html.PagedListPager(Model.books, page => Url.Action("Index", new { page }))
+                @Html.PagedListPager(Model.books, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort }))
             </div>
         </div>
     </div>
@@ -64,10 +73,10 @@
         color: #000;
     }
 
-    .list-group-item a:hover {
-        color: #007bff;
-        text-decoration: underline;
-    }
+        .list-group-item a:hover {
+            color: #007bff;
+            text-decoration: underline;
+        }
 
     .badge-pill {
         background-color: #007bff;
@@ -85,5 +94,9 @@
     .pagination-container {
         text-align: center;
         margin-top: 20px;
+    }
+
+    .custom-dropdown {
+        width: 200px; /* Adjust the width as needed */
     }
 </style>

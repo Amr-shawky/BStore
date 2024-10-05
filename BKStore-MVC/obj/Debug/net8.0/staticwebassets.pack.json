@@ -13,8 +13,16 @@
       "PackagePath": "staticwebassets\\assets\\img\\Head-First-Design-Patterns-388x500.jpg.png"
     },
     {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\Monster.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\Monster.jpg"
+    },
+    {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\avataaars.svg",
       "PackagePath": "staticwebassets\\assets\\img\\avataaars.svg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\magic_cover.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\magic_cover.webp"
     },
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\p1.jpg",
