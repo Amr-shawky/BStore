@@ -1,6 +1,7 @@
 ﻿@model BKStore_MVC.ViewModel.BookWithAuthorWithPuplisherWithCategVM
 
 @{
+    Layout = "_LayoutC";
     ViewData["Title"] = "Book Details";
 }
 
@@ -89,7 +90,7 @@
 <script>
     function buyNow(bookId) {
         var quantity = document.getElementById('quantity').value;
-        window.location.href = '@Url.Action("AddCustomer", "Customer")' + '?bookId=' + bookId + '&quantity=' + quantity;
+        window.location.href = '@Url.Action("AddToCartBuy", "Customer")' + '?bookId=' + bookId + '&quantity=' + quantity;
     }
 
     document.getElementById('quantity').addEventListener('change', function () {

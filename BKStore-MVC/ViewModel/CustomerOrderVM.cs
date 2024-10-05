@@ -17,6 +17,7 @@ namespace BKStore_MVC.ViewModel
         public string? UserID { get; set; }
         [Required]
         public int? GovernorateID { get; set; }
+        public int? BookID { get; set; }
         public int? Quantity { get; set; }
         public DateTime? OrderDate { get; set; } = DateTime.Now;
         public decimal? TotalAmount { get; set; }

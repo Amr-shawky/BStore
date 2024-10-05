@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "_LayoutC";
 }
 <div class="container">
     <div class="row">
@@ -25,14 +26,6 @@
             </ul>
         </div>
         <div class="col-md-9">
-            <div class="row mb-4">
-                <div class="col-md-12">
-                    <form asp-action="SearchByName" method="get" class="form-inline">
-                        <input type="text" name="name" value="@(Model?.SearchName ?? "")" class="form-control w-75" placeholder="Search for books" />
-                        <button type="submit" class="btn btn-primary ml-2">Search</button>
-                    </form>
-                </div>
-            </div>
             <h3>Books</h3>
             <div class="row">
                 @if (Model.books != null && Model.books.Any())
@@ -47,11 +40,6 @@
                                         <h5 class="card-title">@book.Title</h5>
                                         <p class="card-text">Author: @book.AuthorName</p>
                                         <p class="card-text">Price: <strong>@book.Price</strong></p>
-                                        @*                                 @if (book.Discount > 0)
-                                {
-                                <span class="badge badge-danger">-@book.Discount%</span>
-                                }
-                                *@
                                     </div>
                                 </a>
                             </div>
@@ -90,30 +78,3 @@
         background-color: #dc3545;
     }
 </style>
-
-@*
-<a asp-action="New" asp-controller="Book" class="btn btn-success">NEw</a>
-
-<table class="table table-bordered table-hover">
-    <tr>
-        <th>Title</th>
-        <th>Price</th>
-        <th>ImagePath</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Title</td>
-            <td>@item.Price</td>
-            <td>@item.ImagePath</td>
-            <td>
-                <a href="/Book/Edit/@item.BookID">Edit</a>
-            </td>
-
-            <td>
-                <a href="/Book/Delete/@item.BookID" class="btn btn-success" style="color:#CA2C6E">Delete</a>
-            </td>
-        </tr>
-    }
-</table>
- *@

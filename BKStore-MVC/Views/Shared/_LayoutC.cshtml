@@ -39,6 +39,22 @@
             left: 0; /* Show sidebar */
         }
 
+        .search-bar {
+            display: flex;
+            align-items: center;
+            width: 40%; /* Make search bar larger */
+            margin-left: -50px; /* Increase length from the left side */
+        }
+
+            .search-bar input {
+                flex: 1;
+                padding: 5px; /* Increase padding for larger input */
+                margin-right: 200px;
+            }
+            .search-bar .icon {
+                margin-left: 10px;
+            }
+
         .auth-buttons {
             display: flex;
             align-items: center;
@@ -90,6 +106,11 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Sign Out</a>
                         </li>
                     </ul>
+                    <div class="search-bar">
+                        <form id="searchForm" asp-action="SearchByName" asp-controller="Book" method="get" class="form-inline">
+                            <input id="searchInput" type="text" name="name" value="@(Model?.SearchName ?? "")" class="form-control" placeholder="Search for books" />
+                        </form>
+                    </div>
                     <div class="auth-buttons">
                         <a href="#" class="icon"><i class="fa fa-heart"></i></a>
                         <a href="#" class="icon"><i class="fa fa-user"></i></a>
@@ -128,7 +149,31 @@
             var sidebar = document.getElementById("sidebar");
             sidebar.classList.toggle("open-sidebar");
         }
+
+        // Auto-submit search form on input
+        document.getElementById('searchInput').addEventListener('input', function () {
+            document.getElementById('searchForm').submit();
+        });
     </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+@* asp-controller="Book"  
+
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            width: 40%; /* Make search bar larger */
+            margin-left: -50px; /* Increase length from the left side */
+        }
+
+            .search-bar input {
+                flex: 1;
+                padding: 5px; /* Increase padding for larger input */
+                margin-right: 200px;
+            }
+
+
+*@

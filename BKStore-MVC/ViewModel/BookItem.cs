@@ -6,5 +6,6 @@
         public int Quantity { get; set; }
         public string Title { get; set; }
         public double price { get; set; }
+        public string? SearchName { get; set; }
     }
 }

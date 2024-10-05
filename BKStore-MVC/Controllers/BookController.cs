@@ -14,13 +14,16 @@ namespace BKStore_MVC.Controllers
     {
         IBookRepository bookRepository;
         ICategoryRepository categoryRepository;
+        private readonly IGovernorateRepository governorateRepository;
         IMapper _mapper;
-        public BookController(IBookRepository _bookRepository,IMapper mapper,
+        public BookController(IBookRepository _bookRepository, IGovernorateRepository governorateRepository,
+            IMapper mapper,
             ICategoryRepository _categoryRepository)
         {
             bookRepository = _bookRepository;
             categoryRepository = _categoryRepository;
             _mapper = mapper;
+            this.governorateRepository = governorateRepository;
         }
 
         public IActionResult Index()
@@ -223,6 +226,28 @@ namespace BKStore_MVC.Controllers
             //return RedirectToAction(nameof(ShowCart));
 
         }
+        //public IActionResult BuyNow(int bookId, int Quantity)
+        //{
+        //    Book book = bookRepository.GetByID(bookId);
+        //    BookCartItem cartItem = new BookCartItem()
+        //    {
+        //        BookId=bookId,
+        //        Quantity = Quantity,
+        //        ImagePath=book.ImagePath,
+        //        Title = book.Title,
+        //        Price = book.Price
+                
+        //    };
+        //    List<BookCartItem> cartItems = new List<BookCartItem>();
+        //    cartItems.Add(item: cartItem);
+        //    ViewData["Governoratelst"] = governorateRepository.GetAll();
+        //    CustomerOrderVM customerOrderVM = new CustomerOrderVM
+        //    {
+        //        BookItems = cartItems,
+        //        TotalAmount = (decimal?)(book.Price * Quantity)
+        //    };
+        //    return View("AddCustomer", customerOrderVM);
+        //}
         public IActionResult ShowCart()
         {
             // Retrieve the existing cookie
@@ -240,12 +265,7 @@ namespace BKStore_MVC.Controllers
                 cartItems = new List<BookCartItem>();
             }
 
-            //// Create the ViewModel and populate it with the cart items
-            //var viewModel = new CartViewModel
-            //{
-            //    Items = cartItems
-            //};
-
+            
             // Pass the ViewModel to the view
             return View("Cart",cartItems);
         }
