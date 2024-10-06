@@ -1,9 +1,12 @@
-﻿using BKStore_MVC.Models;
+﻿using Azure.Core;
+using BKStore_MVC.Models;
+using BKStore_MVC.Repository;
 using BKStore_MVC.Repository.Interfaces;
 using BKStore_MVC.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net;
+using System.Security.Claims;
 
 namespace BKStore_MVC.Controllers
 {
@@ -123,33 +126,71 @@ namespace BKStore_MVC.Controllers
             {
                 if (customerOrderVM.Address != null)
                 {
-                    Customer customer = new Customer();
-                    customer.Address = customerOrderVM.Address;
-                    customer.Name = customerOrderVM.Name;
-                    customer.Phone = customerOrderVM.Phone;
-                    customer.GovernorateID = customerOrderVM.GovernorateID;
-                    customerRepository.Add(customer);
-                    customerRepository.Save();
-                    Order order = new Order();
-                    order.CustomerID = customerRepository.GetByName(customerOrderVM.Name).ID;
-                    order.OrderDate = DateTime.Now;
-                    order.DelivaryStatus = "Pending";
-                    order.TotalAmount = ((double?)customerOrderVM.TotalAmount);
+                    var customerIDCookie = Request.Cookies["CustomerID"];
+                    string customerID;
+                    if (customerIDCookie != null)
+                    {
+                        // Use the existing cookie value
+                        customerID = JsonConvert.DeserializeObject<string>(customerIDCookie);
+                        Customer customer = customerRepository.GetByID(int.Parse(customerID??" "));
+                        customer.Name = customerOrderVM.Name;
+                        customer.Address = customerOrderVM.Address;
+                        customer.Phone= customerOrderVM.Phone;
+                        customer.GovernorateID= customerOrderVM.GovernorateID;
+                        var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                        customer.UserID = userID;
+                        customerRepository.Update(customer);
+                        customerRepository.Save();
+                    }
+                    else
+                    {
+                        // Create a new cookie with the CustomerID
+                        customerID = customerRepository.GetByName(customerOrderVM.Name).ID.ToString();
+                        string serializedID = JsonConvert.SerializeObject(customerID);
+                        Response.Cookies.Append("CustomerID", serializedID, new CookieOptions
+                        {
+                            Expires = DateTimeOffset.Now.AddDays(7) // Set the cookie to expire in 7 days
+                        });
+                        var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                        Customer customer = new Customer
+                        {
+                            Address = customerOrderVM.Address,
+                            Name = customerOrderVM.Name,
+                            Phone = customerOrderVM.Phone,
+                            GovernorateID = customerOrderVM.GovernorateID,
+                            UserID = userID
+                        };
+                        customerRepository.Add(customer);
+                        customerRepository.Save();
+
+                    }
+
+
+                    Order order = new Order
+                    {
+                        CustomerID = customerRepository.GetByName(customerOrderVM.Name).ID,
+                        OrderDate = DateTime.Now,
+                        DelivaryStatus = "Pending",
+                        TotalAmount = (double?)customerOrderVM.TotalAmount
+                    };
                     orderRepository.Add(order);
                     orderRepository.Save();
-                    var cookie = Request.Cookies["Cart"];
-                    List<BookCartItem> cartItems;
 
-                    if (cookie != null)
+                    // Check if the CustomerID cookie exists
+                    
+                    var cartCookie = Request.Cookies["Cart"];
+                    List<BookCartItem> cartItems;
+                    if (cartCookie != null)
                     {
                         // Deserialize the existing cookie value
-                        cartItems = JsonConvert.DeserializeObject<List<BookCartItem>>(cookie);
+                        cartItems = JsonConvert.DeserializeObject<List<BookCartItem>>(cartCookie);
                     }
                     else
                     {
                         // Initialize an empty list if the cookie does not exist
                         cartItems = new List<BookCartItem>();
                     }
+
                     if (customerOrderVM.BookItems.Count > 1)
                     {
                         foreach (var item in cartItems.ToList())
@@ -164,32 +205,111 @@ namespace BKStore_MVC.Controllers
                             orderBookRepository.Add(orderBook);
                             orderBookRepository.Save();
                         }
-                        
                     }
                     else
                     {
                         var carts = cartItems.LastOrDefault();
-                      
-                            OrderBook orderBook = new OrderBook
-                            {
-                                BookID = carts.BookId ?? 0,
-                                Quantity = carts.Quantity ?? 0,
-                                TSubPrice = (carts.Price * carts.Quantity) ?? 0,
-                                OrderID = order.OrderId
-                            };
-                            orderBookRepository.Add(orderBook);
-                            orderBookRepository.Save();
-                            
-                        
+                        OrderBook orderBook = new OrderBook
+                        {
+                            BookID = carts.BookId ?? 0,
+                            Quantity = carts.Quantity ?? 0,
+                            TSubPrice = (carts.Price * carts.Quantity) ?? 0,
+                            OrderID = order.OrderId
+                        };
+                        orderBookRepository.Add(orderBook);
+                        orderBookRepository.Save();
                     }
-                    
+
                     return RedirectToAction(nameof(Index), nameof(Book));
                 }
-
             }
+
             ViewData["Governoratelst"] = governorateRepository.GetAll();
             return View("AddCustomer", customerOrderVM);
         }
+
+        //public IActionResult SaveAdd(CustomerOrderVM customerOrderVM)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (customerOrderVM.Address != null)
+        //        {
+        //            Customer customer = new Customer();
+        //            customer.Address = customerOrderVM.Address;
+        //            customer.Name = customerOrderVM.Name;
+        //            customer.Phone = customerOrderVM.Phone;
+        //            customer.GovernorateID = customerOrderVM.GovernorateID;
+        //            customerRepository.Add(customer);
+        //            customerRepository.Save();
+        //            Order order = new Order();
+        //            order.CustomerID = customerRepository.GetByName(customerOrderVM.Name).ID;
+        //            order.OrderDate = DateTime.Now;
+        //            order.DelivaryStatus = "Pending";
+        //            order.TotalAmount = ((double?)customerOrderVM.TotalAmount);
+        //            orderRepository.Add(order);
+        //            orderRepository.Save();
+        //            var cookie = Request.Cookies["Cart"];
+        //            List<BookCartItem> cartItems;
+        //            string ID = customerRepository.GetByName(customerOrderVM.Name).ID.ToString();
+        //            string serializedID = JsonConvert.SerializeObject(ID);
+
+        //            // Create or update the cookie
+        //            Response.Cookies.Append("CustomerID", serializedID, new CookieOptions
+        //            {
+        //                Expires = DateTimeOffset.Now.AddDays(7) // Set the cookie to expire in 7 days
+        //            });
+
+        //            if (cookie != null)
+        //            {
+        //                // Deserialize the existing cookie value
+        //                cartItems = JsonConvert.DeserializeObject<List<BookCartItem>>(cookie);
+        //            }
+        //            else
+        //            {
+        //                // Initialize an empty list if the cookie does not exist
+        //                cartItems = new List<BookCartItem>();
+        //            }
+
+        //            if (customerOrderVM.BookItems.Count > 1)
+        //            {
+        //                foreach (var item in cartItems.ToList())
+        //                {
+        //                    OrderBook orderBook = new OrderBook
+        //                    {
+        //                        BookID = item.BookId ?? 0,
+        //                        Quantity = item.Quantity ?? 0,
+        //                        TSubPrice = (item.Price * item.Quantity) ?? 0,
+        //                        OrderID = order.OrderId
+        //                    };
+        //                    orderBookRepository.Add(orderBook);
+        //                    orderBookRepository.Save();
+        //                }
+
+        //            }
+        //            else
+        //            {
+        //                var carts = cartItems.LastOrDefault();
+
+        //                    OrderBook orderBook = new OrderBook
+        //                    {
+        //                        BookID = carts.BookId ?? 0,
+        //                        Quantity = carts.Quantity ?? 0,
+        //                        TSubPrice = (carts.Price * carts.Quantity) ?? 0,
+        //                        OrderID = order.OrderId
+        //                    };
+        //                    orderBookRepository.Add(orderBook);
+        //                    orderBookRepository.Save();
+
+
+        //            }
+
+        //            return RedirectToAction(nameof(Index), nameof(Book));
+        //        }
+
+        //    }
+        //    ViewData["Governoratelst"] = governorateRepository.GetAll();
+        //    return View("AddCustomer", customerOrderVM);
+        //}
 
 
         public IActionResult Details(Customer customer)
@@ -202,3 +322,15 @@ namespace BKStore_MVC.Controllers
         }
     }
 }
+//var cookieCustomerID = Request.Cookies["CustomerID"];
+//int CustID;
+//if (cookieCustomerID != null)
+//{
+//    // Deserialize the existing cookie value
+//    CustID = JsonConvert.DeserializeObject<int>(cookieCustomerID);
+//}
+//else
+//{
+//    // Initialize an empty list if the cookie does not exist
+//    cookieCustomerID = customerRepository.GetByName(customerOrderVM.Name).ID.ToString();
+//}

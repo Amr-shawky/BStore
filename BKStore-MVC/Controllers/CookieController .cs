@@ -35,7 +35,7 @@ namespace BKStore_MVC.Controllers
             string DeliveryIDValue = UserID;
             CookieOptions options = new CookieOptions
             {
-                Expires = DateTime.Now.AddDays(1)
+                Expires = DateTime.Now.AddDays(7)
             };
             Response.Cookies.Append("Did", DeliveryIDValue, options);
 

@@ -318,28 +318,6 @@ namespace BKStore_MVC.Controllers
             //return RedirectToAction(nameof(ShowCart));
 
         }
-        //public IActionResult BuyNow(int bookId, int Quantity)
-        //{
-        //    Book book = bookRepository.GetByID(bookId);
-        //    BookCartItem cartItem = new BookCartItem()
-        //    {
-        //        BookId=bookId,
-        //        Quantity = Quantity,
-        //        ImagePath=book.ImagePath,
-        //        Title = book.Title,
-        //        Price = book.Price
-                
-        //    };
-        //    List<BookCartItem> cartItems = new List<BookCartItem>();
-        //    cartItems.Add(item: cartItem);
-        //    ViewData["Governoratelst"] = governorateRepository.GetAll();
-        //    CustomerOrderVM customerOrderVM = new CustomerOrderVM
-        //    {
-        //        BookItems = cartItems,
-        //        TotalAmount = (decimal?)(book.Price * Quantity)
-        //    };
-        //    return View("AddCustomer", customerOrderVM);
-        //}
         public IActionResult ShowCart()
         {
             // Retrieve the existing cookie
@@ -405,7 +383,8 @@ namespace BKStore_MVC.Controllers
         {
             BookCategVM bookCategVM = new BookCategVM();
             bookCategVM.categories = categoryRepository.GetAll();
-            bookCategVM.books = (IPagedList<Book>)bookRepository.GetBooksByCatgyId(ID);
+            var books = bookRepository.GetBooksByCatgyId(ID);
+            bookCategVM.books = books.ToPagedList(pageNumber: 1, pageSize: 10); // Adjust pageNumber and pageSize as needed
             return View("Index", bookCategVM);
         }
         public IActionResult DetailedBookForAdmin(int ID)
@@ -416,6 +395,29 @@ namespace BKStore_MVC.Controllers
     }
 }
 #region MyImportantTests
+//public IActionResult BuyNow(int bookId, int Quantity)
+//{
+//    Book book = bookRepository.GetByID(bookId);
+//    BookCartItem cartItem = new BookCartItem()
+//    {
+//        BookId=bookId,
+//        Quantity = Quantity,
+//        ImagePath=book.ImagePath,
+//        Title = book.Title,
+//        Price = book.Price
+
+//    };
+//    List<BookCartItem> cartItems = new List<BookCartItem>();
+//    cartItems.Add(item: cartItem);
+//    ViewData["Governoratelst"] = governorateRepository.GetAll();
+//    CustomerOrderVM customerOrderVM = new CustomerOrderVM
+//    {
+//        BookItems = cartItems,
+//        TotalAmount = (decimal?)(book.Price * Quantity)
+//    };
+//    return View("AddCustomer", customerOrderVM);
+//}
+
 //[HttpPost]
 //public IActionResult SaveEdit(int id, BookWithAuthorWithPuplisherWithCategVM bookFromRequest)
 //{

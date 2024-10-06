@@ -92,6 +92,21 @@
             .dropdown-item:hover {
                 background-color: #f1f1f1;
             }
+
+        .my-order-btn {
+            margin-left: 10px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .my-order-btn:hover {
+                background-color: #0056b3;
+            }
     </style>
 </head>
 <body>
@@ -141,17 +156,16 @@
                         <a href="/Book/ShowCart" class="icon">
                             <img src="~/assets/img/shopping-cart.png" alt="Shopping Cart" style="width: 24px; height: 24px;" />
                         </a>
-                       
                         <a href="@Url.Action("Login", "Account")">Login</a> /
                         <a href="@Url.Action("Register", "Account")">Register</a>
+                        <a href="/User/MyAccount/">
+                            <img src="~/assets/img/icon-5359553_1280.png" alt="My Account" style="width: 50px; height: 50px" />
+                        </a>
+                        <a href="/Order/DetailedOrderForUser/" class="btn btn-primary my-order-btn ">My Order</a>
                     </div>
-
                 </div>
             </div>
         </nav>
-        <a href="/User/MyAccount/">
-            <img src="~/assets/img/icon-5359553_1280.png" alt="My Account" style="width: 50px; height: 50px; margin-left:1200px" />
-        </a>
     </header>
     <div class="sidebar" id="sidebar">
         <h2>Settings</h2>
@@ -211,25 +225,6 @@
             }
         });
     </script>
-    @RenderSection("Scripts", required: false)
 </body>
+
 </html>
-
-@* asp-controller="Book"  
-
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-            width: 40%; /* Make search bar larger */
-            margin-left: -50px; /* Increase length from the left side */
-        }
-
-            .search-bar input {
-                flex: 1;
-                padding: 5px; /* Increase padding for larger input */
-                margin-right: 200px;
-            }
-
-
-*@

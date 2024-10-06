@@ -66,6 +66,60 @@ namespace BKStore_MVC.Controllers
             orderDetailVM.Governorate = governorateRepository.GetByID(customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).GovernorateID ?? 0).Name;
             return View("DetailedOrder", orderDetailVM);
         }
+        public IActionResult DetailedOrderForUser()
+        {
+            int OrderId;
+            if (User.Identity.IsAuthenticated == true)
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (string.IsNullOrEmpty(userId))
+                {
+                    return BadRequest("User ID cannot be null or empty.");
+                }
+                OrderId = orderRepository.GetByCustomerID(customerRepository.GetByUserID(userId).ID).OrderId;
+            }
+            else
+            {
+                var customerIDCookie = Request.Cookies["CustomerID"];
+                string customerID;
+                if (customerIDCookie != null)
+                {
+                    // Use the existing cookie value
+                    customerID = JsonConvert.DeserializeObject<string>(customerIDCookie);
+                }
+                else
+                {
+                    customerID = "";
+                }
+                OrderId = orderRepository.GetByCustomerID(int.Parse(customerID ?? "")).OrderId;
+            }
+
+            List<OrderBook> orderBook = orderBookRepository.GetByID(OrderId);
+            List<BookCartItem> bookCartItems = new List<BookCartItem>();
+            OrderDetailVM orderDetailVM = new OrderDetailVM();
+            if (orderBook != null)
+            {
+                foreach (var item in orderBook.ToList())
+                {
+                    BookCartItem bookCart = new BookCartItem();
+                    bookCart.Title = bookRepository.GetByID(item.BookID).Title;
+                    bookCart.Quantity = item.Quantity;
+                    bookCart.Price = bookRepository.GetByID(item.BookID).Price;
+                    bookCart.ImagePath = bookRepository.GetByID(item.BookID).ImagePath;
+                    bookCart.BookId = item.BookID;
+
+                    bookCartItems.Add(bookCart);
+                }
+            }
+
+            orderDetailVM.bookCartItems = bookCartItems;
+            orderDetailVM.CustomerName = customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).Name;
+            orderDetailVM.TotalPrice = orderRepository.GetByID(OrderId).TotalAmount ?? 0;
+            orderDetailVM.CustomerAddress = customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).Address;
+            orderDetailVM.Governorate = governorateRepository.GetByID(customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).GovernorateID ?? 0).Name;
+            return View("DetailedOrder", orderDetailVM);
+        }
+
         public async Task<IActionResult> DeliverOrder(string CustomerName)
         {
 

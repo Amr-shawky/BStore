@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\assets\\favicon.ico"
     },
     {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\00b1521e-37bc-487a-9e96-d6cf4c2f64ba_BoundlessNecromancer.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\00b1521e-37bc-487a-9e96-d6cf4c2f64ba_BoundlessNecromancer.jpg"
+    },
+    {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\08b4add3-f10f-4338-9d39-6df6a3eccac2_certification.JPG",
       "PackagePath": "staticwebassets\\assets\\img\\08b4add3-f10f-4338-9d39-6df6a3eccac2_certification.JPG"
     },
@@ -19,6 +23,10 @@
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\44a02df6-f11c-459d-a9af-50bec2a65362_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\44a02df6-f11c-459d-a9af-50bec2a65362_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\4b11bd9e-ba5c-490e-b9ea-b966beaa7bdb_magic_cover.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\4b11bd9e-ba5c-490e-b9ea-b966beaa7bdb_magic_cover.webp"
     },
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\6c6a3e8c-b9f9-41f6-b7b6-8ac962f16e0e_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg",
@@ -77,6 +85,10 @@
       "PackagePath": "staticwebassets\\assets\\img\\e1dbb89e-5b15-4b42-9cf7-c9ae7523ab58_magic_cover.webp"
     },
     {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\e42bc21a-2752-434e-aa70-483535816ed5_BoundlessNecromancer.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\e42bc21a-2752-434e-aa70-483535816ed5_BoundlessNecromancer.jpg"
+    },
+    {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\e500c7d0-be52-4450-8099-8c6091b25de6_BoundlessNecromancer.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\e500c7d0-be52-4450-8099-8c6091b25de6_BoundlessNecromancer.jpg"
     },
@@ -91,6 +103,10 @@
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\magic_cover.webp",
       "PackagePath": "staticwebassets\\assets\\img\\magic_cover.webp"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\order.png",
+      "PackagePath": "staticwebassets\\assets\\img\\order.png"
     },
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\p1.jpg",
@@ -123,6 +139,18 @@
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\shopping-cart.png",
       "PackagePath": "staticwebassets\\assets\\img\\shopping-cart.png"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\shopping-cart.svg",
+      "PackagePath": "staticwebassets\\assets\\img\\shopping-cart.svg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\star-empty.svg",
+      "PackagePath": "staticwebassets\\assets\\img\\star-empty.svg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\star-filled.svg",
+      "PackagePath": "staticwebassets\\assets\\img\\star-filled.svg"
     },
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\css\\site.css",
