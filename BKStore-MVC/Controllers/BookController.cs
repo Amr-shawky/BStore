@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using X.PagedList;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BKStore_MVC.Controllers
 {
@@ -18,7 +19,9 @@ namespace BKStore_MVC.Controllers
         ICategoryRepository categoryRepository;
         private readonly IGovernorateRepository governorateRepository;
         IMapper _mapper;
-        public BookController(IBookRepository _bookRepository, IGovernorateRepository governorateRepository,
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public BookController(IBookRepository _bookRepository, IWebHostEnvironment webHostEnvironment,
+            IGovernorateRepository governorateRepository,
             IMapper mapper,
             ICategoryRepository _categoryRepository)
         {
@@ -26,6 +29,7 @@ namespace BKStore_MVC.Controllers
             categoryRepository = _categoryRepository;
             _mapper = mapper;
             this.governorateRepository = governorateRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index(int? page, string sortOrder)
         {
@@ -155,28 +159,63 @@ namespace BKStore_MVC.Controllers
         //}
 
         [HttpPost]
-        public IActionResult SaveNew(Book bookFromRequest)
+        public async Task<IActionResult> SaveNew(Book bookFromRequest, IFormFile ImagePath)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //save
-                    if (bookFromRequest.Publishdate==null)
-                    bookFromRequest.Publishdate= DateTime.Now;
+                    if (ImagePath != null)
+                    {
+                        var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img");
+                        var uniqueFileName = Guid.NewGuid().ToString() + "_" + ImagePath.FileName;
+                        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await ImagePath.CopyToAsync(fileStream);
+                        }
+                        bookFromRequest.ImagePath = uniqueFileName;
+                    }
+
+                    if (bookFromRequest.Publishdate == null)
+                        bookFromRequest.Publishdate = DateTime.Now;
+
                     bookRepository.Add(bookFromRequest);
                     bookRepository.Save();
                     return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+                    ModelState.AddModelError(string.Empty, ex.InnerException?.Message ?? ex.Message);
                 }
             }
-            ViewData["CategoryName"] = categoryRepository.GetAll();
-            return RedirectToAction("New", bookFromRequest);
-        } // Save Data
-        public IActionResult Edit(int id)
+
+            ViewData["Categories"] = categoryRepository.GetAll();
+            return View("New", bookFromRequest);
+        }
+    
+    //public IActionResult SaveNew(Book bookFromRequest)
+    //{
+    //    if (ModelState.IsValid)
+    //    {
+    //        try
+    //        {
+    //            //save
+    //            if (bookFromRequest.Publishdate==null)
+    //            bookFromRequest.Publishdate= DateTime.Now;
+    //            bookRepository.Add(bookFromRequest);
+    //            bookRepository.Save();
+    //            return RedirectToAction("Index");
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+    //        }
+    //    }
+    //    ViewData["CategoryName"] = categoryRepository.GetAll();
+    //    return RedirectToAction("New", bookFromRequest);
+    //} // Save Data
+    public IActionResult Edit(int id)
         {
             var bookModel = bookRepository.GetByID(id);
 

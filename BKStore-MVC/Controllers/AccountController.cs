@@ -34,6 +34,7 @@ namespace BKStore_MVC.Controllers
                 applicationUser.UserName = viewModel.UserName;
                 applicationUser.PasswordHash = viewModel.Password;
                 applicationUser.Email = viewModel.Email;
+                applicationUser.ImagePath = "blank-profile-picture.png";
                 IdentityResult result = await userManager.CreateAsync(applicationUser, viewModel.Password);
                 if (result.Succeeded)
                 {

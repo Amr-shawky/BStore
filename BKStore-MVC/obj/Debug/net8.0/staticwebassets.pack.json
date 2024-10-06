@@ -9,6 +9,18 @@
       "PackagePath": "staticwebassets\\assets\\favicon.ico"
     },
     {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\08b4add3-f10f-4338-9d39-6df6a3eccac2_certification.JPG",
+      "PackagePath": "staticwebassets\\assets\\img\\08b4add3-f10f-4338-9d39-6df6a3eccac2_certification.JPG"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\19f2d266-8135-4e86-bb5c-d7ccf99bd90e_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\19f2d266-8135-4e86-bb5c-d7ccf99bd90e_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\44a02df6-f11c-459d-a9af-50bec2a65362_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\44a02df6-f11c-459d-a9af-50bec2a65362_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg"
+    },
+    {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\Head-First-Design-Patterns-388x500.jpg.png",
       "PackagePath": "staticwebassets\\assets\\img\\Head-First-Design-Patterns-388x500.jpg.png"
     },
@@ -19,6 +31,50 @@
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\avataaars.svg",
       "PackagePath": "staticwebassets\\assets\\img\\avataaars.svg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\blank-profile-picture.png",
+      "PackagePath": "staticwebassets\\assets\\img\\blank-profile-picture.png"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\blank-profile-picture1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\blank-profile-picture1.png"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\c001de0c-26f8-44be-9323-52c5c9024265_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\c001de0c-26f8-44be-9323-52c5c9024265_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\ca136f86-b19f-42e8-8a1a-1ac13fea4745_blder.JPG",
+      "PackagePath": "staticwebassets\\assets\\img\\ca136f86-b19f-42e8-8a1a-1ac13fea4745_blder.JPG"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\cc60c248-7c7a-43f4-b61d-42fba3711266_Fearness.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\cc60c248-7c7a-43f4-b61d-42fba3711266_Fearness.jpg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\cf4ca54b-1238-4f77-85bd-4d59e7720712_Fearness.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\cf4ca54b-1238-4f77-85bd-4d59e7720712_Fearness.jpg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\d0677b57-37d0-4bf6-b677-0e8874a27c70_BoundlessNecromancer.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\d0677b57-37d0-4bf6-b677-0e8874a27c70_BoundlessNecromancer.jpg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\d88d4caf-a126-4093-bdcf-f254983d338b_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\d88d4caf-a126-4093-bdcf-f254983d338b_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\e1dbb89e-5b15-4b42-9cf7-c9ae7523ab58_magic_cover.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\e1dbb89e-5b15-4b42-9cf7-c9ae7523ab58_magic_cover.webp"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\e500c7d0-be52-4450-8099-8c6091b25de6_BoundlessNecromancer.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\e500c7d0-be52-4450-8099-8c6091b25de6_BoundlessNecromancer.jpg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\fefe922e-d228-48da-80cf-22a1b988844d_Fearness.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\fefe922e-d228-48da-80cf-22a1b988844d_Fearness.jpg"
     },
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\magic_cover.webp",

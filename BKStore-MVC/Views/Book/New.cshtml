@@ -1,11 +1,11 @@
 ﻿@model Book
 
 @{
-    ViewData["Title"] = "NEw";
+    ViewData["Title"] = "New";
 }
 
 <h1>New</h1>
-<form method="post" asp-action="SaveNew" asp-controller="Book">
+<form id="bookForm" method="post" asp-action="SaveNew" asp-controller="Book" enctype="multipart/form-data" onsubmit="return confirmSubmission()">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div>
         <label asp-for="Title"></label>
@@ -43,12 +43,11 @@
             <option value="0">-- Select option --</option>
         </select>
         <span asp-validation-for="CategoryID" class="text-danger"></span>
-
     </div>
 
     <div>
-        <label asp-for="ImagePath"></label>
-        <input class="form form-control" asp-for="ImagePath" />
+        <label asp-for="ImagePath">Upload Image</label>
+        <input type="file" class="form form-control" asp-for="ImagePath" />
         <span asp-validation-for="ImagePath" class="text-danger"></span>
     </div>
 
@@ -64,7 +63,11 @@
     </div>
 
     <input type="submit" value="Create" class="btn btn-success" />
-
 </form>
 <a asp-action="Index">Back To List</a>
 
+<script>
+    function confirmSubmission() {
+        return confirm("Are you sure you want to add this book?");
+    }
+</script>
