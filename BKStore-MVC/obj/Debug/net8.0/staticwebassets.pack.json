@@ -21,6 +21,14 @@
       "PackagePath": "staticwebassets\\assets\\img\\44a02df6-f11c-459d-a9af-50bec2a65362_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg"
     },
     {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\6c6a3e8c-b9f9-41f6-b7b6-8ac962f16e0e_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\6c6a3e8c-b9f9-41f6-b7b6-8ac962f16e0e_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\8d722d36-16c0-40ca-807e-d045c59f7ad9_Fearness.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\8d722d36-16c0-40ca-807e-d045c59f7ad9_Fearness.jpg"
+    },
+    {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\Head-First-Design-Patterns-388x500.jpg.png",
       "PackagePath": "staticwebassets\\assets\\img\\Head-First-Design-Patterns-388x500.jpg.png"
     },
@@ -75,6 +83,10 @@
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\fefe922e-d228-48da-80cf-22a1b988844d_Fearness.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\fefe922e-d228-48da-80cf-22a1b988844d_Fearness.jpg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\icon-5359553_1280.png",
+      "PackagePath": "staticwebassets\\assets\\img\\icon-5359553_1280.png"
     },
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\magic_cover.webp",
