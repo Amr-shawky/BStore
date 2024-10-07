@@ -9,6 +9,7 @@ namespace BKStore_MVC.Repository.Interfaces
         public void Update(Book book);
         public void Delete(int ID);
         public List<Book> GetAll();
+        public void RateBook(int BookID, int rating, string? UserID);
         public List<Book> GetByName(string name);
         public Book GetByID(int ID);
         public List<Book> GetBooksByCatgyId (int id);

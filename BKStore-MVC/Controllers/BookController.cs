@@ -138,26 +138,6 @@ namespace BKStore_MVC.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-
-        //public IActionResult SearchByName(string name)
-        //{
-        //        if (name != null)
-        //        {
-        //            var categories = categoryRepository.GetAll();
-        //            var books = bookRepository.GetByName(name);
-
-        //            var bookCategVM = new BookCategVM
-        //            {
-        //                categories = categories,
-        //                books = _mapper.Map<List<Book>>(books),
-        //                SearchName = name
-        //            };
-
-        //            return View("Index", bookCategVM);
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //}
-
         [HttpPost]
         public async Task<IActionResult> SaveNew(Book bookFromRequest, IFormFile ImagePath)
         {
@@ -193,29 +173,23 @@ namespace BKStore_MVC.Controllers
             ViewData["Categories"] = categoryRepository.GetAll();
             return View("New", bookFromRequest);
         }
-    
-    //public IActionResult SaveNew(Book bookFromRequest)
-    //{
-    //    if (ModelState.IsValid)
-    //    {
-    //        try
-    //        {
-    //            //save
-    //            if (bookFromRequest.Publishdate==null)
-    //            bookFromRequest.Publishdate= DateTime.Now;
-    //            bookRepository.Add(bookFromRequest);
-    //            bookRepository.Save();
-    //            return RedirectToAction("Index");
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            ModelState.AddModelError(string.Empty, ex.InnerException.Message);
-    //        }
-    //    }
-    //    ViewData["CategoryName"] = categoryRepository.GetAll();
-    //    return RedirectToAction("New", bookFromRequest);
-    //} // Save Data
-    public IActionResult Edit(int id)
+        //[ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult RateBook([FromBody] RatingModel ratingModel)
+        {
+            if (ratingModel == null || ratingModel.BookId <= 0 || ratingModel.Rating <= 0)
+            {
+                return BadRequest(new { success = false, message = "Invalid data" });
+            }
+
+            bookRepository.RateBook(ratingModel.BookId, ratingModel.Rating, null);
+            bookRepository.Save();
+
+            var book = bookRepository.GetByID(ratingModel.BookId);
+            return Ok(new { success = true, averageRating = book.AverageRating });
+        }
+
+        public IActionResult Edit(int id)
         {
             var bookModel = bookRepository.GetByID(id);
 
@@ -395,6 +369,47 @@ namespace BKStore_MVC.Controllers
     }
 }
 #region MyImportantTests
+
+//public IActionResult SearchByName(string name)
+//{
+//        if (name != null)
+//        {
+//            var categories = categoryRepository.GetAll();
+//            var books = bookRepository.GetByName(name);
+
+//            var bookCategVM = new BookCategVM
+//            {
+//                categories = categories,
+//                books = _mapper.Map<List<Book>>(books),
+//                SearchName = name
+//            };
+
+//            return View("Index", bookCategVM);
+//        }
+//        return RedirectToAction(nameof(Index));
+//}
+
+//public IActionResult SaveNew(Book bookFromRequest)
+//{
+//    if (ModelState.IsValid)
+//    {
+//        try
+//        {
+//            //save
+//            if (bookFromRequest.Publishdate==null)
+//            bookFromRequest.Publishdate= DateTime.Now;
+//            bookRepository.Add(bookFromRequest);
+//            bookRepository.Save();
+//            return RedirectToAction("Index");
+//        }
+//        catch (Exception ex)
+//        {
+//            ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+//        }
+//    }
+//    ViewData["CategoryName"] = categoryRepository.GetAll();
+//    return RedirectToAction("New", bookFromRequest);
+//} // Save Data
 //public IActionResult BuyNow(int bookId, int Quantity)
 //{
 //    Book book = bookRepository.GetByID(bookId);

@@ -56,6 +56,6 @@ namespace BKStore_MVC.Models.Context
         public DbSet<Governorate> governorate { get; set; }
         public DbSet<DeliveryClients> DeliveryClients { get; set; }
         public DbSet<ReviewsDelivery> ReviewsDelivery { get; set; }
-
+        public DbSet<BookRating> BookRatings { get; set; }
     }
 }

@@ -4,10 +4,6 @@ using BKStore_MVC.Repository.Interfaces;
 using BKStore_MVC.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using BKStore_MVC.Models.Context;
-using BKStore_MVC.Models;
-using BKStore_MVC.Repository.Interfaces;
-using BKStore_MVC.Repository;
 using Microsoft.AspNetCore.Hosting;
 
 namespace BKStore_MVC
@@ -22,6 +18,12 @@ namespace BKStore_MVC
             builder.Services.AddControllersWithViews();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+            builder.Services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.MinimumSameSitePolicy = SameSiteMode.Strict;
+                options.Secure = CookieSecurePolicy.Always; // Ensure cookies are only sent over HTTPS
+                options.HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.Always; // Good practice to prevent client-side scripts from accessing the cookie
+            });
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(Options =>
             {
@@ -46,7 +48,6 @@ namespace BKStore_MVC
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("BK1"));
             });
 
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -59,6 +60,8 @@ namespace BKStore_MVC
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCookiePolicy(); // Add this line to use the configured cookie policy
 
             app.MapControllerRoute(
                 name: "default",

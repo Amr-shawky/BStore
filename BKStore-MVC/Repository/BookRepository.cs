@@ -2,6 +2,7 @@
 using BKStore_MVC.Models.Context;
 using BKStore_MVC.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace BKStore_MVC.Repository
 {
@@ -37,17 +38,51 @@ namespace BKStore_MVC.Repository
         }
         public List<Book> GetByName(string name)
         {
-            //if (string.IsNullOrEmpty(name))
-            //{
-            //    return GetAll();
-           // }
             return context.Book.Where(b => b.Title.Contains(name)).ToList();
         }
         public void Save()
         {
             context.SaveChanges();
         }
+        public void RateBook(int BookID, int rating, string? UserID)
+        {
+            var book = context.Book.Include(b => b.Ratings).FirstOrDefault(b => b.BookID == BookID);
 
+            if (book != null)
+            {
+                BookRating userRating;
+
+                if (UserID != null)
+                {
+                    userRating = book.Ratings?.FirstOrDefault(r => r.UserID == UserID);
+                    if (userRating == null)
+                    {
+                        userRating = new BookRating { BookID = BookID, UserID = UserID, Rating = rating };
+                        if (book.Ratings == null)
+                        {
+                            book.Ratings = new List<BookRating>();
+                        }
+                        book.Ratings.Add(userRating);
+                    }
+                    else
+                    {
+                        userRating.Rating = rating;
+                    }
+                }
+                else
+                {
+                    // Handle anonymous rating if needed
+                    userRating = new BookRating { BookID = BookID, Rating = rating };
+                    if (book.Ratings == null)
+                    {
+                        book.Ratings = new List<BookRating>();
+                    }
+                    book.Ratings.Add(userRating);
+                }
+
+                book.AverageRating = book.Ratings.Average(r => r.Rating);
+            }
+        }
         public void Update(Book book)
         {
             context.Update(book);

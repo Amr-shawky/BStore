@@ -43,7 +43,7 @@
                     @foreach (var book in Model.books)
                     {
                         <div class="col-md-4">
-                            <div class="card mb-4">
+                            <div class="card mb-4" data-book-id="@book.BookID">
                                 <img src="~/assets/img/@book.ImagePath" class="card-img-top book-image" alt="@book.Title" data-url="@Url.Action("Details", "Book", new { Bookid = book.BookID })">
                                 <div class="card-body">
                                     <h5 class="card-title">@book.Title</h5>
@@ -64,11 +64,17 @@
                 }
                 else
                 {
-                    <p>No books available</p>
+                    <div class="col-md-12">
+                        <p>No books available</p>
+                    </div>
                 }
             </div>
-            <div class="pagination-container">
-                @Html.PagedListPager(Model.books, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort }))
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-center">
+                        @Html.PagedListPager(Model.books, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort }))
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -120,40 +126,20 @@
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const stars = document.querySelectorAll('.star');
-        stars.forEach(star => {
-            star.addEventListener('click', function (event) {
-                event.stopPropagation(); // Prevent navigation to book details
-                const value = this.getAttribute('data-value');
-                const starContainer = this.parentElement;
-                const allStars = starContainer.querySelectorAll('.star');
-                allStars.forEach(s => s.querySelector('path').setAttribute('fill', 'white'));
-                for (let i = 0; i < value; i++) {
-                    allStars[i].querySelector('path').setAttribute('fill', 'black');
-                }
-                // Send the rating to the server (e.g., using fetch or AJAX)
-                console.log('User rating:', value);
-            });
-        });
-
-        const bookImages = document.querySelectorAll('.book-image');
-        bookImages.forEach(image => {
-            image.addEventListener('click', function () {
-                const url = this.getAttribute('data-url');
-                window.location.href = url;
-            });
-        });
-    });
-    document.addEventListener('DOMContentLoaded', function () {
         const bookCards = document.querySelectorAll('.card');
+        console.log('Book cards:', bookCards);
 
         bookCards.forEach(card => {
             const stars = card.querySelectorAll('.star');
+            console.log('Stars:', stars);
             let clickedValue = 0;
 
             stars.forEach(star => {
+                console.log('Star data-value:', star.getAttribute('data-value'));
+
                 star.addEventListener('mouseover', function () {
                     const value = this.getAttribute('data-value');
+                    console.log('Mouseover value:', value);
                     fillStars(stars, value);
                 });
 
@@ -164,9 +150,10 @@
                 star.addEventListener('click', function (event) {
                     event.stopPropagation(); // Prevent navigation to book details
                     clickedValue = this.getAttribute('data-value');
+                    console.log('Clicked value:', clickedValue);
                     fillStars(stars, clickedValue);
-                    // Send the rating to the server (e.g., using fetch or AJAX)
-                    console.log('User rating:', clickedValue);
+                    const bookId = card.getAttribute('data-book-id');
+                    saveRating(bookId, clickedValue);
                 });
             });
         });
@@ -174,11 +161,48 @@
         function fillStars(stars, value) {
             stars.forEach(star => {
                 const starValue = star.getAttribute('data-value');
-                if (starValue <= value) {
-                    star.querySelector('path').setAttribute('fill', 'black');
+                const path = star.querySelector('path');
+                if (path) {
+                    if (starValue <= value) {
+                        path.setAttribute('fill', 'black');
+                    } else {
+                        path.setAttribute('fill', 'white');
+                    }
                 } else {
-                    star.querySelector('path').setAttribute('fill', 'white');
+                    console.error('Path element not found in star');
                 }
+            });
+        }
+
+        function saveRating(bookId, rating) {
+            const payload = { bookId, rating };
+            console.log('Payload:', payload);
+
+            fetch('http://localhost:59884/Book/RateBook', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CUSTOM-TOKEN': 'your-custom-token' // Replace with your custom token
+                },
+                body: JSON.stringify(payload)
+            }).then(response => {
+                if (!response.ok) {
+                    return response.json().then(errorData => {
+                        console.error('Error response:', errorData);
+                        throw new Error('Network response was not ok');
+                    });
+                }
+                return response.json();
+            }).then(data => {
+                if (data.success) {
+                    console.log('Rating submitted:', data);
+                    alert('Rating submitted successfully! Average rating: ' + data.averageRating);
+                } else {
+                    alert('Failed to submit rating.');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while submitting your rating.');
             });
         }
 
@@ -190,5 +214,4 @@
             });
         });
     });
-
 </script>

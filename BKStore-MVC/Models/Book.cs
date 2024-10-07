@@ -35,6 +35,8 @@ namespace BKStore_MVC.Models
         [Display(Name = "Publish date")]
         public DateTime? Publishdate { get; set; }
         public double? discount { get; set; }
+        public double AverageRating { get; set; } // New property
+        public virtual ICollection<BookRating>? Ratings { get; set; }
         public Category? Category { get; set; }
         public ICollection<OrderBook>? orderDetails { get; set; }
         public ICollection<Reviews>? books { get; set; }
