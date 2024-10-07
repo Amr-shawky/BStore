@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "79z1zMey1bLbCNtHPpPeke63DuWy5g0Sq0tUhcUqn5w=",
+  "Hash": "WjRVh2tXKhVUhmmyG1DuZdsPXwKrDa6hM1ZPKSqNMbI=",
   "Source": "BKStore-MVC",
   "BasePath": "_content/BKStore-MVC",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\19f2d266-8135-4e86-bb5c-d7ccf99bd90e_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg"
+    },
+    {
+      "Identity": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\3f1a2e7f-5d46-457a-918a-3b6e224e5578_BoundlessNecromancer.jpg",
+      "SourceId": "BKStore-MVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\",
+      "BasePath": "_content/BKStore-MVC",
+      "RelativePath": "assets/img/3f1a2e7f-5d46-457a-918a-3b6e224e5578_BoundlessNecromancer.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\3f1a2e7f-5d46-457a-918a-3b6e224e5578_BoundlessNecromancer.jpg"
     },
     {
       "Identity": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\44a02df6-f11c-459d-a9af-50bec2a65362_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg",
@@ -433,6 +452,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\e500c7d0-be52-4450-8099-8c6091b25de6_BoundlessNecromancer.jpg"
+    },
+    {
+      "Identity": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\f3725c0b-46b2-4fb6-b685-ad449d53f096_mvc.jpeg",
+      "SourceId": "BKStore-MVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\",
+      "BasePath": "_content/BKStore-MVC",
+      "RelativePath": "assets/img/f3725c0b-46b2-4fb6-b685-ad449d53f096_mvc.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\f3725c0b-46b2-4fb6-b685-ad449d53f096_mvc.jpeg"
     },
     {
       "Identity": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\fefe922e-d228-48da-80cf-22a1b988844d_Fearness.jpg",

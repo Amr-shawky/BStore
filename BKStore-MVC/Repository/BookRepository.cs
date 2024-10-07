@@ -71,13 +71,21 @@ namespace BKStore_MVC.Repository
                 }
                 else
                 {
-                    // Handle anonymous rating if needed
-                    userRating = new BookRating { BookID = BookID, Rating = rating };
-                    if (book.Ratings == null)
+                    // Handle guest rating
+                    var guestRating = book.Ratings?.FirstOrDefault(r => r.UserID == null);
+                    if (guestRating == null)
                     {
-                        book.Ratings = new List<BookRating>();
+                        guestRating = new BookRating { BookID = BookID, Rating = rating };
+                        if (book.Ratings == null)
+                        {
+                            book.Ratings = new List<BookRating>();
+                        }
+                        book.Ratings.Add(guestRating);
                     }
-                    book.Ratings.Add(userRating);
+                    else
+                    {
+                        guestRating.Rating = rating;
+                    }
                 }
 
                 book.AverageRating = book.Ratings.Average(r => r.Rating);

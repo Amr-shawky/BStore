@@ -85,11 +85,11 @@ namespace BKStore_MVC.Controllers
             }
             return View("Login", loginBS);
         }
-
+        [Authorize]
         public async Task<IActionResult> SignOut()
         {
             await signInManager.SignOutAsync();
-            return View(nameof(Register));
+            return View(nameof(Login));
         }
         [Authorize(Roles = "Admin")]
         public IActionResult AddAdmin()

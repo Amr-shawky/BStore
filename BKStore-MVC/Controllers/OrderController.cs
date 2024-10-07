@@ -49,10 +49,10 @@ namespace BKStore_MVC.Controllers
                 foreach (var item in orderBook.ToList())
                 {
                     BookCartItem bookCart = new BookCartItem();
-                    bookCart.Title = bookRepository.GetByID(item.BookID).Title;
+                    bookCart.Title = bookRepository.GetByID(item.BookID??0).Title;
                     bookCart.Quantity = item.Quantity;
-                    bookCart.Price = bookRepository.GetByID(item.BookID).Price;
-                    bookCart.ImagePath = bookRepository.GetByID(item.BookID).ImagePath;
+                    bookCart.Price = bookRepository.GetByID(item.BookID ?? 0).Price;
+                    bookCart.ImagePath = bookRepository.GetByID(item.BookID ?? 0).ImagePath;
                     bookCart.BookId = item.BookID;
                     
                     bookCartItems.Add(bookCart);
@@ -64,66 +64,81 @@ namespace BKStore_MVC.Controllers
             orderDetailVM.TotalPrice = orderRepository.GetByID(OrderId).TotalAmount ?? 0;
             orderDetailVM.CustomerAddress = customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).Address;
             orderDetailVM.Governorate = governorateRepository.GetByID(customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).GovernorateID ?? 0).Name;
+            orderDetailVM.CustomerID = orderRepository.GetByID(OrderId).CustomerID;
             return View("DetailedOrder", orderDetailVM);
         }
         public IActionResult DetailedOrderForUser()
         {
             int OrderId;
-            if (User.Identity.IsAuthenticated == true)
+            string customerID = GetCustomerID();
+
+            if (string.IsNullOrEmpty(customerID))
             {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                if (string.IsNullOrEmpty(userId))
-                {
-                    return BadRequest("User ID cannot be null or empty.");
-                }
-                OrderId = orderRepository.GetByCustomerID(customerRepository.GetByUserID(userId).ID).OrderId;
+                return BadRequest("Customer ID cannot be null or empty.");
             }
-            else
-            {
-                var customerIDCookie = Request.Cookies["CustomerID"];
-                string customerID;
-                if (customerIDCookie != null)
-                {
-                    // Use the existing cookie value
-                    customerID = JsonConvert.DeserializeObject<string>(customerIDCookie);
-                }
-                else
-                {
-                    customerID = "";
-                }
-                OrderId = orderRepository.GetByCustomerID(int.Parse(customerID ?? "")).OrderId;
-            }
+
+            OrderId = orderRepository.GetByCustomerID(int.Parse(customerID)).OrderId;
 
             List<OrderBook> orderBook = orderBookRepository.GetByID(OrderId);
             List<BookCartItem> bookCartItems = new List<BookCartItem>();
             OrderDetailVM orderDetailVM = new OrderDetailVM();
+
             if (orderBook != null)
             {
-                foreach (var item in orderBook.ToList())
+                foreach (var item in orderBook)
                 {
-                    BookCartItem bookCart = new BookCartItem();
-                    bookCart.Title = bookRepository.GetByID(item.BookID).Title;
-                    bookCart.Quantity = item.Quantity;
-                    bookCart.Price = bookRepository.GetByID(item.BookID).Price;
-                    bookCart.ImagePath = bookRepository.GetByID(item.BookID).ImagePath;
-                    bookCart.BookId = item.BookID;
+                    var book = bookRepository.GetByID(item.BookID ?? 0);
+                    BookCartItem bookCart = new BookCartItem
+                    {
+                        Title = book.Title,
+                        Quantity = item.Quantity,
+                        Price = book.Price,
+                        ImagePath = book.ImagePath,
+                        BookId = item.BookID
+                    };
 
                     bookCartItems.Add(bookCart);
+                  
+                }
+                //orderDetailVM.bookCartItems = bookCartItems;
+            }
+            
+            var order = orderRepository.GetByID(OrderId);
+            var customer = customerRepository.GetByID(order.CustomerID ?? 0);
+            var governorate = governorateRepository.GetByID(customer.GovernorateID ?? 0);
+
+            orderDetailVM.bookCartItems = bookCartItems;
+            orderDetailVM.CustomerName = customer.Name;
+            orderDetailVM.TotalPrice = order.TotalAmount ?? 0;
+            orderDetailVM.CustomerAddress = customer.Address;
+            orderDetailVM.Governorate = governorate.Name;
+            orderDetailVM.CustomerID = order.CustomerID;
+
+            return View("DetailedOrder", orderDetailVM);
+        }
+        private string GetCustomerID()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (!string.IsNullOrEmpty(userId))
+                {
+                    return customerRepository.GetByUserID(userId).ID.ToString();
                 }
             }
 
-            orderDetailVM.bookCartItems = bookCartItems;
-            orderDetailVM.CustomerName = customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).Name;
-            orderDetailVM.TotalPrice = orderRepository.GetByID(OrderId).TotalAmount ?? 0;
-            orderDetailVM.CustomerAddress = customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).Address;
-            orderDetailVM.Governorate = governorateRepository.GetByID(customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).GovernorateID ?? 0).Name;
-            return View("DetailedOrder", orderDetailVM);
-        }
+            var customerIDCookie = Request.Cookies["CustomerID"];
+            if (customerIDCookie != null)
+            {
+                return JsonConvert.DeserializeObject<string>(customerIDCookie);
+            }
 
-        public async Task<IActionResult> DeliverOrder(string CustomerName)
+            return string.Empty;
+        }
+        public async Task<IActionResult> DeliverOrder(int CustomerID)
         {
 
-            Order order = orderRepository.GetByCustomerID(customerRepository.GetByName(CustomerName).ID);
+            Order order = orderRepository.GetByCustomerID(CustomerID);
             order.DelivaryStatus = "Delivering";
             var cookie = Request.Cookies[".AspNetCore.Identity.Application"];
             if (cookie != null)
@@ -137,6 +152,7 @@ namespace BKStore_MVC.Controllers
                     orderRepository.Save();
                     return View("GetAll", orderRepository.GetAll());
                 }
+
             }
             //order.DeliveryClientsID = deliveryClientRepository.GetByUserID(userIdCookie).ID;
             //orderRepository.Update(order);

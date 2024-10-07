@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <form asp-action="SaveAdd" method="post">
+            <form asp-action="SaveAdd" method="post" onsubmit="return confirmSave()">
                 <div>
                     <label asp-for="Name"></label>
                     <input asp-for="Name" type="text" class="form form-control" />
@@ -97,3 +97,8 @@
         border-color: #007bff;
     }
 </style>
+<script>
+    function confirmSave() {
+        return confirm("Are you sure you want to make the order ?");
+    }
+</script>

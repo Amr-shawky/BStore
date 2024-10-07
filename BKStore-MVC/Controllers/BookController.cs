@@ -181,8 +181,16 @@ namespace BKStore_MVC.Controllers
             {
                 return BadRequest(new { success = false, message = "Invalid data" });
             }
+            if (User.Identity.IsAuthenticated == true)
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            bookRepository.RateBook(ratingModel.BookId, ratingModel.Rating, null);
+                bookRepository.RateBook(ratingModel.BookId, ratingModel.Rating, userId);
+            }
+            else
+            {
+                bookRepository.RateBook(ratingModel.BookId, ratingModel.Rating, null);
+            }
             bookRepository.Save();
 
             var book = bookRepository.GetByID(ratingModel.BookId);
