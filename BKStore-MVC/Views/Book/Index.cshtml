@@ -144,4 +144,51 @@
             });
         });
     });
+    document.addEventListener('DOMContentLoaded', function () {
+        const bookCards = document.querySelectorAll('.card');
+
+        bookCards.forEach(card => {
+            const stars = card.querySelectorAll('.star');
+            let clickedValue = 0;
+
+            stars.forEach(star => {
+                star.addEventListener('mouseover', function () {
+                    const value = this.getAttribute('data-value');
+                    fillStars(stars, value);
+                });
+
+                star.addEventListener('mouseout', function () {
+                    fillStars(stars, clickedValue);
+                });
+
+                star.addEventListener('click', function (event) {
+                    event.stopPropagation(); // Prevent navigation to book details
+                    clickedValue = this.getAttribute('data-value');
+                    fillStars(stars, clickedValue);
+                    // Send the rating to the server (e.g., using fetch or AJAX)
+                    console.log('User rating:', clickedValue);
+                });
+            });
+        });
+
+        function fillStars(stars, value) {
+            stars.forEach(star => {
+                const starValue = star.getAttribute('data-value');
+                if (starValue <= value) {
+                    star.querySelector('path').setAttribute('fill', 'black');
+                } else {
+                    star.querySelector('path').setAttribute('fill', 'white');
+                }
+            });
+        }
+
+        const bookImages = document.querySelectorAll('.book-image');
+        bookImages.forEach(image => {
+            image.addEventListener('click', function () {
+                const url = this.getAttribute('data-url');
+                window.location.href = url;
+            });
+        });
+    });
+
 </script>

@@ -2,6 +2,23 @@
 @{
     ViewData["Title"] = "Cart";
 }
+<style>
+    .my-order-btn {
+        margin-left: 10px;
+        text-decoration: none;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .my-order-btn:hover {
+            background-color: #0056b3;
+        }
+
+</style>
 <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -55,6 +72,10 @@
             </ul>
             <a href="javascript:void(0);" onclick="proceedToCheckout()" class="btn btn-primary btn-block mt-3">Proceed to Checkout</a>
         </div>
+        
+    </div>
+    <div >
+        <a href="/Order/DetailedOrderForUser/" class="btn btn-primary my-order-btn ">My Order</a>
     </div>
 </div>
 <script>
