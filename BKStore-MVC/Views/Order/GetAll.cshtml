@@ -27,9 +27,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.DelivaryStatus)
             </th>
+            @if (User.IsInRole("Admin") | User.IsInRole("Delivery"))
+                        {
+
             <th>
                 @Html.DisplayNameFor(model => model.DeliveryClientsID)
             </th>
+                        }
             <th></th>
         </tr>
     </thead>
@@ -52,9 +56,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.DelivaryStatus)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DeliveryClientsID)
+                @if (User.IsInRole("Admin") | User.IsInRole("Delivery"))
+                {
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeliveryClientsID)
                 </td>
+                }
                 <td>
                     @Html.ActionLink("Details", "DetailedOrder", "Order", new { OrderId = item.OrderId }, null) |
                     @if (User.IsInRole("Admin"))

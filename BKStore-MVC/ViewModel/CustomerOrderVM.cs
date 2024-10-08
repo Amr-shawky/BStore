@@ -21,7 +21,7 @@ namespace BKStore_MVC.ViewModel
         public int? Quantity { get; set; }
         public DateTime? OrderDate { get; set; } = DateTime.Now;
         public decimal? TotalAmount { get; set; }
-        
+        public string? Nationalnumber { get; set; }
         public List<BookCartItem>? BookItems { get; set; }
         //public int? BookPrice { get; set; }
 

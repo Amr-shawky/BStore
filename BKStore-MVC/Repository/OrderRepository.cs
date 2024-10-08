@@ -35,6 +35,10 @@ namespace BKStore_MVC.Repository
         {
             return context.Order.FirstOrDefault(c => c.CustomerID == ID) ?? new Order();
         }
+        public List<Order> GetByCustomersID(int ID)
+        {
+            return context.Order.Where(c => c.CustomerID == ID).ToList();
+        }
         public Order GetBydeliveryID(int deliveryID, int OrderID)
         {
             return context.Order.FirstOrDefault(o => o.DeliveryClientsID == deliveryID && o.OrderId == OrderID) ?? new Order();

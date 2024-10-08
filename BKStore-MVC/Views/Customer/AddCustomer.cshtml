@@ -17,17 +17,25 @@
                     <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
                 <div>
+                    <label asp-for="Nationalnumber"></label>
+                    <input asp-for="Nationalnumber" type="text" class="form form-control" />
+                    <span asp-validation-for="Nationalnumber" class="text-danger"></span>
+                </div>
+
+                <div>
                     <label asp-for="GovernorateID"></label>
                     <select asp-for="GovernorateID" asp-items="@(new SelectList(ViewData["Governoratelst"] as List<Governorate>, "Id", "Name"))" class="form-control">
                         <option value="0">-- Select option --</option>
                     </select>
                     <span asp-validation-for="GovernorateID" class="text-danger"></span>
                 </div>
+
                 <div style="border-bottom:10px">
                     <label asp-for="Phone"></label>
                     <input asp-for="Phone" type="text" class="form form-control" />
                     <span asp-validation-for="Phone" class="text-danger"></span>
                 </div>
+
                 @foreach (var item in Model.BookItems)
                 {
                     <div style="border-bottom:10px">

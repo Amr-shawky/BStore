@@ -31,7 +31,7 @@
             <h3>Books</h3>
             <div class="row">
                 <div class="col-md-12 mb-3 d-flex justify-content-end">
-                    <select id="sortOrder" class="form-control custom-dropdown" onchange="location = this.value;">
+                    <select id="sortOrder" class="form-control custom-dropdown" onchange="saveSelectionAndRedirect()">
                         <option value="@Url.Action("Index", new { sortOrder = "" })">Sort by Publish Date</option>
                         <option value="@Url.Action("Index", new { sortOrder = "date_desc" })">Sort by Publish Date (Desc)</option>
                         <option value="@Url.Action("Index", new { sortOrder = "Price" })">Sort by Price (Low to High)</option>
@@ -214,4 +214,22 @@
             });
         });
     });
+    // Function to save the selected value to localStorage and redirect
+    function saveSelectionAndRedirect() {
+        var sortOrder = document.getElementById('sortOrder').value;
+        localStorage.setItem('selectedSortOrder', sortOrder);
+        location = sortOrder; // Redirect to the selected value
+    }
+
+    // Function to set the selected value from localStorage
+    function setSelection() {
+        var selectedSortOrder = localStorage.getItem('selectedSortOrder');
+        if (selectedSortOrder) {
+            document.getElementById('sortOrder').value = selectedSortOrder;
+        }
+    }
+
+    // Call setSelection when the page loads
+    window.onload = setSelection;
+
 </script>

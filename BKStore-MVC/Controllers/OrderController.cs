@@ -39,6 +39,10 @@ namespace BKStore_MVC.Controllers
         {
             return View("GetAll", orderRepository.GetAll());
         }
+        public IActionResult GetAllByCustomerID()
+        {
+            return View("GetAll", orderRepository.GetByCustomersID(int.Parse(GetCustomerID())));
+        }
         public IActionResult DetailedOrder(int OrderId)
         {
             List<OrderBook> orderBook= orderBookRepository.GetByID(OrderId);
@@ -65,6 +69,7 @@ namespace BKStore_MVC.Controllers
             orderDetailVM.CustomerAddress = customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).Address;
             orderDetailVM.Governorate = governorateRepository.GetByID(customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).GovernorateID ?? 0).Name;
             orderDetailVM.CustomerID = orderRepository.GetByID(OrderId).CustomerID;
+            orderDetailVM.Nationalnumber = customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).Nationalnumber;
             return View("DetailedOrder", orderDetailVM);
         }
         public IActionResult DetailedOrderForUser()
@@ -113,6 +118,7 @@ namespace BKStore_MVC.Controllers
             orderDetailVM.CustomerAddress = customer.Address;
             orderDetailVM.Governorate = governorate.Name;
             orderDetailVM.CustomerID = order.CustomerID;
+            orderDetailVM.Nationalnumber=customer.Nationalnumber;
 
             return View("DetailedOrder", orderDetailVM);
         }
