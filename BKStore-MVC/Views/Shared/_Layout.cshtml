@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="~/css/site.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BKStore_MVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BKStore1_MVC.styles.css" asp-append-version="true" />
-    <style>
+@*     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+ *@    <style>
         .sidebar {
             width: 250px;
             background-color: #f4f4f4;
@@ -76,13 +77,13 @@
                         </li>
                         @if (User.IsInRole("Admin"))
                         {
-                            <li class="nav-item">
+                     @*        <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">AddAdmin</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">AddRole</a>
                             </li>
-                            <li class="nav-item">
+                      *@       <li class="nav-item">
                                 <a class="nav-link text-dark" href="#" onclick="toggleSidebar()">Settings</a>
                             </li>
                         }
@@ -111,6 +112,8 @@
         <a href="/Delivery/GetAll/">Delivery</a>
         <a href="/Home/Users/">Users</a>
         <a href="/Order/GetAll">Order</a>
+        <a href="/Category/Index">Category</a>
+        <a href="/Account/GetAll">Users</a>
     </div>
     <div class="main-content">
         @RenderBody()

@@ -116,18 +116,18 @@
                         </li>
                         @if (User.IsInRole("Admin"))
                         {
-                            <li class="nav-item">
+                            @* <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">AddAdmin</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">AddRole</a>
-                            </li>
+                            </li> *@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" href="#" onclick="toggleSidebar()">Settings</a>
                             </li>
                         }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Sign Out</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignOut">Sign Out</a>
                         </li>
                     </ul>
                     <div class="search-bar">
@@ -160,6 +160,7 @@
         <a href="/Delivery/GetAll/">Delivery</a>
         <a href="/Home/Users/">Users</a>
         <a href="/Order/GetAll">Order</a>
+        <a href="/Account/GetAll">Users</a>
     </div>
     <div class="main-content">
         @RenderBody()

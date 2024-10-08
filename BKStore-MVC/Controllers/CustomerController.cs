@@ -60,7 +60,7 @@ namespace BKStore_MVC.Controllers
             };
 
             ViewData["Governoratelst"] = governorateRepository.GetAll();
-            if (GetCustomerID() != null)
+            if (GetCustomerID() != "")
             {
                 int CustomerID = int.Parse(GetCustomerID());
                 customerOrderVM.Address = customerRepository.GetByID(CustomerID).Address;
@@ -123,9 +123,9 @@ namespace BKStore_MVC.Controllers
                 BookItems = BookCartItem,
                 TotalAmount = (decimal?)(book.Price * Quantity + 50)
             };
-            if (GetCustomerID() != null)
+            if (GetCustomerID() != "")
             {
-                int CustomerID = int.Parse(GetCustomerID());
+                int CustomerID = int.Parse(GetCustomerID().ToString());
                 customerOrderVM.Address = customerRepository.GetByID(CustomerID).Address;
                 customerOrderVM.GovernorateID = customerRepository.GetByID(CustomerID).GovernorateID;
                 customerOrderVM.Name = customerRepository.GetByID(CustomerID).Name;
@@ -133,6 +133,7 @@ namespace BKStore_MVC.Controllers
                 customerOrderVM.Phone = customerRepository.GetByID(CustomerID).Phone;
                 return View("AddCustomer", customerOrderVM);
             }
+
             return View("AddCustomer", customerOrderVM);            //return RedirectToAction(nameof(ShowCart));
 
         }
@@ -270,7 +271,7 @@ namespace BKStore_MVC.Controllers
             var customerIDCookie = Request.Cookies["CustomerID"];
             if (customerIDCookie != null)
             {
-                return JsonConvert.DeserializeObject<string>(customerIDCookie);
+                return JsonConvert.DeserializeObject<string>(customerIDCookie).ToString();
             }
 
             return string.Empty;

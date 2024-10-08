@@ -17,6 +17,7 @@ namespace BKStore_MVC.ViewModel
         public string? CategoryName { get; set; }
         public DateTime? Publishdate { get; set; }
         public string? SearchName { get; set; }
+        public IFormFile ImagePath { get; set; }
         public List<Category>? categories { get; set; }
 
     }

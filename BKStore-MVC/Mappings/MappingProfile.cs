@@ -19,16 +19,18 @@ namespace BKStore_MVC.Mappings
              .ForMember(dest => dest.categories, opt => opt.Ignore()) // Assuming categories are handled separately
              .ForMember(dest => dest.SearchName, opt => opt.Ignore()); // Assuming SearchName is set separately
             CreateMap<Book, BookWithAuthorWithPuplisherWithCategVM>()
-           .ForMember(dest => dest.BookID, opt => opt.MapFrom(src => src.BookID))
-           .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
-           .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.AuthorName))
-           .ForMember(dest => dest.StockQuantity, opt => opt.MapFrom(src => src.StockQuantity))
-           .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
-           .ForMember(dest => dest.BookImagePath, opt => opt.MapFrom(src => src.ImagePath))
-           .ForMember(dest => dest.PublisherName, opt => opt.MapFrom(src => src.PublisherName))
-           .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
-           .ForMember(dest => dest.CategoryID, opt => opt.MapFrom(src => src.CategoryID))
-           .ForMember(dest => dest.categories, opt => opt.Ignore()); // Categories will be set separately
+                .ForMember(dest => dest.BookID, opt => opt.MapFrom(src => src.BookID))
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+                .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.AuthorName))
+                .ForMember(dest => dest.StockQuantity, opt => opt.MapFrom(src => src.StockQuantity))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+                .ForMember(dest => dest.BookImagePath, opt => opt.MapFrom(src => src.ImagePath)) // Map ImagePath to BookImagePath
+                .ForMember(dest => dest.PublisherName, opt => opt.MapFrom(src => src.PublisherName))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.CategoryID, opt => opt.MapFrom(src => src.CategoryID))
+                .ForMember(dest => dest.categories, opt => opt.Ignore()) // Categories will be set separately
+                .ForMember(dest => dest.ImagePath, opt => opt.Ignore()); // Ignore ImagePath
+
             CreateMap<BookWithAuthorWithPuplisherWithCategVM, Book>()
             .ForMember(dest => dest.BookID, opt => opt.Ignore()) // Assuming BookID is not updated
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))

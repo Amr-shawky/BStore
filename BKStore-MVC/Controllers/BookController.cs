@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using X.PagedList;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BKStore_MVC.Controllers
 {
@@ -66,17 +67,6 @@ namespace BKStore_MVC.Controllers
             return View("Index", bookCategVM);
         }
 
-        //public IActionResult Index(int? page)
-        //{
-        //    int pageSize = 10; // Number of items per page
-        //    int pageNumber = (page ?? 1); // Default to page 1 if no page is specified
-
-        //    BookCategVM bookCategVM = new BookCategVM();
-        //    bookCategVM.categories = categoryRepository.GetAll();
-        //    bookCategVM.books = bookRepository.GetAll().ToPagedList(pageNumber, pageSize);
-
-        //    return View("Index", bookCategVM);
-        //} // Show All Books
         public IActionResult Details(int Bookid)
         {
             Book book = bookRepository.GetByID(Bookid);
@@ -174,6 +164,7 @@ namespace BKStore_MVC.Controllers
             return View("New", bookFromRequest);
         }
         //[ValidateAntiForgeryToken]
+        [Authorize]
         [HttpPost]
         public IActionResult RateBook([FromBody] RatingModel ratingModel)
         {
@@ -207,30 +198,53 @@ namespace BKStore_MVC.Controllers
             return View("Edit", bookVM);
         }
         [HttpPost]
-        public IActionResult SaveEdit(int id, BookWithAuthorWithPuplisherWithCategVM bookFromRequest)
+        [HttpPost]
+        public async Task<IActionResult> SaveEdit(int id, BookWithAuthorWithPuplisherWithCategVM bookFromRequest)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
+                //try
+                //{
                     var bookFromDB = bookRepository.GetByID(id);
+                    if (bookFromDB == null)
+                    {
+                        return NotFound();
+                    }
 
-                    // Map the properties from bookFromRequest to bookFromDB
+                    if (bookFromRequest.ImagePath != null)
+                    {
+                        var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img");
+                        var uniqueFileName = Guid.NewGuid().ToString() + "_" + bookFromRequest.ImagePath.FileName;
+                        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await bookFromRequest.ImagePath.CopyToAsync(fileStream);
+                        }
+                        bookFromDB.ImagePath = uniqueFileName;
+                        bookFromRequest.BookImagePath = uniqueFileName; // Update the ViewModel
+                    }
+                    else
+                    {
+                        bookFromRequest.BookImagePath = bookFromDB.ImagePath; // Retain the existing image path
+                    }
+
+                    // Map the properties from bookFromRequest to bookFromDB, excluding ImagePath
                     _mapper.Map(bookFromRequest, bookFromDB);
-
+                    bookRepository.Update(bookFromDB);
                     bookRepository.Save();
-                    return RedirectToAction("Index");
-                }
-                catch (Exception ex)
-                {
-                    string errorMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                    ModelState.AddModelError(string.Empty, errorMessage);
-                }
+                    return RedirectToAction("GetAllToAdmin");
+                //}
+                //catch (Exception ex)
+                //{
+                //    string errorMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                //    ModelState.AddModelError(string.Empty, errorMessage);
+                //}
             }
 
             bookFromRequest.categories = categoryRepository.GetAll();
             return View("Edit", bookFromRequest);
         }
+
         public IActionResult Delete(int id)
         {
             // Fetch the book to delete
@@ -377,6 +391,17 @@ namespace BKStore_MVC.Controllers
     }
 }
 #region MyImportantTests
+//public IActionResult Index(int? page)
+//{
+//    int pageSize = 10; // Number of items per page
+//    int pageNumber = (page ?? 1); // Default to page 1 if no page is specified
+
+//    BookCategVM bookCategVM = new BookCategVM();
+//    bookCategVM.categories = categoryRepository.GetAll();
+//    bookCategVM.books = bookRepository.GetAll().ToPagedList(pageNumber, pageSize);
+
+//    return View("Index", bookCategVM);
+//} // Show All Books
 
 //public IActionResult SearchByName(string name)
 //{
