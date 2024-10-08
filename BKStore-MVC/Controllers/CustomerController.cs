@@ -5,9 +5,7 @@ using BKStore_MVC.Repository.Interfaces;
 using BKStore_MVC.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Net;
 using System.Security.Claims;
-
 namespace BKStore_MVC.Controllers
 {
     public class CustomerController : Controller
@@ -165,32 +163,35 @@ namespace BKStore_MVC.Controllers
                     }
                     else
                     {
+                        Customer customer = new Customer();
+                        customer.Name = customerOrderVM.Name;
+                        customer.Address = customerOrderVM.Address;
+                        customer.Phone = customerOrderVM.Phone;
+                        customer.GovernorateID = customerOrderVM.GovernorateID;
+                        customer.Nationalnumber = customerOrderVM.Nationalnumber;
+                        var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                        if (User.FindFirstValue(ClaimTypes.NameIdentifier) != null)
+                        {
+                            customer.UserID = userID;
+                        }
+                        customerRepository.Add(customer);
+                        customerRepository.Save();
+
                         // Create a new cookie with the CustomerID
-                        customerID = customerRepository.GetByName(customerOrderVM.Name).ID.ToString();
+                        customerID = customerRepository.GetByID(customer.ID).ID.ToString();
                         string serializedID = JsonConvert.SerializeObject(customerID);
                         Response.Cookies.Append("CustomerID", serializedID, new CookieOptions
                         {
                             Expires = DateTimeOffset.Now.AddDays(7) // Set the cookie to expire in 7 days
                         });
-                        var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                        Customer customer = new Customer
-                        {
-                            Address = customerOrderVM.Address,
-                            Name = customerOrderVM.Name,
-                            Phone = customerOrderVM.Phone,
-                            GovernorateID = customerOrderVM.GovernorateID,
-                            UserID = userID,
-                            Nationalnumber = customerOrderVM.Nationalnumber
-                        };
-                        customerRepository.Add(customer);
-                        customerRepository.Save();
+                        
 
                     }
 
 
                     Order order = new Order
                     {
-                        CustomerID = customerRepository.GetByName(customerOrderVM.Name).ID,
+                        CustomerID = customerRepository.GetByID(int.Parse(customerID??"0")).ID,
                         OrderDate = DateTime.Now,
                         DelivaryStatus = "Pending",
                         TotalAmount = (double?)customerOrderVM.TotalAmount

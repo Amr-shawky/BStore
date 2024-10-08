@@ -59,8 +59,7 @@
               "ViewState": "AgIAAMUAAAAAAAAAAAAUwMgAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-10-05T13:56:30.887Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -73,8 +72,7 @@
               "ViewState": "AgIAAIIAAAAAAAAAAAAAAKsAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-05T01:06:23.662Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -88,7 +86,7 @@
               "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
               "ToolTip": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Controllers\\CustomerController.cs",
               "RelativeToolTip": "Controllers\\CustomerController.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAAAD4AAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAMUAAAAAAAAAAAAQwNQAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-08T19:45:37.413Z",
               "EditorCaption": ""
@@ -103,8 +101,7 @@
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAGkAAAAAAAAAAAAAAGoAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-08T18:34:23.865Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T18:34:23.865Z"
             },
             {
               "$type": "Document",
@@ -116,8 +113,7 @@
               "RelativeToolTip": "Views\\Shared\\_LayoutC.cshtml",
               "ViewState": "AgIAAHQAAAAAAAAAAAAAAHUAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-08T18:29:40.209Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T18:29:40.209Z"
             },
             {
               "$type": "Document",
@@ -129,8 +125,7 @@
               "RelativeToolTip": "ViewModel\\BookWithAuthorWithPuplisherWithCategVM.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAA5wBgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-08T17:01:34.642Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T17:01:34.642Z"
             },
             {
               "$type": "Document",
@@ -142,8 +137,7 @@
               "RelativeToolTip": "Mappings\\MappingProfile.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAAwCAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-08T16:43:40.118Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T16:43:40.118Z"
             },
             {
               "$type": "Document",
@@ -155,8 +149,7 @@
               "RelativeToolTip": "Views\\Book\\New.cshtml",
               "ViewState": "AgIAACYAAAAAAAAAAAAIwDUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-08T16:25:40.516Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T16:25:40.516Z"
             },
             {
               "$type": "Document",
@@ -168,8 +161,7 @@
               "RelativeToolTip": "Views\\Book\\Edit.cshtml",
               "ViewState": "AgIAAC4AAAAAAAAAAAAAwDoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-08T16:25:35.314Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T16:25:35.314Z"
             }
           ]
         }
