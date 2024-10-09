@@ -512,6 +512,7 @@ F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\staticwebass
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.BKStore-MVC.props
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\staticwebassets.pack.json
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\scopedcss\Views\Shared\_LayoutC.cshtml.rz.scp.css
+F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\scopedcss\Views\Shared\_LayoutC1.cshtml.rz.scp.css
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\scopedcss\bundle\BKStore-MVC.styles.css
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\scopedcss\projectbundle\BKStore-MVC.bundle.scp.css
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-.3A94ABEB.Up2Date
@@ -520,4 +521,8 @@ F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\refint\BKSto
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-MVC.pdb
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\BKStore-MVC.genruntimeconfig.cache
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\ref\BKStore-MVC.dll
-F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\obj\Debug\net8.0\scopedcss\Views\Shared\_LayoutC1.cshtml.rz.scp.css
+F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll

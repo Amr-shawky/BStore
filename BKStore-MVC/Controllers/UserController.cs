@@ -5,6 +5,7 @@ using BKStore_MVC.ViewModel;
 using Newtonsoft.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 namespace BKStore_MVC.Controllers
 {
@@ -92,6 +93,27 @@ namespace BKStore_MVC.Controllers
 
             return RedirectToAction("MyAccount");
         }
+        public async Task<IActionResult> GetAll()
+        {
+            var users = await _userManager.Users.ToListAsync(); // Materialize the users list first
+            List<UsersInfoVM> UsersInfo = new List<UsersInfoVM>();
+
+            foreach (var user in users)
+            {
+                var userInfo = new UsersInfoVM
+                {
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Phone = user.PhoneNumber,
+                    IsLocked = user.LockoutEnd.HasValue && user.LockoutEnd.Value > DateTimeOffset.Now,
+                    Role = (await _userManager.GetRolesAsync(user)).FirstOrDefault()
+                };
+                UsersInfo.Add(userInfo);
+            }
+
+            return View("GetAll", UsersInfo);
+        }
+
 
     }
 }
