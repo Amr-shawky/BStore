@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="~/css/site.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BKStore_MVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site1.css" asp-append-version="true" />
-@*     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
- *@    <style>
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <style>
         .sidebar {
             width: 250px;
             background-color: #f4f4f4;
@@ -40,6 +39,23 @@
             left: 0; /* Show sidebar */
         }
 
+        .search-bar {
+            display: flex;
+            align-items: center;
+            width: 40%; /* Make search bar larger */
+            margin-left: -50px; /* Increase length from the left side */
+        }
+
+            .search-bar input {
+                flex: 1;
+                padding: 5px; /* Increase padding for larger input */
+                margin-right: 200px;
+            }
+
+            .search-bar .icon {
+                margin-left: 10px;
+            }
+
         .auth-buttons {
             display: flex;
             align-items: center;
@@ -54,6 +70,29 @@
                 .auth-buttons a:hover {
                     text-decoration: underline;
                 }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            width: 100%;
+        }
+
+            .dropdown-menu.show {
+                display: block;
+            }
+
+        .dropdown-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+            .dropdown-item:hover {
+                background-color: #f1f1f1;
+            }
+
     </style>
 </head>
 <body>
@@ -77,13 +116,13 @@
                         </li>
                         @if (User.IsInRole("Admin"))
                         {
-                     @*        <li class="nav-item">
+                            @* <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">AddAdmin</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">AddRole</a>
-                            </li>
-                      *@       <li class="nav-item">
+                            </li> *@
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" href="#" onclick="toggleSidebar()">Settings</a>
                             </li>
                         }
@@ -91,6 +130,12 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignOut">Sign Out</a>
                         </li>
                     </ul>
+                    <div class="search-bar">
+                        <form id="searchForm" asp-action="SearchByName" asp-controller="Book" method="get" class="form-inline">
+                            <input id="searchInput" type="text" name="name" class="form-control" placeholder="Search for books" autocomplete="off" />
+                            <div id="searchDropdown" class="dropdown-menu"></div>
+                        </form>
+                    </div>
                     <div class="auth-buttons">
                         <a href="#" class="icon"><i class="fa fa-heart"></i></a>
                         <a href="#" class="icon"><i class="fa fa-user"></i></a>
@@ -99,7 +144,10 @@
                         </a>
                         <a href="@Url.Action("Login", "Account")">Login</a> /
                         <a href="@Url.Action("Register", "Account")">Register</a>
-                    </div>
+                        <a href="/User/MyAccount/">
+                            <img src="~/assets/img/icon-5359553_1280.png" alt="My Account" style="width: 50px; height: 50px" />
+                        </a>
+                 </div>
                 </div>
             </div>
         </nav>
@@ -112,7 +160,6 @@
         <a href="/Delivery/GetAll/">Delivery</a>
         <a href="/Home/Users/">Users</a>
         <a href="/Order/GetAll">Order</a>
-        <a href="/Category/Index">Category</a>
         <a href="/Account/GetAll">Users</a>
     </div>
     <div class="main-content">
@@ -131,7 +178,59 @@
             var sidebar = document.getElementById("sidebar");
             sidebar.classList.toggle("open-sidebar");
         }
+
+        // Auto-submit search form on input
+        document.getElementById('searchInput').addEventListener('input', function () {
+            var query = this.value;
+            if (query.length > 2) {
+                $.ajax({
+                    url: '@Url.Action("SearchBooks", "Book")',
+                    type: 'GET',
+                    data: { name: query },
+                    success: function (data) {
+                        var dropdown = document.getElementById('searchDropdown');
+                        dropdown.innerHTML = '';
+                        if (data.length > 0) {
+                            data.forEach(function (book) {
+                                var item = document.createElement('div');
+                                item.className = 'dropdown-item';
+                                item.textContent = book.title;
+                                item.onclick = function () {
+                                    window.location.href = '/Book/Details/' + book.id;
+                                };
+                                dropdown.appendChild(item);
+                            });
+                            dropdown.classList.add('show');
+                        } else {
+                            dropdown.classList.remove('show');
+                        }
+                    }
+                });
+            } else {
+                document.getElementById('searchDropdown').classList.remove('show');
+            }
+        });
     </script>
-    @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+
+@* 
+/*
+        .my-order-btn {
+            margin-left: 10px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .my-order-btn:hover {
+                background-color: #0056b3;
+            }
+                         <a href="/Order/DetailedOrderForUser/" class="btn btn-primary my-order-btn ">My Order</a>
+    
+ */ *@

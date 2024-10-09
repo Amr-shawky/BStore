@@ -106,7 +106,7 @@ namespace BKStore_MVC.Controllers
         } // Add New Book
         public IActionResult GetAllToAdmin()
         {
-            return View("GetAllToAdmin",bookRepository.GetAll());
+            return View("GetAllToAdmin", bookRepository.GetAll());
         }
 
         [HttpGet]
@@ -198,41 +198,40 @@ namespace BKStore_MVC.Controllers
             return View("Edit", bookVM);
         }
         [HttpPost]
-        [HttpPost]
         public async Task<IActionResult> SaveEdit(int id, BookWithAuthorWithPuplisherWithCategVM bookFromRequest)
         {
             if (ModelState.IsValid)
             {
                 //try
                 //{
-                    var bookFromDB = bookRepository.GetByID(id);
-                    if (bookFromDB == null)
-                    {
-                        return NotFound();
-                    }
+                var bookFromDB = bookRepository.GetByID(id);
+                if (bookFromDB == null)
+                {
+                    return NotFound();
+                }
 
-                    if (bookFromRequest.ImagePath != null)
+                if (bookFromRequest.ImagePath != null)
+                {
+                    var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img");
+                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + bookFromRequest.ImagePath.FileName;
+                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
-                        var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img");
-                        var uniqueFileName = Guid.NewGuid().ToString() + "_" + bookFromRequest.ImagePath.FileName;
-                        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                        using (var fileStream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await bookFromRequest.ImagePath.CopyToAsync(fileStream);
-                        }
-                        bookFromDB.ImagePath = uniqueFileName;
-                        bookFromRequest.BookImagePath = uniqueFileName; // Update the ViewModel
+                        await bookFromRequest.ImagePath.CopyToAsync(fileStream);
                     }
-                    else
-                    {
-                        bookFromRequest.BookImagePath = bookFromDB.ImagePath; // Retain the existing image path
-                    }
+                    bookFromDB.ImagePath = uniqueFileName;
+                    bookFromRequest.BookImagePath = uniqueFileName; // Update the ViewModel
+                }
+                else
+                {
+                    bookFromRequest.BookImagePath = bookFromDB.ImagePath; // Retain the existing image path
+                }
 
-                    // Map the properties from bookFromRequest to bookFromDB, excluding ImagePath
-                    _mapper.Map(bookFromRequest, bookFromDB);
-                    bookRepository.Update(bookFromDB);
-                    bookRepository.Save();
-                    return RedirectToAction("GetAllToAdmin");
+                // Map the properties from bookFromRequest to bookFromDB, excluding ImagePath
+                _mapper.Map(bookFromRequest, bookFromDB);
+                bookRepository.Update(bookFromDB);
+                bookRepository.Save();
+                return RedirectToAction("GetAllToAdmin");
                 //}
                 //catch (Exception ex)
                 //{
@@ -280,7 +279,7 @@ namespace BKStore_MVC.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public IActionResult AddToCart(int bookId ,int Quantity)
+        public IActionResult AddToCart(int bookId, int Quantity)
         {
             var cookie = Request.Cookies["Cart"];
             List<BookCartItem> cartItems;
@@ -297,8 +296,14 @@ namespace BKStore_MVC.Controllers
             }
             Book book = bookRepository.GetByID(bookId);
             // Add the new item to the list
-            cartItems.Add(new BookCartItem { BookId = bookId,Quantity = Quantity ,
-                ImagePath= book.ImagePath,Title=book.Title,Price=book.Price
+            cartItems.Add(new BookCartItem
+            {
+                BookId = bookId,
+                Quantity = Quantity,
+                ImagePath = book.ImagePath,
+                Title = book.Title,
+                Price = book.Price,
+                StockQuantity = bookRepository.GetByID(bookId).StockQuantity
             });
 
             // Serialize the updated list
@@ -331,9 +336,9 @@ namespace BKStore_MVC.Controllers
                 cartItems = new List<BookCartItem>();
             }
 
-            
+
             // Pass the ViewModel to the view
-            return View("Cart",cartItems);
+            return View("Cart", cartItems);
         }
         public IActionResult RemoveFromCart(int bookId)
         {
@@ -385,9 +390,35 @@ namespace BKStore_MVC.Controllers
         }
         public IActionResult DetailedBookForAdmin(int ID)
         {
-            return View("DetailedBookForAdmin",bookRepository.GetByID(ID));
+            return View("DetailedBookForAdmin", bookRepository.GetByID(ID));
+        }
+        private static List<BookCartItem> cart = new List<BookCartItem>();
+
+        [HttpPost]
+        public IActionResult UpdateQuantity(int bookId, int quantity)
+        {
+            var item = cart.FirstOrDefault(i => i.BookId == bookId);
+            if (item == null)
+            {
+                return Json(new { success = false, message = "Item not found in cart." });
+            }
+
+            item.Quantity = quantity;
+
+            var newSubtotal = item.Price * item.Quantity;
+            var newCartSubtotal = cart.Sum(i => i.Price * i.Quantity);
+            var newCartTotal = newCartSubtotal + 50; // Assuming a fixed shipping cost
+
+            return Json(new
+            {
+                success = true,
+                newSubtotal = newSubtotal,
+                newCartSubtotal = newCartSubtotal,
+                newCartTotal = newCartTotal
+            });
         }
 
+        // Example method to add items to the cart
     }
 }
 #region MyImportantTests

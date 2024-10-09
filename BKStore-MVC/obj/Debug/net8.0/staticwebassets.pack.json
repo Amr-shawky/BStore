@@ -81,12 +81,24 @@
       "PackagePath": "staticwebassets\\assets\\img\\65dabb12-d068-4d0f-ab30-34134b182aca_War And Peace.jpeg"
     },
     {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\666603.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\666603.jpg"
+    },
+    {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\691773c3-6e5c-49e2-80f8-879eeb09648d_◜\uD83D\uDC90◞.jpeg",
       "PackagePath": "staticwebassets\\assets\\img\\691773c3-6e5c-49e2-80f8-879eeb09648d_◜\uD83D\uDC90◞.jpeg"
     },
     {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\6a3fab84-a788-45d4-8af9-b8288fcd9a3b_magic_cover.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\6a3fab84-a788-45d4-8af9-b8288fcd9a3b_magic_cover.webp"
+    },
+    {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\6c6a3e8c-b9f9-41f6-b7b6-8ac962f16e0e_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\6c6a3e8c-b9f9-41f6-b7b6-8ac962f16e0e_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\728b34a1-b21e-4164-8758-87fac4a5367f_Fearness.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\728b34a1-b21e-4164-8758-87fac4a5367f_Fearness.jpg"
     },
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\7f89ed24-b183-4466-b0f3-3390c8adb571_1984 George Orwell - Book Cover.jpeg",
@@ -257,6 +269,10 @@
       "PackagePath": "staticwebassets\\assets\\img\\p1.jpg"
     },
     {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\pexels-anna-nekrashevich-8534046.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\pexels-anna-nekrashevich-8534046.jpg"
+    },
+    {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\portfolio\\cabin.png",
       "PackagePath": "staticwebassets\\assets\\img\\portfolio\\cabin.png"
     },
@@ -299,6 +315,10 @@
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\css\\site1.css",
+      "PackagePath": "staticwebassets\\css\\site1.css"
     },
     {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\css\\styles.css",

@@ -43,8 +43,7 @@
                             </td>
                             <td id="price-@item.BookId">@item.Price EGP</td>
                             <td>
-                                <input type="number" value="@item.Quantity" min="1" class="form-control w-50" onchange="updateQuantity('@item.BookId', this.value)">
-                            </td>
+                                <input type="number" value="@item.Quantity" min="1" max="@item.StockQuantity" class="form-control w-50" readonly>                            </td>
                             <td id="subtotal-@item.BookId">@(@item.Price * @item.Quantity) EGP</td>
                             <td>
                                 <button class="btn btn-danger" onclick="removeFromCart(@item.BookId)">Remove</button>

@@ -26,15 +26,6 @@ namespace BKStore_MVC.Controllers
             this.orderBookRepository = orderBookRepository;
             this.orderRepository = orderRepository;
         }
-        //public IActionResult AddCustomer(int BookId, int Quantity,double total)
-        //{
-        //    ViewData["Governoratelst"] = governorateRepository.GetAll();
-        //    CustomerOrderVM customerOrderVM = new CustomerOrderVM();
-        //    customerOrderVM.Quantity = Quantity;
-        //    customerOrderVM.Book = bookRepository.GetByID(BookId);
-        //    customerOrderVM.TotalAmount= total;
-        //    return View("AddCustomer", customerOrderVM);
-        //}
         public IActionResult AddCustomer(decimal TotalAmount)
         {
             // Retrieve the existing cookie
@@ -87,15 +78,21 @@ namespace BKStore_MVC.Controllers
             }
             Book book = bookRepository.GetByID(bookId);
             // Add the new item to the list
-            cartItems.Add(new BookCartItem
+            if (book.StockQuantity < Quantity)
             {
-                BookId = bookId,
-                Quantity = Quantity,
-                ImagePath = book.ImagePath,
-                Title = book.Title,
-                Price = book.Price
-            });
-
+                Quantity = book.StockQuantity;
+            }
+            else
+            {
+                cartItems.Add(new BookCartItem
+                {
+                    BookId = bookId,
+                    Quantity = Quantity,
+                    ImagePath = book.ImagePath,
+                    Title = book.Title,
+                    Price = book.Price
+                });
+            }
             // Serialize the updated list
             string serializedCartItems = JsonConvert.SerializeObject(cartItems);
 
@@ -135,8 +132,6 @@ namespace BKStore_MVC.Controllers
             return View("AddCustomer", customerOrderVM);            //return RedirectToAction(nameof(ShowCart));
 
         }
-
-
         [HttpPost]
         public IActionResult SaveAdd(CustomerOrderVM customerOrderVM)
         {
@@ -218,6 +213,8 @@ namespace BKStore_MVC.Controllers
                     {
                         foreach (var item in cartItems.ToList())
                         {
+                            Book bookedit = bookRepository.GetByID(item.BookId??0);
+                            bookedit.StockQuantity = bookedit.StockQuantity - item.Quantity??0;
                             OrderBook orderBook = new OrderBook
                             {
                                 BookID = item.BookId ?? 0,
@@ -225,13 +222,17 @@ namespace BKStore_MVC.Controllers
                                 TSubPrice = (item.Price * item.Quantity) ?? 0,
                                 OrderID = order.OrderId
                             };
+                            bookRepository.Update(bookedit);
                             orderBookRepository.Add(orderBook);
                             orderBookRepository.Save();
+                            bookRepository.Save();
                         }
                     }
                     else
                     {
                         var carts = cartItems.LastOrDefault();
+                        Book bookedit = bookRepository.GetByID(carts.BookId ?? 0);
+                        bookedit.StockQuantity = bookedit.StockQuantity - carts.Quantity ?? 0;
                         OrderBook orderBook = new OrderBook
                         {
                             BookID = carts.BookId ?? 0,
@@ -239,8 +240,10 @@ namespace BKStore_MVC.Controllers
                             TSubPrice = (carts.Price * carts.Quantity) ?? 0,
                             OrderID = order.OrderId
                         };
+                        bookRepository.Update(bookedit);
                         orderBookRepository.Add(orderBook);
                         orderBookRepository.Save();
+                        bookRepository.Save();
                     }
 
                     return RedirectToAction("GetAllByCustomerID", "Order");

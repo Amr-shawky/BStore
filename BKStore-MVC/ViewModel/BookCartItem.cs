@@ -8,6 +8,7 @@
         public int? Quantity { get; set; }
         public string? ImagePath { get; set; }
         public string? SearchName { get; set; }
+        public int? StockQuantity { get; set; }
 
     }
 }
