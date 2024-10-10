@@ -296,15 +296,26 @@ namespace BKStore_MVC.Controllers
             }
             Book book = bookRepository.GetByID(bookId);
             // Add the new item to the list
-            cartItems.Add(new BookCartItem
+            if (cartItems.Any(item => item.BookId == bookId))
             {
-                BookId = bookId,
-                Quantity = Quantity,
-                ImagePath = book.ImagePath,
-                Title = book.Title,
-                Price = book.Price,
-                StockQuantity = bookRepository.GetByID(bookId).StockQuantity
-            });
+                BookCartItem bookCart = cartItems.Where(item => item.BookId == bookId).FirstOrDefault();
+                if (bookCart.StockQuantity >= Quantity + bookCart.Quantity)
+                {
+                    bookCart.Quantity = Quantity + bookCart.Quantity;
+                }
+            }
+            else
+            {
+                cartItems.Add(new BookCartItem
+                {
+                    BookId = bookId,
+                    Quantity = Quantity,
+                    ImagePath = book.ImagePath,
+                    Title = book.Title,
+                    Price = book.Price,
+                    StockQuantity = bookRepository.GetByID(bookId).StockQuantity
+                });
+            }
 
             // Serialize the updated list
             string serializedCartItems = JsonConvert.SerializeObject(cartItems);
@@ -314,7 +325,6 @@ namespace BKStore_MVC.Controllers
             {
                 Expires = DateTimeOffset.Now.AddDays(7) // Set the cookie to expire in 7 days
             });
-
             return View("Cart", cartItems);
             //return RedirectToAction(nameof(ShowCart));
 

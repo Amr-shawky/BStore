@@ -227,6 +227,7 @@ namespace BKStore_MVC.Controllers
                             orderBookRepository.Save();
                             bookRepository.Save();
                         }
+                        Response.Cookies.Delete("Cart");
                     }
                     else
                     {
@@ -244,6 +245,7 @@ namespace BKStore_MVC.Controllers
                         orderBookRepository.Add(orderBook);
                         orderBookRepository.Save();
                         bookRepository.Save();
+                        Response.Cookies.Delete("Cart");
                     }
 
                     return RedirectToAction("GetAllByCustomerID", "Order");
