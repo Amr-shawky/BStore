@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using BKStore_MVC.Repository.Interfaces;
+using System.Net;
 
 namespace BKStore_MVC.Controllers
 {
@@ -13,10 +15,16 @@ namespace BKStore_MVC.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public UserController(UserManager<ApplicationUser> userManager, IWebHostEnvironment webHostEnvironment)
+        private readonly IOrderRepository orderRepository;
+        private readonly ICustomerRepository customerRepository;
+        public UserController(UserManager<ApplicationUser> userManager,ICustomerRepository customerRepository,
+            IOrderRepository orderRepository,
+            IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _webHostEnvironment = webHostEnvironment;
+            this.orderRepository = orderRepository;
+            this.customerRepository = customerRepository;
         }
 
         public async Task<IActionResult> MyAccount()
@@ -102,6 +110,7 @@ namespace BKStore_MVC.Controllers
             {
                 var userInfo = new UsersInfoVM
                 {
+                    UserID = user.Id,
                     UserName = user.UserName,
                     Email = user.Email,
                     Phone = user.PhoneNumber,
@@ -113,7 +122,86 @@ namespace BKStore_MVC.Controllers
 
             return View("GetAll", UsersInfo);
         }
+        [HttpPost]
+        public async Task<IActionResult> LockAccount(string ID)
+        {
+            // Retrieve the user by their ID
+            var user = await _userManager.FindByIdAsync(ID);
+            if (user == null)
+            {
+                return NotFound(); // Handle the case where the user is not found
+            }
 
+            // Enable the lockout feature
+            user.LockoutEnabled = true;
+
+            // Optionally, set the LockoutEnd property to a future date if you want to lock the account for a specific duration
+            user.LockoutEnd = DateTimeOffset.Now.AddDays(30);
+
+            // Update the user in the database
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                // Handle the case where the update fails
+                return BadRequest(result.Errors);
+            }
+
+            return RedirectToAction(nameof(GetAll));
+        }
+        [HttpPost]
+        public async Task<IActionResult> UnLockAccount(string ID)
+        {
+            // Retrieve the user by their ID
+            var user = await _userManager.FindByIdAsync(ID);
+            if (user == null)
+            {
+                return NotFound(); // Handle the case where the user is not found
+            }
+
+            // Enable the lockout feature
+            user.LockoutEnabled = false;
+
+            // Optionally, set the LockoutEnd property to a future date if you want to lock the account for a specific duration
+            user.LockoutEnd = null;
+
+            // Update the user in the database
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                // Handle the case where the update fails
+                return BadRequest(result.Errors);
+            }
+
+            return RedirectToAction(nameof(GetAll));
+        }
+
+        public async Task<IActionResult> Detailed(string ID)
+        {
+            var users = await _userManager.Users.ToListAsync(); // Materialize the users list first
+            var user = await _userManager.FindByIdAsync(ID);
+            if (user == null)
+            {
+                return NotFound(); // Handle the case where the user is not found
+            }
+            DetaledUserInfoVM UsersInfo = new DetaledUserInfoVM()
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                Phone = user.PhoneNumber,
+                Role = (await _userManager.GetRolesAsync(user)).FirstOrDefault(),
+                IsLocked = user.LockoutEnabled
+            };
+            Customer customer = customerRepository.GetByUserID(ID);
+            if (customer != null) {
+                Order order = orderRepository.GetByCustomerID(customer.ID);
+                UsersInfo.CustomerID = customer.ID;
+                UsersInfo.FullName = customer.Name;
+                UsersInfo.Address = customer.Address;
+                UsersInfo.OrderID = order.OrderId;
+                UsersInfo.ImagePath = user.ImagePath;
+            }
+            return View("GetAll", UsersInfo);
+        }
 
     }
 }

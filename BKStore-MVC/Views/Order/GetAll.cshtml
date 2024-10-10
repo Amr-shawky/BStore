@@ -64,18 +64,19 @@
                 </td>
                 }
                 <td>
-                    @Html.ActionLink("Details", "DetailedOrder", "Order", new { OrderId = item.OrderId }, null) |
-                    @if (User.IsInRole("Admin"))
-                    {
-                        @Html.ActionLink("Edit ", "Edit", new {  /* id=item.PrimaryKey */  }) <text>|</text>
-                        @Html.ActionLink(" Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    }
+
+                    @Html.ActionLink("Details", "DetailedOrder", "Order", new { OrderId = item.OrderId }, null)
+
                 </td>
-                @if (item.DelivaryStatus == "Delivering")
+                @if (User.IsInRole("Delivery"))
                 {
-                    <td>
-                        <button onclick="updateOrderStatus(@item.OrderId)">Mark as Delivered</button>
-                    </td>
+
+                    @if (item.DelivaryStatus == "Delivering")
+                    {
+                        <td>
+                            <button onclick="updateOrderStatus(@item.OrderId)">Mark as Delivered</button>
+                        </td>
+                    }
                 }
             </tr>
         }

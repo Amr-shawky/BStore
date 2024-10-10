@@ -255,9 +255,55 @@ namespace BKStore_MVC.Controllers
             ViewData["Governoratelst"] = governorateRepository.GetAll();
             return View("AddCustomer", customerOrderVM);
         }
-        public IActionResult Details(Customer customer)
+        public IActionResult Details(int ID)
         {
-            return View();
+            int OrderId;
+            int customerID = ID;
+
+            if (customerID==0)
+            {
+                return BadRequest("Customer ID cannot be null or empty.");
+            }
+
+            OrderId = orderRepository.GetByCustomerID(customerID).OrderId;
+
+            List<OrderBook> orderBook = orderBookRepository.GetByID(OrderId);
+            List<BookCartItem> bookCartItems = new List<BookCartItem>();
+            OrderDetailVM orderDetailVM = new OrderDetailVM();
+
+            if (orderBook != null)
+            {
+                foreach (var item in orderBook)
+                {
+                    var book = bookRepository.GetByID(item.BookID ?? 0);
+                    BookCartItem bookCart = new BookCartItem
+                    {
+                        Title = book.Title,
+                        Quantity = item.Quantity,
+                        Price = book.Price,
+                        ImagePath = book.ImagePath,
+                        BookId = item.BookID
+                    };
+
+                    bookCartItems.Add(bookCart);
+
+                }
+                //orderDetailVM.bookCartItems = bookCartItems;
+            }
+
+            var order = orderRepository.GetByID(OrderId);
+            var customer = customerRepository.GetByID(order.CustomerID ?? 0);
+            var governorate = governorateRepository.GetByID(customer.GovernorateID ?? 0);
+
+            orderDetailVM.bookCartItems = bookCartItems;
+            orderDetailVM.CustomerName = customer.Name;
+            orderDetailVM.TotalPrice = order.TotalAmount ?? 0;
+            orderDetailVM.CustomerAddress = customer.Address;
+            orderDetailVM.Governorate = governorate.Name;
+            orderDetailVM.CustomerID = order.CustomerID;
+            orderDetailVM.Nationalnumber = customer.Nationalnumber;
+
+            return View("Details", orderDetailVM);
         }
         public IActionResult GetAll()
         {

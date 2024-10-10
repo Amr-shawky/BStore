@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using BKStore_MVC.ViewModels;
+using BKStore_MVC.Repository.Interfaces;
 
 namespace BKStore_MVC.Controllers
 {
@@ -12,15 +13,17 @@ namespace BKStore_MVC.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly IDeliveryClientRepository deliveryClientRepository;
 
         public RoleManager<IdentityRole> RoleManager { get; }
 
-        public AccountController(UserManager<ApplicationUser> userManager,
+        public AccountController(UserManager<ApplicationUser> userManager,IDeliveryClientRepository deliveryClientRepository,
               SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             RoleManager = roleManager;
+            this.deliveryClientRepository = deliveryClientRepository;
         }
         public IActionResult Register()
         {
@@ -63,7 +66,7 @@ namespace BKStore_MVC.Controllers
 
                 if (appuser != null)
                 {
-                    if (appuser.LockoutEnabled == true)
+                    if (appuser.LockoutEnabled == false)
                     {
                         bool found =
                         await userManager.CheckPasswordAsync(appuser, loginBS.Password);
@@ -75,10 +78,12 @@ namespace BKStore_MVC.Controllers
                     }
                     else
                     {
-                        if (await userManager.IsInRoleAsync(appuser, "Delivery"))
+                        DeliveryClients delivery = deliveryClientRepository.GetByUserID(appuser.Id);
+                        if (await userManager.IsInRoleAsync(appuser, "Delivery") & delivery==null)
                         {
                             return RedirectToAction("AddDelivery", "Delivery", new { UserId = appuser.Id });
                         }
+        
                     }
                 }
                 ModelState.AddModelError("", "Username OR Password Wrong");

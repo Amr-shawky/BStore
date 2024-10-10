@@ -7,7 +7,7 @@
 <h1>GetAll</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-controller="Account" asp-action="AddAdmin">Create New</a>
 </p>
 <table class="table" style="background-color: white;">
     <thead>
@@ -49,9 +49,20 @@
                 @Html.DisplayFor(modelItem => item.Role)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @if (item.IsLocked == false)
+                    {
+                        <form asp-action="LockAccount" asp-controller="User" method="post">
+                            <input type="hidden" name="ID" value="@item.UserID" />
+                            <button type="submit">Lock User</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="UnLockAccount" asp-controller="User" method="post">
+                            <input type="hidden" name="ID" value="@item.UserID" />
+                            <button type="submit">UnLock User</button>
+                        </form>
+                    }
             </td>
         </tr>
 }
