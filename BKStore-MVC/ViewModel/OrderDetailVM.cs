@@ -16,6 +16,7 @@ namespace BKStore_MVC.ViewModel
         public int? CustomerID { get; set; }
         [Display(Name = "national number")]
         public string? Nationalnumber { get; set; }
+        public int? OrderID { get; set; }
 
         public List<BookCartItem>? bookCartItems { get; set; }
 

@@ -70,6 +70,7 @@ namespace BKStore_MVC.Controllers
             orderDetailVM.Governorate = governorateRepository.GetByID(customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).GovernorateID ?? 0).Name;
             orderDetailVM.CustomerID = orderRepository.GetByID(OrderId).CustomerID;
             orderDetailVM.Nationalnumber = customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).Nationalnumber;
+            orderDetailVM.OrderID = OrderId;
             return View("DetailedOrder", orderDetailVM);
         }
         public IActionResult DetailedOrderForUser()
@@ -141,10 +142,10 @@ namespace BKStore_MVC.Controllers
 
             return string.Empty;
         }
-        public async Task<IActionResult> DeliverOrder(int CustomerID)
+        public async Task<IActionResult> DeliverOrder(int orderID)
         {
 
-            Order order = orderRepository.GetByCustomerID(CustomerID);
+            Order order = orderRepository.GetByID(orderID);
             order.DelivaryStatus = "Delivering";
             var cookie = Request.Cookies[".AspNetCore.Identity.Application"];
             if (cookie != null)
@@ -156,7 +157,7 @@ namespace BKStore_MVC.Controllers
                     order.DeliveryClientsID = deliveryClientRepository.GetByUserID(userId).ID;
                     orderRepository.Update(order);
                     orderRepository.Save();
-                    return View("GetAll", orderRepository.GetAll());
+                    return RedirectToAction("GetAll");
                 }
 
             }

@@ -257,7 +257,6 @@ C:\Users\MG\Desktop\DEPI_Project\BookStoreProject\BStore\BKStore-MVC\obj\Debug\n
 C:\Users\MG\Desktop\DEPI_Project\BookStoreProject\BStore\BKStore-MVC\obj\Debug\net8.0\ref\BKStore-MVC.dll
 C:\Users\MG\Desktop\DEPI_Project\BookStoreProject\BStore\BKStore-MVC\bin\Debug\net8.0\dotnet-aspnet-codegenerator-design.dll
 C:\Users\MG\Desktop\DEPI_Project\BookStoreProject\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
-F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\appsettings.Development.json
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\appsettings.json
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\BKStore-MVC.staticwebassets.runtime.json
@@ -297,6 +296,7 @@ F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.En
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 F:\FULL Projects\DPI\Book-Store\BStore\BKStore-MVC\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
