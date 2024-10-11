@@ -11,6 +11,8 @@ using X.PagedList;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
+using static System.Reflection.Metadata.BlobBuilder;
+using System.Net;
 
 namespace BKStore_MVC.Controllers
 {
@@ -66,7 +68,6 @@ namespace BKStore_MVC.Controllers
 
             return View("Index", bookCategVM);
         }
-
         public IActionResult Details(int Bookid)
         {
             Book book = bookRepository.GetByID(Bookid);
@@ -96,7 +97,6 @@ namespace BKStore_MVC.Controllers
 
             return Json(books);
         }
-
         [HttpGet]
         public IActionResult New()
         {
@@ -108,7 +108,6 @@ namespace BKStore_MVC.Controllers
         {
             return View("GetAllToAdmin", bookRepository.GetAll());
         }
-
         [HttpGet]
         public IActionResult SearchByName(string name)
         {
@@ -163,7 +162,6 @@ namespace BKStore_MVC.Controllers
             ViewData["Categories"] = categoryRepository.GetAll();
             return View("New", bookFromRequest);
         }
-        //[ValidateAntiForgeryToken]
         [Authorize]
         [HttpPost]
         public IActionResult RateBook([FromBody] RatingModel ratingModel)
@@ -187,7 +185,6 @@ namespace BKStore_MVC.Controllers
             var book = bookRepository.GetByID(ratingModel.BookId);
             return Ok(new { success = true, averageRating = book.AverageRating });
         }
-
         public IActionResult Edit(int id)
         {
             var bookModel = bookRepository.GetByID(id);
@@ -243,7 +240,6 @@ namespace BKStore_MVC.Controllers
             bookFromRequest.categories = categoryRepository.GetAll();
             return View("Edit", bookFromRequest);
         }
-
         public IActionResult Delete(int id)
         {
             // Fetch the book to delete
@@ -259,7 +255,6 @@ namespace BKStore_MVC.Controllers
 
             return RedirectToAction("GetAllToAdmin"); // Display confirmation before deletion
         }
-
         public IActionResult DeleteConfirmed(int id)
         {
             // Fetch the book to delete
@@ -403,7 +398,6 @@ namespace BKStore_MVC.Controllers
             return View("DetailedBookForAdmin", bookRepository.GetByID(ID));
         }
         private static List<BookCartItem> cart = new List<BookCartItem>();
-
         [HttpPost]
         public IActionResult UpdateQuantity(int bookId, int quantity)
         {
@@ -427,8 +421,130 @@ namespace BKStore_MVC.Controllers
                 newCartTotal = newCartTotal
             });
         }
+        [HttpPost]
+        public IActionResult AddToWishlist(int bookId)
+        {
+            try
+            {
+                var cookie = Request.Cookies["Wishlist"];
+                List<int> Books;
 
-        // Example method to add items to the cart
+                if (cookie != null)
+                {
+                    // Deserialize the existing cookie value
+                    Books = JsonConvert.DeserializeObject<List<int>>(cookie);
+                }
+                else
+                {
+                    // Initialize a new list if the cookie does not exist
+                    Books = new List<int>();
+                }
+
+                // Check if the book exists
+                Book book = bookRepository.GetByID(bookId);
+                if (book == null)
+                {
+                    return NotFound("Book not found");
+                }
+
+                // Add the new item to the list if it doesn't already exist
+                if (!Books.Contains(bookId))
+                {
+                    Books.Add(bookId);
+                }
+
+                // Serialize the updated list
+                string serializedCartItems = JsonConvert.SerializeObject(Books);
+
+                // Create or update the cookie
+                Response.Cookies.Append("Wishlist", serializedCartItems, new CookieOptions
+                {
+                    Expires = DateTimeOffset.Now.AddDays(7) // Set the cookie to expire in 7 days
+                });
+
+                return RedirectToAction("ShowWishlist");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (you can use a logging framework like Serilog, NLog, etc.)
+                Console.WriteLine($"Error: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        [HttpPost]
+        public IActionResult RemoveFromWishlist(int bookId)
+        {
+            var cookie = Request.Cookies["Wishlist"];
+            List<int> Books;
+
+            if (cookie != null)
+            {
+                // Deserialize the existing cookie value
+                Books = JsonConvert.DeserializeObject<List<int>>(cookie);
+            }
+            else
+            {
+                // Initialize a new list if the cookie does not exist
+                Books = new List<int>();
+            }
+
+            // Remove the item from the list
+            if (Books.Contains(bookId))
+            {
+                Books.Remove(bookId);
+            }
+            List<Book> books = new List<Book>();
+            foreach (var item in Books)
+            {
+                Book book99 = bookRepository.GetByID(item);
+                books.Add(book99);
+            }
+
+            // Serialize the updated list
+            string serializedCartItems = JsonConvert.SerializeObject(Books);
+
+            // Create or update the cookie
+            Response.Cookies.Append("Wishlist", serializedCartItems, new CookieOptions
+            {
+                Expires = DateTimeOffset.Now.AddDays(7) // Set the cookie to expire in 7 days
+            });
+
+            return RedirectToAction("ShowWishlist");
+        }
+        public IActionResult ShowWishlist()
+        {
+            var cookie = Request.Cookies["Wishlist"];
+            List<int> Books;
+
+            if (cookie != null)
+            {
+                // Deserialize the existing cookie value
+                Books = JsonConvert.DeserializeObject<List<int>>(cookie);
+            }
+            else
+            {
+                // Initialize a new list if the cookie does not exist
+                Books = new List<int>();
+            }
+
+            // Remove the item from the list
+            List<Book> books = new List<Book>();
+            if (Books != null)
+            {
+                foreach (var item in Books ?? new List<int>())
+                {
+                    Book book99 = bookRepository?.GetByID(item);
+                    if (book99 != null)
+                    {
+                        books.Add(book99);
+                    }
+                }
+                return View("Wishlist", books);
+            }
+
+            return View("Wishlist", books);
+        }
+
     }
 }
 #region MyImportantTests

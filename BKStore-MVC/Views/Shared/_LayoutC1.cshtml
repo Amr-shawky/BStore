@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="~/css/site1.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
     <style>
+        .wishlist-icon svg path {
+            transition: fill 0.3s;
+        }
+
+        .wishlist-icon:hover svg path {
+            fill: red; /* Change to the desired fill color on hover */
+        }
         .sidebar {
             width: 250px;
             background-color: #f4f4f4;
@@ -136,6 +143,7 @@
                             <div id="searchDropdown" class="dropdown-menu"></div>
                         </form>
                     </div>
+                    
                     <div class="auth-buttons">
                         <a href="#" class="icon"><i class="fa fa-heart"></i></a>
                         <a href="#" class="icon"><i class="fa fa-user"></i></a>
@@ -147,9 +155,11 @@
                         <a href="/User/MyAccount/">
                             <img src="~/assets/img/icon-5359553_1280.png" alt="My Account" style="width: 50px; height: 50px" />
                         </a>
+
                  </div>
                 </div>
             </div>
+
         </nav>
     </header>
     <div class="sidebar" id="sidebar">

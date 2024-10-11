@@ -93,6 +93,7 @@
             .then(data => {
                 if (data.success) {
                     alert('Order status updated successfully!');
+                    location.reload(); // Reload the page to reflect the changes
                 } else {
                     alert('Failed to update order status.');
                 }

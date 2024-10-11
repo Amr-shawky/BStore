@@ -44,18 +44,28 @@
                     {
                         <div class="col-md-4">
                             <div class="card mb-4" data-book-id="@book.BookID">
-                                <img src="~/assets/img/@book.ImagePath" class="card-img-top book-image" alt="@book.Title" data-url="@Url.Action("Details", "Book", new { Bookid = book.BookID })">
+                                <div class="book-image-container">
+                                    <img src="~/assets/img/@book.ImagePath" class="card-img-top book-image" alt="@book.Title" data-url="@Url.Action("Details", "Book", new { Bookid = book.BookID })">
+                                    <form action="/Book/AddToWishlist" method="post">
+                                        <input type="hidden" name="bookId" value="@book.BookID" />
+                                        <button type="submit" class="icon wishlist-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M19.5003 12.5717L12.0003 19.9997L4.5003 12.5717C4.00561 12.0903 3.61594 11.5117 3.35585 10.8723C3.09575 10.2329 2.97086 9.54664 2.98904 8.85662C3.00721 8.1666 3.16806 7.48782 3.46146 6.86303C3.75485 6.23823 4.17444 5.68094 4.69379 5.22627C5.21314 4.77159 5.82101 4.42938 6.47911 4.22117C7.13722 4.01296 7.83131 3.94327 8.51767 4.01649C9.20403 4.08971 9.8678 4.30425 10.4672 4.64659C11.0666 4.98894 11.5885 5.45169 12.0003 6.00569C12.4138 5.45571 12.9364 4.99701 13.5354 4.65829C14.1344 4.31958 14.7968 4.10814 15.4812 4.03721C16.1657 3.96628 16.8574 4.03739 17.5131 4.24608C18.1688 4.45477 18.7743 4.79656 19.2919 5.25005C19.8094 5.70354 20.2277 6.25897 20.5207 6.88158C20.8137 7.50419 20.975 8.18057 20.9946 8.8684C21.0142 9.55622 20.8916 10.2407 20.6344 10.8789C20.3773 11.5172 19.9912 12.0955 19.5003 12.5777" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
                                 <div class="card-body">
                                     <h5 class="card-title">@book.Title</h5>
                                     <p class="card-text">Author: @book.AuthorName</p>
                                     <p class="card-text">Price: <strong>@book.Price</strong></p>
-                                    @if(book.StockQuantity!=0){
+                                    @if (book.StockQuantity != 0)
+                                    {
                                         <p class="card-text">StockQuantity: <strong>@book.StockQuantity</strong></p>
                                     }
                                     else
                                     {
                                         <p class="card-text">StockQuantity: <strong style="color:red">Out Of Stock</strong></p>
-
                                     }
                                     <div class="star-rating">
                                         @for (int i = 1; i <= 5; i++)
@@ -89,14 +99,10 @@
 </div>
 
 <style>
-    .list-group-item a {
-        color: #000;
+    .list-group-item a:hover {
+        color: #007bff;
+        text-decoration: underline;
     }
-
-        .list-group-item a:hover {
-            color: #007bff;
-            text-decoration: underline;
-        }
 
     .badge-pill {
         background-color: #007bff;
@@ -105,7 +111,7 @@
     .card-img-top {
         width: 100%; /* Ensure the image takes the full width of the container */
         height: 280px; /* Set a fixed height for the image container */
-        object-fit: cover; /* Ensure the image covers the container while maintaining aspect ratio */
+        object-fit: fill; /* Ensure the image covers the container while maintaining aspect ratio */
         cursor: pointer;
     }
 
@@ -131,6 +137,27 @@
         width: 24px;
         cursor: pointer;
     }
+
+    /* Book Image Container */
+    .book-image-container {
+        position: relative;
+    }
+
+    /* Wishlist Icon */
+    .wishlist-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        transition: fill 0.3s;
+    }
+
+        .wishlist-icon svg path {
+            transition: fill 0.3s;
+        }
+
+        .wishlist-icon:hover svg path {
+            fill: red; /* Change to the desired fill color on hover */
+        }
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -240,4 +267,32 @@
     // Call setSelection when the page loads
     window.onload = setSelection;
 
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.wishlist-form').on('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            var form = $(this);
+            var bookId = form.find('input[name="bookId"]').val();
+
+            $.ajax({
+                url: '/Book/AddToWishlist',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ bookId: bookId }),
+                success: function (data) {
+                    if (data.success) {
+                        alert('Book added to wishlist!');
+                    } else {
+                        alert('Failed to add book to wishlist.');
+                    }
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
 </script>
