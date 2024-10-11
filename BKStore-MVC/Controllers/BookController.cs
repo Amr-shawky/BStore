@@ -88,16 +88,6 @@ namespace BKStore_MVC.Controllers
             return View("Details", bookVM);
         }
         [HttpGet]
-        public IActionResult SearchBooks(string name)
-        {
-            var books = bookRepository.GetAll()
-                .Where(b => b.Title.Contains(name))
-                .Select(b => new { b.BookID, b.Title })
-                .ToList();
-
-            return Json(books);
-        }
-        [HttpGet]
         public IActionResult New()
         {
             ViewData["Categories"] = categoryRepository.GetAll();
@@ -109,8 +99,14 @@ namespace BKStore_MVC.Controllers
             return View("GetAllToAdmin", bookRepository.GetAll());
         }
         [HttpGet]
-        public IActionResult SearchByName(string name)
+        public IActionResult SearchByName(string name, int? bookId)
         {
+            if (bookId.HasValue)
+            {
+                // Handle the case where a specific book is selected
+                return RedirectToAction("Details", new { id = bookId.Value });
+            }
+
             if (!string.IsNullOrEmpty(name))
             {
                 var categories = categoryRepository.GetAll();
@@ -123,9 +119,21 @@ namespace BKStore_MVC.Controllers
                     SearchName = name
                 };
 
+                ViewBag.SearchTerm = name; // Pass the search term to the view
+
                 return View("Index", bookCategVM);
             }
             return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public IActionResult SearchBooks(string name)
+        {
+            if (!string.IsNullOrEmpty(name))
+            {
+                var books = bookRepository.GetByNameList(name);
+                return Json(books.Select(b => new { b.BookID, b.Title }));
+            }
+            return Json(new List<object>());
         }
         [HttpPost]
         public async Task<IActionResult> SaveNew(Book bookFromRequest, IFormFile ImagePath)
@@ -298,6 +306,10 @@ namespace BKStore_MVC.Controllers
                 if (bookCart.StockQuantity >= Quantity + bookCart.Quantity)
                 {
                     bookCart.Quantity = Quantity + bookCart.Quantity;
+                }
+                else
+                {
+                    bookCart.Quantity = bookCart.StockQuantity;
                 }
             }
             else
