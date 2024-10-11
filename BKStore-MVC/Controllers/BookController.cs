@@ -282,7 +282,8 @@ namespace BKStore_MVC.Controllers
             if (cookie != null)
             {
                 // Deserialize the existing cookie value
-                cartItems = JsonConvert.DeserializeObject<List<BookCartItem>>(cookie);
+                cartItems = JsonConvert.DeserializeObject<List<BookCartItem>>(cookie) ?? new List<BookCartItem>();
+
             }
             else
             {

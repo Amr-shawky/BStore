@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
     <style>
         .wishlist-icon {
-            left: 300; /* Adjust this value as needed */
+            left: 300px; /* Adjust this value as needed */
             top: 40%; /* Center vertically, adjust as needed */
         }
         .wishlist-icon svg path {
@@ -138,9 +138,13 @@
                                 <a class="nav-link text-dark" href="#" onclick="toggleSidebar()">Settings</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignOut">Sign Out</a>
-                        </li>
+                        @if (User?.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignOut">Sign Out</a>
+                            </li>
+                        }
+
                     </ul>
                     <div class="search-bar">
                         <form id="searchForm" asp-action="SearchByName" asp-controller="Book" method="get" class="form-inline">
