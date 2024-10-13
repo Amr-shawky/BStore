@@ -19,7 +19,6 @@
                 <div>
                     <label asp-for="Nationalnumber"></label>
                     <input asp-for="Nationalnumber" type="text" class="form form-control" />
-                    <span asp-validation-for="Nationalnumber" class="text-danger"></span>
                 </div>
 
                 <div>
@@ -110,3 +109,8 @@
         return confirm("Are you sure you want to make the order ?");
     }
 </script>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }

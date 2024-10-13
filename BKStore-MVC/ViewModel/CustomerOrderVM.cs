@@ -8,11 +8,14 @@ namespace BKStore_MVC.ViewModel
     {
         [StringLength(30, ErrorMessage = " name cannot exceed 30 characters.")]
         [Display(Name ="Full Name")]
+        [Required]
         public string Name { get; set; }
         [StringLength(400, ErrorMessage = " Address cannot exceed 400 characters.")]
+        [Required]
         public string Address { get; set; }
         [StringLength(15, ErrorMessage = " Phone cannot exceed 15 characters.")]
         [Display(Name = "Mobile")]
+        [Required]
         public string Phone { get; set; }
         public string? UserID { get; set; }
         [Required]

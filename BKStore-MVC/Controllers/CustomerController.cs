@@ -161,7 +161,7 @@ namespace BKStore_MVC.Controllers
                         customer.Address = customerOrderVM.Address;
                         customer.Phone= customerOrderVM.Phone;
                         customer.GovernorateID= customerOrderVM.GovernorateID;
-                        customer.Nationalnumber= customerOrderVM.Nationalnumber;
+                        customer.Nationalnumber= customerOrderVM.Nationalnumber??"";
                         var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
                         customer.UserID = userID;
                         customerRepository.Update(customer);
