@@ -88,8 +88,20 @@
                     <strong id="cart-total">@(@Model.Where(item => item.StockQuantity >= item.Quantity).Sum(item => item.Price * item.Quantity) + ((double)ViewData["PaymentFees"])) EGP</strong>
                 </li>
             </ul>
-            <a href="javascript:void(0);" onclick="proceedToCheckout()" class="btn btn-primary btn-block mt-3">Proceed to Checkout</a>
-        </div>
+            @if (Model.Where(item => item.StockQuantity >= item.Quantity).Sum(item => item.Price * item.Quantity)==0){
+
+            
+                <a href="javascript:void(0);" onclick="proceedToCheckout()" class="btn btn-primary btn-block mt-3" style="pointer-events: none; opacity: 0.5;">Proceed to Checkout</a>
+
+
+            }
+            else
+            {
+                <a href="javascript:void(0);" onclick="proceedToCheckout()" class="btn btn-primary btn-block mt-3">Proceed to Checkout</a>
+
+            }            
+
+              </div>
         
     </div>
     <div >
