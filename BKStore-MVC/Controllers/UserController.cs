@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using BKStore_MVC.Repository.Interfaces;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BKStore_MVC.Controllers
 {
@@ -26,7 +27,7 @@ namespace BKStore_MVC.Controllers
             this.orderRepository = orderRepository;
             this.customerRepository = customerRepository;
         }
-
+        [Authorize]
         public async Task<IActionResult> MyAccount()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

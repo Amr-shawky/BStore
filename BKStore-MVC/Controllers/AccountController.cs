@@ -33,14 +33,22 @@ namespace BKStore_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser applicationUser = new ApplicationUser();
-                applicationUser.UserName = viewModel.UserName;
-                applicationUser.PasswordHash = viewModel.Password;
-                applicationUser.Email = viewModel.Email;
-                applicationUser.ImagePath = "blank-profile-picture.png";
+                ApplicationUser applicationUser = new ApplicationUser
+                {
+                    UserName = viewModel.UserName,
+                    PasswordHash = viewModel.Password,
+                    Email = viewModel.Email,
+                    ImagePath = "blank-profile-picture.png",
+                    LockoutEnabled = false, // Explicitly set LockoutEnabled to false
+                    LockoutEnd = null
+                };
+
                 IdentityResult result = await userManager.CreateAsync(applicationUser, viewModel.Password);
                 if (result.Succeeded)
                 {
+                    applicationUser.LockoutEnabled = false;
+                    await userManager.UpdateAsync(applicationUser);
+
                     if (userManager.Users.Count() < 2)
                         await userManager.AddToRoleAsync(applicationUser, "Admin");
                     await signInManager.SignInAsync(applicationUser, false);
@@ -53,6 +61,7 @@ namespace BKStore_MVC.Controllers
             }
             return View("Register", viewModel);
         }
+
         public IActionResult Login()
         {
             return View("Login");
@@ -139,31 +148,6 @@ namespace BKStore_MVC.Controllers
             return View("Register", viewModel);
         }
 
-        //public async Task<IActionResult> SaveAdmin(RegistersRoles viewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        ApplicationUser applicationUser = new ApplicationUser();
-        //        applicationUser.UserName = viewModel.UserName;
-        //        applicationUser.PasswordHash = viewModel.Password;
-        //        applicationUser.Email = viewModel.Email;
-        //        if(viewModel.Role== "Delivery")
-        //        {
-        //            applicationUser.LockoutEnabled = false;
-        //        }
-        //        IdentityResult result = await userManager.CreateAsync(applicationUser, viewModel.Password);
-        //        if (result.Succeeded)
-        //        {
-        //            await userManager.AddToRoleAsync(applicationUser, viewModel.Role);
-        //            return RedirectToAction("Index", "Home");
-        //        }
-        //        foreach (var item in result.Errors)
-        //        {
-        //            ModelState.AddModelError("", item.Description);
-        //        }
-        //    }
-        //    return View("Register", viewModel);
-        //}
 
     }
 }

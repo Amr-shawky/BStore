@@ -23,16 +23,20 @@ namespace BKStore_MVC.Controllers
         private readonly IGovernorateRepository governorateRepository;
         IMapper _mapper;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        IShippingMethodRepository shippingMethodRepository;
+        IBookRatingRepository bookRatingRepository;
         public BookController(IBookRepository _bookRepository, IWebHostEnvironment webHostEnvironment,
-            IGovernorateRepository governorateRepository,
-            IMapper mapper,
+            IGovernorateRepository governorateRepository,IShippingMethodRepository shippingMethodRepository,
+            IMapper mapper,IBookRatingRepository bookRatingRepository,
             ICategoryRepository _categoryRepository)
         {
+            this.shippingMethodRepository = shippingMethodRepository;
             bookRepository = _bookRepository;
             categoryRepository = _categoryRepository;
             _mapper = mapper;
             this.governorateRepository = governorateRepository;
             _webHostEnvironment = webHostEnvironment;
+            this.bookRatingRepository = bookRatingRepository;
         }
         public IActionResult Index(int? page, string sortOrder)
         {
@@ -84,6 +88,8 @@ namespace BKStore_MVC.Controllers
 
             var bookVM = _mapper.Map<BookWithAuthorWithPuplisherWithCategVM>(book);
             _mapper.Map(category, bookVM); // Map category properties to the view model
+            var ratings = bookRatingRepository.GetByBookID(Bookid);
+            ViewData["AvgRating"] = ratings.Any() ? Math.Round(ratings.Average(b => b.Rating), 1) : 0;
 
             return View("Details", bookVM);
         }
@@ -284,6 +290,7 @@ namespace BKStore_MVC.Controllers
         [HttpPost]
         public IActionResult AddToCart(int bookId, int Quantity)
         {
+            ViewData["PaymentFees"] = shippingMethodRepository.GetByID(1).PaymentFees;
             var cookie = Request.Cookies["Cart"];
             List<BookCartItem> cartItems;
 
@@ -333,12 +340,13 @@ namespace BKStore_MVC.Controllers
             {
                 Expires = DateTimeOffset.Now.AddDays(7) // Set the cookie to expire in 7 days
             });
-            return View("Cart", cartItems);
+            return RedirectToAction(nameof(ShowCart));
             //return RedirectToAction(nameof(ShowCart));
-
         }
         public IActionResult ShowCart()
         {
+            ViewData["PaymentFees"] = shippingMethodRepository.GetByID(1).PaymentFees;
+
             // Retrieve the existing cookie
             var cookie = Request.Cookies["Cart"];
             List<BookCartItem> cartItems;
@@ -393,7 +401,7 @@ namespace BKStore_MVC.Controllers
 
             // Calculate new totals
             var newSubtotal = cartItems.Sum(item => item.Price * item.Quantity);
-            var newTotal = newSubtotal + 50; // Assuming a fixed shipping cost of 50 EGP
+            var newTotal = newSubtotal + shippingMethodRepository.GetByID(1).PaymentFees; // Assuming a fixed shipping cost of 50 EGP
 
             // Return the new totals as JSON
             return Json(new { newSubtotal, newTotal });
@@ -424,7 +432,7 @@ namespace BKStore_MVC.Controllers
 
             var newSubtotal = item.Price * item.Quantity;
             var newCartSubtotal = cart.Sum(i => i.Price * i.Quantity);
-            var newCartTotal = newCartSubtotal + 50; // Assuming a fixed shipping cost
+            var newCartTotal = newCartSubtotal + shippingMethodRepository.GetByID(1).PaymentFees; // Assuming a fixed shipping cost
 
             return Json(new
             {

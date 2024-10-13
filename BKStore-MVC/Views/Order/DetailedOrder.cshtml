@@ -30,11 +30,11 @@
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span>Shipping (Cairo & Giza)</span>
-                    <span>50 EGP</span>
+                    <span>@Model.PaymentFees EGP</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <strong>Total</strong>
-                    <strong>@(total + 50 ) EGP</strong>
+                    <strong>@(total + Model.PaymentFees ) EGP</strong>
                 </li>
             </ul>
         </div>

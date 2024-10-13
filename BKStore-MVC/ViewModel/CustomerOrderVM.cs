@@ -23,6 +23,8 @@ namespace BKStore_MVC.ViewModel
         public decimal? TotalAmount { get; set; }
         public string? Nationalnumber { get; set; }
         public List<BookCartItem>? BookItems { get; set; }
+        public double? PaymentFees { get; set; }
+
         //public int? BookPrice { get; set; }
 
 

@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <h3>Categories</h3>
+            <h3 style="color:antiquewhite">Categories</h3>
             <ul class="list-group">
                 @if (Model.categories != null)
                 {
@@ -28,7 +28,7 @@
             </ul>
         </div>
         <div class="col-md-9">
-            <h3>Books</h3>
+            <h3 style="color:antiquewhite">Books</h3>
             <div class="row">
                 <div class="col-md-12 mb-3 d-flex justify-content-end">
                     <select id="sortOrder" class="form-control custom-dropdown" onchange="saveSelectionAndRedirect()">
@@ -104,6 +104,32 @@
         text-decoration: underline;
     }
 
+    .pagination-container .pagination .active span {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 18px;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        text-decoration: none;
+        margin: 5px;
+    }
+
+    .pagination-container .pagination a {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 18px;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        text-decoration: none;
+        margin: 5px;
+    }
+
     .badge-pill {
         background-color: #007bff;
     }
@@ -123,6 +149,17 @@
         text-align: center;
         margin-top: 20px;
     }
+
+    .col-md-3 h3 {
+        display: inline-block;
+        width: 100%;
+        height: auto;
+        font-size: 32px;
+        color: white;
+        background-color: transparent;
+        text-align: center;
+    }
+
 
     .custom-dropdown {
         width: 200px; /* Adjust the width as needed */

@@ -40,10 +40,11 @@ namespace BKStore_MVC
             builder.Services.AddScoped<ICountryRepository, CountryRepository>();
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IShippingRepository, ShippingRepository>();
+            builder.Services.AddScoped<IShippingMethodRepository, ShippingMethodRepository>();
             builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
             builder.Services.AddScoped<IOrderBookRepository, OrderBookRepository>();
             builder.Services.AddScoped<IDeliveryClientRepository, DeliveryClientRepository>();
-
+            builder.Services.AddScoped<IBookRatingRepository, BookRatingRepository>();
             builder.Services.AddDbContext<BKstore_System>(Options => {
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("BK1"));
             });

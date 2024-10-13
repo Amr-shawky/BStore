@@ -15,12 +15,22 @@ namespace BKStore_MVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
+        }
+
+        public IActionResult AboutUs()
+        {
+            return View("AboutUs");
+        }
+
+        public IActionResult ContactUs()
+        {
+            return View("ContactUs");
         }
 
         public IActionResult Privacy()
         {
-            return View();
+            return View("Privacy");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

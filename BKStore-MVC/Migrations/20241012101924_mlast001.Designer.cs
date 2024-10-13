@@ -4,6 +4,7 @@ using BKStore_MVC.Models.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BKStore_MVC.Migrations
 {
     [DbContext(typeof(BKstore_System))]
-    partial class BKstore_SystemModelSnapshot : ModelSnapshot
+    [Migration("20241012101924_mlast001")]
+    partial class mlast001
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -484,8 +487,6 @@ namespace BKStore_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GovernorateID");
-
                     b.ToTable("shippingMethod");
                 });
 
@@ -764,13 +765,6 @@ namespace BKStore_MVC.Migrations
                     b.Navigation("ShippingMethod");
                 });
 
-            modelBuilder.Entity("BKStore_MVC.Models.ShippingMethod", b =>
-                {
-                    b.HasOne("BKStore_MVC.Models.Governorate", null)
-                        .WithMany("shippingMethod")
-                        .HasForeignKey("GovernorateID");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -864,8 +858,6 @@ namespace BKStore_MVC.Migrations
             modelBuilder.Entity("BKStore_MVC.Models.Governorate", b =>
                 {
                     b.Navigation("customers");
-
-                    b.Navigation("shippingMethod");
                 });
 
             modelBuilder.Entity("BKStore_MVC.Models.Order", b =>

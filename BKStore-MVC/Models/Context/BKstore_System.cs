@@ -57,5 +57,6 @@ namespace BKStore_MVC.Models.Context
         public DbSet<DeliveryClients> DeliveryClients { get; set; }
         public DbSet<ReviewsDelivery> ReviewsDelivery { get; set; }
         public DbSet<BookRating> BookRatings { get; set; }
+        public DbSet<ShippingMethod> shippingMethod { get; set; }
     }
 }

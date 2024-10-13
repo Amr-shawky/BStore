@@ -61,11 +61,11 @@
                 }
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span>Subtotal</span>
-                    <span>@(Model.TotalAmount - 50) EGP</span>
+                    <span>@(Model.TotalAmount - (decimal)Model.PaymentFees) EGP</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span>Shipping (Cairo & Giza)</span>
-                    <span>50 EGP</span>
+                    <span>@ViewData["PaymentFees"]</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <strong>Total</strong>

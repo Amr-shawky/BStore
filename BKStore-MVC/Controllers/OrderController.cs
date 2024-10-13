@@ -19,12 +19,14 @@ namespace BKStore_MVC.Controllers
         ICustomerRepository customerRepository;
         IBookRepository bookRepository;
         IGovernorateRepository governorateRepository;
+        IShippingRepository shippingRepository;
+        IShippingMethodRepository shippingMethodRepository;
         private readonly SignInManager<ApplicationUser> _signInManager;
         public OrderController(SignInManager<ApplicationUser> signInManager
-            , IOrderRepository orderRepository,
+            , IOrderRepository orderRepository,IShippingRepository shippingRepository,
             ICustomerRepository customerRepository, IBookRepository bookRepository,
             IOrderBookRepository orderBookRepository, IDeliveryClientRepository deliveryClientRepository
-            , IGovernorateRepository governorateRepository)
+            , IGovernorateRepository governorateRepository, IShippingMethodRepository shippingMethodRepository)
         {
             this.orderBookRepository = orderBookRepository;
             this.deliveryClientRepository = deliveryClientRepository;
@@ -33,6 +35,8 @@ namespace BKStore_MVC.Controllers
             this.bookRepository = bookRepository;
             this.governorateRepository = governorateRepository;
             _signInManager = signInManager;
+            this.shippingRepository = shippingRepository;
+            this.shippingMethodRepository = shippingMethodRepository;
         }
         //[Authorize(Roles = "Delivery")]
         public IActionResult GetAll()
@@ -71,6 +75,7 @@ namespace BKStore_MVC.Controllers
             orderDetailVM.CustomerID = orderRepository.GetByID(OrderId).CustomerID;
             orderDetailVM.Nationalnumber = customerRepository.GetByID(orderRepository.GetByID(OrderId).CustomerID ?? 0).Nationalnumber;
             orderDetailVM.OrderID = OrderId;
+            orderDetailVM.PaymentFees = shippingMethodRepository.GetByID(1).PaymentFees;
             return View("DetailedOrder", orderDetailVM);
         }
         public IActionResult DetailedOrderForUser()

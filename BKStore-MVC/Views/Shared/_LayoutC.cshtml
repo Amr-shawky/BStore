@@ -29,6 +29,7 @@
             height: 100%;
             left: -250px; /* Hide sidebar by default */
             transition: left 0.3s;
+            z-index: 1000; /* Ensure sidebar appears on top */
         }
 
             .sidebar a {
@@ -45,6 +46,7 @@
         .main-content {
             margin-left: 20px; /* Adjust based on sidebar width */
             padding: 20px;
+            z-index: 1; /* Ensure main content is below the sidebar */
         }
 
         .open-sidebar {
@@ -141,6 +143,7 @@
                             </li>
                         }
 
+
                     </ul>
                     <div class="search-bar">
                         <form id="searchForm" asp-action="SearchByName" asp-controller="Book" method="get" class="form-inline">
@@ -165,8 +168,11 @@
                         <a href="/Book/ShowCart" class="icon">
                             <img src="~/assets/img/shopping-cart.png" alt="Shopping Cart" style="width: 24px; height: 24px;" />
                         </a>
-                        <a href="@Url.Action("Login", "Account")">Login</a> /
-                        <a href="@Url.Action("Register", "Account")">Register</a>
+                        @if (User.Identity.IsAuthenticated == false)
+                        {
+                            <a href="@Url.Action("Login", "Account")">Login</a>
+                            <a href="@Url.Action("Register", "Account")">Register</a>
+                        }
                         <a href="/User/MyAccount/">
                             <img src="~/assets/img/icon-5359553_1280.png" alt="My Account" style="width: 50px; height: 50px" />
                         </a>
@@ -181,7 +187,6 @@
         <a href="/Book/GetAllToAdmin/">Book</a>
         <a href="/Customer/GetAll/">Customer</a>
         <a href="/Delivery/GetAll/">Delivery</a>
-        <a href="/Home/Users/">Users</a>
         <a href="/Order/GetAll">Order</a>
         <a href="/Account/GetAll">Users</a>
     </div>

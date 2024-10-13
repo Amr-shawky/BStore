@@ -31,6 +31,10 @@ namespace BKStore_MVC.Repository
         {
             return context.Shipping.FirstOrDefault(c => c.ShippingID== ID) ?? new Shipping();
         }
+        public Shipping GetByOrderID(int ID)
+        {
+            return context.Shipping.FirstOrDefault(c => c.OrderID == ID) ?? new Shipping();
+        }
 
         public void Save()
         {

@@ -15,19 +15,25 @@ namespace BKStore_MVC.Controllers
         private readonly IGovernorateRepository governorateRepository;
         private readonly IOrderBookRepository orderBookRepository;
         private readonly IOrderRepository orderRepository;
-
-        public CustomerController(IBookRepository bookRepository, ICustomerRepository customerRepository,
+        private readonly IShippingMethodRepository shippingMethodRepository;
+        private readonly IShippingRepository shippingRepository;
+        public CustomerController(IBookRepository bookRepository,IShippingMethodRepository shippingMethodRepository,
+            ICustomerRepository customerRepository,IShippingRepository shippingRepository,
             IGovernorateRepository governorateRepository, IOrderBookRepository orderBookRepository,
             IOrderRepository orderRepository)
         {
+            this.shippingMethodRepository = shippingMethodRepository;
             this.bookRepository = bookRepository;
             this.customerRepository = customerRepository;
             this.governorateRepository = governorateRepository;
             this.orderBookRepository = orderBookRepository;
             this.orderRepository = orderRepository;
+            this.shippingRepository = shippingRepository;
         }
         public IActionResult AddCustomer(decimal TotalAmount)
         {
+            ViewData["PaymentFees"] = shippingMethodRepository.GetByID(1).PaymentFees;
+
             // Retrieve the existing cookie
             var cookie = Request.Cookies["Cart"];
             List<BookCartItem> cartItems;
@@ -57,12 +63,16 @@ namespace BKStore_MVC.Controllers
                 customerOrderVM.Name = customerRepository.GetByID(CustomerID).Name;
                 customerOrderVM.Nationalnumber = customerRepository.GetByID(CustomerID).Nationalnumber;
                 customerOrderVM.Phone = customerRepository.GetByID(CustomerID).Phone;
+                customerOrderVM.PaymentFees = shippingMethodRepository.GetByID(1).PaymentFees;
                 return View("AddCustomer", customerOrderVM);
             }
+            customerOrderVM.PaymentFees = shippingMethodRepository.GetByID(1).PaymentFees;
             return View("AddCustomer", customerOrderVM);
         }
         public IActionResult AddToCartBuy(int bookId, int Quantity)
         {
+            ViewData["PaymentFees"] = shippingMethodRepository.GetByID(1).PaymentFees;
+
             var cookie = Request.Cookies["Cart"];
             List<BookCartItem> cartItems;
 
@@ -116,7 +126,7 @@ namespace BKStore_MVC.Controllers
             CustomerOrderVM customerOrderVM = new CustomerOrderVM
             {
                 BookItems = BookCartItem,
-                TotalAmount = (decimal?)(book.Price * Quantity + 50)
+                TotalAmount = (decimal?)(book.Price * Quantity + shippingMethodRepository.GetByID(1).PaymentFees)
             };
             if (GetCustomerID() != "")
             {
@@ -126,9 +136,10 @@ namespace BKStore_MVC.Controllers
                 customerOrderVM.Name = customerRepository.GetByID(CustomerID).Name;
                 customerOrderVM.Nationalnumber = customerRepository.GetByID(CustomerID).Nationalnumber;
                 customerOrderVM.Phone = customerRepository.GetByID(CustomerID).Phone;
+                customerOrderVM.PaymentFees = shippingMethodRepository.GetByID(1).PaymentFees;
                 return View("AddCustomer", customerOrderVM);
             }
-
+            customerOrderVM.PaymentFees = shippingMethodRepository.GetByID(1).PaymentFees;
             return View("AddCustomer", customerOrderVM);            //return RedirectToAction(nameof(ShowCart));
 
         }
@@ -193,9 +204,18 @@ namespace BKStore_MVC.Controllers
                     };
                     orderRepository.Add(order);
                     orderRepository.Save();
-
+                    Random random = new Random();
+                    Shipping shipping = new Shipping()
+                    {
+                        ShippingMethodID = 1,
+                        OrderID = order.OrderId,
+                        ShippingDate = DateTime.Now,
+                        TrackingNumber = random.Next(100000, 999999)
+                    };
+                    shippingRepository.Add(shipping);
+                    shippingRepository.Save();
                     // Check if the CustomerID cookie exists
-                    
+
                     var cartCookie = Request.Cookies["Cart"];
                     List<BookCartItem> cartItems;
                     if (cartCookie != null)
@@ -247,8 +267,8 @@ namespace BKStore_MVC.Controllers
                         bookRepository.Save();
                         Response.Cookies.Delete("Cart");
                     }
-
-                    return RedirectToAction("GetAllByCustomerID", "Order");
+                    TempData["OrderSuccessMessage"] = "Your order has been placed successfully!";
+                    return RedirectToAction("Index", "Book");
                 }
             }
 

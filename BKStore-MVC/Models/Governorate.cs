@@ -12,5 +12,6 @@ namespace BKStore_MVC.Models
         public int? CountryID { get; set; }
         public ICollection<Customer>? customers { get; set; }
         public Country? Country { get; set; }
+        public ICollection<ShippingMethod>? shippingMethod { get; set; }
     }
 }
