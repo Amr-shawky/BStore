@@ -490,7 +490,7 @@ namespace BKStore_MVC.Controllers
                     Expires = DateTimeOffset.Now.AddDays(7) // Set the cookie to expire in 7 days
                 });
 
-                return RedirectToAction("ShowWishlist");
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
@@ -499,6 +499,7 @@ namespace BKStore_MVC.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
         [HttpPost]
         public IActionResult RemoveFromWishlist(int bookId)
         {

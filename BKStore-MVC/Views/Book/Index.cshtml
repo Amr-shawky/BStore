@@ -5,6 +5,33 @@
     ViewData["Title"] = "Index";
     Layout = "_LayoutC";
 }
+@* Temp Data Info  *@
+@if (TempData["OrderSuccessMessage"] != null)
+{
+    <div id="orderSuccessMessage" class="alert alert-success">
+        @TempData["OrderSuccessMessage"]
+    </div>
+}
+<style>
+    .alert-success {
+        padding: 15px;
+        background-color: #4CAF50;
+        color: white;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+</style>
+<script>
+    // Hide the success message after 6 seconds (6000 milliseconds)
+    setTimeout(function () {
+        var messageElement = document.getElementById("orderSuccessMessage");
+        if (messageElement) {
+            messageElement.style.display = "none";
+        }
+    }, 6000); // 6 seconds
+</script>
+
+
 
 <div class="container">
     <div class="row">
@@ -46,7 +73,7 @@
                             <div class="card mb-4" data-book-id="@book.BookID">
                                 <div class="book-image-container">
                                     <img src="~/assets/img/@book.ImagePath" class="card-img-top book-image" alt="@book.Title" data-url="@Url.Action("Details", "Book", new { Bookid = book.BookID })">
-                                    <form action="/Book/AddToWishlist" method="post">
+                                    <form action="/Book/AddToWishlist" onsubmit="return showAlert()"  method="post">
                                         <input type="hidden" name="bookId" value="@book.BookID" />
                                         <button type="submit" class="icon wishlist1-icon">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -268,7 +295,7 @@
             }).then(data => {
                 if (data.success) {
                     console.log('Rating submitted:', data);
-                    alert('Rating submitted successfully! Average rating: ' + data.averageRating);
+                    // alert('Rating submitted successfully! Average rating: ' + data.averageRating);
                 } else {
                     alert('Failed to submit rating.');
                 }
@@ -332,4 +359,11 @@
             });
         });
     });
+</script>
+
+<script>
+    function showAlert() {
+        alert('Book added to wishlist!');
+        return true; // Allow the form to be submitted
+    }
 </script>
