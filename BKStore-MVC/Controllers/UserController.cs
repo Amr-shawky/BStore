@@ -102,6 +102,7 @@ namespace BKStore_MVC.Controllers
 
             return RedirectToAction("MyAccount");
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
             var users = await _userManager.Users.ToListAsync(); // Materialize the users list first
@@ -124,6 +125,7 @@ namespace BKStore_MVC.Controllers
             return View("GetAll", UsersInfo);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> LockAccount(string ID)
         {
             // Retrieve the user by their ID
@@ -150,6 +152,7 @@ namespace BKStore_MVC.Controllers
             return RedirectToAction(nameof(GetAll));
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UnLockAccount(string ID)
         {
             // Retrieve the user by their ID
@@ -175,7 +178,7 @@ namespace BKStore_MVC.Controllers
 
             return RedirectToAction(nameof(GetAll));
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Detailed(string ID)
         {
             var users = await _userManager.Users.ToListAsync(); // Materialize the users list first

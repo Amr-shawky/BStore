@@ -38,7 +38,7 @@ namespace BKStore_MVC.Controllers
             this.shippingRepository = shippingRepository;
             this.shippingMethodRepository = shippingMethodRepository;
         }
-        //[Authorize(Roles = "Delivery")]
+        [Authorize(Roles = "Delivery, Admin")]
         public IActionResult GetAll()
         {
             return View("GetAll", orderRepository.GetAll());
@@ -147,6 +147,7 @@ namespace BKStore_MVC.Controllers
 
             return string.Empty;
         }
+        [Authorize(Roles = "Delivery")]
         public async Task<IActionResult> DeliverOrder(int orderID)
         {
 
@@ -173,6 +174,7 @@ namespace BKStore_MVC.Controllers
             return Content("Error");
         }
         [HttpPost]
+        [Authorize(Roles = "Delivery")]
         public async Task<IActionResult> UpdateStatus(int orderID)
         {
             var cookie = Request.Cookies[".AspNetCore.Identity.Application"];

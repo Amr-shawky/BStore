@@ -3,10 +3,13 @@ using BKStore_MVC.Models;
 using BKStore_MVC.Repository;
 using BKStore_MVC.Repository.Interfaces;
 using BKStore_MVC.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BKStore_MVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class CategoryController : Controller
     {
         ICategoryRepository categoryRepository;

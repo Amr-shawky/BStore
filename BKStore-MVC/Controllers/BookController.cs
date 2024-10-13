@@ -100,6 +100,7 @@ namespace BKStore_MVC.Controllers
 
             return View("New");
         } // Add New Book
+        [Authorize(Roles = "Admin")]
         public IActionResult GetAllToAdmin()
         {
             return View("GetAllToAdmin", bookRepository.GetAll());
@@ -142,6 +143,7 @@ namespace BKStore_MVC.Controllers
             return Json(new List<object>());
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SaveNew(Book bookFromRequest, IFormFile ImagePath)
         {
             if (ModelState.IsValid)
@@ -199,6 +201,7 @@ namespace BKStore_MVC.Controllers
             var book = bookRepository.GetByID(ratingModel.BookId);
             return Ok(new { success = true, averageRating = book.AverageRating });
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
             var bookModel = bookRepository.GetByID(id);
@@ -209,6 +212,7 @@ namespace BKStore_MVC.Controllers
             return View("Edit", bookVM);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SaveEdit(int id, BookWithAuthorWithPuplisherWithCategVM bookFromRequest)
         {
             if (ModelState.IsValid)
@@ -254,6 +258,7 @@ namespace BKStore_MVC.Controllers
             bookFromRequest.categories = categoryRepository.GetAll();
             return View("Edit", bookFromRequest);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             // Fetch the book to delete
@@ -269,6 +274,7 @@ namespace BKStore_MVC.Controllers
 
             return RedirectToAction("GetAllToAdmin"); // Display confirmation before deletion
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteConfirmed(int id)
         {
             // Fetch the book to delete
@@ -414,6 +420,7 @@ namespace BKStore_MVC.Controllers
             bookCategVM.books = books.ToPagedList(pageNumber: 1, pageSize: 10); // Adjust pageNumber and pageSize as needed
             return View("Index", bookCategVM);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult DetailedBookForAdmin(int ID)
         {
             return View("DetailedBookForAdmin", bookRepository.GetByID(ID));

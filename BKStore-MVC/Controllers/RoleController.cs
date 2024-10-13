@@ -15,11 +15,13 @@ namespace BKStore1_MVC.Controllers
         {
             this.roleManager = roleManager;
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult AddRole()
         {
             return View("AddRole");
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SaveRole(RoleViewModel viewModel)
         {
             if (ModelState.IsValid)

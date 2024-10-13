@@ -1,6 +1,7 @@
 ﻿using BKStore_MVC.Models;
 using BKStore_MVC.Repository.Interfaces;
 using BKStore_MVC.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace BKStore_MVC.Controllers
             UserManager = userManager;
             this.deliveryClientRepository = deliveryClientRepository;
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
             List<DeliveryClients> deliverylst = deliveryClientRepository.GetAll();
@@ -45,7 +47,7 @@ namespace BKStore_MVC.Controllers
 
             return View("GetAll", deliveryVM);
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddDelivery(string UserId)
         {
             //string userId = Request.Cookies["UserId"]??"";
@@ -63,6 +65,7 @@ namespace BKStore_MVC.Controllers
 
             return View("AddDelivery");
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SaveAdd(DeliveryVM deliveryVM)
         {
             ApplicationUser appuser =
@@ -86,6 +89,7 @@ namespace BKStore_MVC.Controllers
             return View(nameof(AddDelivery), deliveryVM);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> LockAccount(string ID)
         {
             // Retrieve the user by their ID
@@ -112,6 +116,7 @@ namespace BKStore_MVC.Controllers
             return RedirectToAction(nameof(GetAll));
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UnLockAccount(string ID)
         {
             // Retrieve the user by their ID
