@@ -40,6 +40,16 @@ namespace BKStore_MVC.Controllers
         }
         public IActionResult Index(int? page, string sortOrder)
         {
+            if (shippingMethodRepository.GetAll == null)
+            {
+                ShippingMethod shipping = new ShippingMethod()
+                {
+                    Name = "Cash on delivery",
+                    PaymentFees = 60
+                };
+                shippingMethodRepository.Add(shipping);
+                shippingMethodRepository.Save();
+            }
             int pageSize = 10; // Number of items per page
             int pageNumber = (page ?? 1); // Default to page 1 if no page is specified
 

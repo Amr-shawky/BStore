@@ -4,82 +4,12 @@
     ViewData["Title"] = "Login";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
-    <style>
-        body {
-            background-color: #f0f4f8;
-            font-family: 'Arial', sans-serif;
-        }
+<h1>Login</h1>
 
-        .container {
-            margin-top: 50px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            background-color: #ffffff;
-            padding: 30px;
-        }
-
-        h1 {
-            color: #333;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .form-group label {
-            font-weight: bold;
-            color: #555;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-        .error-message {
-            display: none; /* Hidden by default */
-            margin-top: 15px;
-            padding: 10px;
-            border: 1px solid #dc3545;
-            background-color: #f8d7da;
-            color: #721c24;
-            border-radius: 5px;
-        }
-
-        .no-account {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .no-account a {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .no-account a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <h1>Login</h1>
-
-        <div class="error-message" id="errorMessage"></div> <!-- Error message div -->
-
-        <form asp-action="SaveLogin" onsubmit="return validateForm()">
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SaveLogin">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
@@ -88,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" type="password" />
+                <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
@@ -97,50 +27,18 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Sign In" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
-
-        <div class="no-account">
-            <p>No account yet? <a asp-action="Register">Create an account</a></p>
-        </div>
     </div>
+</div>
 
-    @section Scripts {
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
-        <script>
-            function validateForm() {
-                const errorMessage = document.getElementById('errorMessage');
-                errorMessage.innerHTML = ''; // Clear previous error messages
-                errorMessage.style.display = 'none'; // Hide the error message initially
+<div>
+    <a asp-action="Register">Create User</a>
+</div>
 
-                const userName = document.getElementById('UserName').value.trim();
-                const password = document.getElementById('Password').value.trim();
-
-                let errorMessages = [];
-
-                // Check for required fields
-                if (!userName) errorMessages.push("Username is required.");
-                if (!password) errorMessages.push("Password is required.");
-
-                // Check for incorrect credentials (this should typically be handled server-side)
-                // Here we will just simulate it for demonstration purposes.
-                const isValidUser = (userName === "correctUser" && password === "correctPassword");
-                if (userName && password && !isValidUser) {
-                    errorMessages.push("Incorrect username or password.");
-                }
-
-                // Show error messages if any
-                if (errorMessages.length > 0) {
-                    errorMessage.innerHTML = errorMessages.join('<br>');
-                    errorMessage.style.display = 'block'; // Show error message
-                    return false; // Prevent form submission
-                }
-                return true; // Allow form submission
-            }
-        </script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-</body>
-</html>
+}

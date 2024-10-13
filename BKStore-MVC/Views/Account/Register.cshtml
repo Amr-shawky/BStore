@@ -4,93 +4,12 @@
     ViewData["Title"] = "Register";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
-    <style>
-        body {
-            background-color: #f0f4f8;
-            font-family: 'Arial', sans-serif;
-        }
+<h1>Register</h1>
 
-        .container {
-            margin-top: 50px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            background-color: #ffffff;
-            padding: 30px;
-        }
-
-        h1 {
-            color: #333;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .form-group label {
-            font-weight: bold;
-            color: #555;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-
-            .btn-primary:hover {
-                background-color: #0056b3;
-                border-color: #0056b3;
-            }
-
-        .btn-outline-light {
-            color: #007bff;
-            border-color: #007bff;
-            transition: all 0.3s ease;
-        }
-
-            .btn-outline-light:hover {
-                background-color: #007bff;
-                color: white;
-            }
-
-        .error-message {
-            display: none; /* Hidden by default */
-            margin-top: 15px;
-            padding: 10px;
-            border: 1px solid #dc3545;
-            background-color: #f8d7da;
-            color: #721c24;
-            border-radius: 5px;
-        }
-
-        .back-link {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-            .back-link a {
-                color: #007bff;
-                text-decoration: none;
-                font-weight: bold;
-            }
-
-                .back-link a:hover {
-                    text-decoration: underline;
-                }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <h1>Register</h1>
-
-        <div class="error-message" id="errorMessage"></div> <!-- Error message div -->
-
-        <form asp-action="SaveRegister" method="post" onsubmit="return validateForm()">
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SaveRegister" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
                 <input asp-for="UserName" class="form-control" />
@@ -103,72 +22,27 @@
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" type="password" />
+                <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
-
-            <!-- Show Password Checkbox -->
             <div class="form-group">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="showPasswordCheckbox" onclick="togglePasswordVisibility()">
-                    <label class="form-check-label" for="showPasswordCheckbox">Show Password</label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Sign Up" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
-
-        <div class="back-link">
-            <a class="btn btn-outline-light" asp-controller="Home" asp-action="Index">Back to Home</a> <!-- Improved Back to Home Button -->
-        </div>
     </div>
+</div>
 
-    @section Scripts {
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
-        <script>
-            function validateForm() {
-                const errorMessage = document.getElementById('errorMessage');
-                errorMessage.innerHTML = ''; // Clear previous error messages
-                errorMessage.style.display = 'none'; // Hide the error message initially
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
-                const userName = document.getElementById('UserName').value.trim();
-                const email = document.getElementById('Email').value.trim();
-                const password = document.getElementById('Password').value.trim();
-                const confirmPassword = document.getElementById('ConfirmPassword').value.trim();
-
-                let errorMessages = [];
-
-                if (!userName) errorMessages.push("Username is required.");
-                if (!email) errorMessages.push("Email is required.");
-                if (!password) errorMessages.push("Password is required.");
-                if (!confirmPassword) errorMessages.push("Confirm Password is required.");
-                if (password !== confirmPassword) errorMessages.push("Passwords do not match.");
-
-                if (errorMessages.length > 0) {
-                    errorMessage.innerHTML = errorMessages.join('<br>');
-                    errorMessage.style.display = 'block'; // Show error message
-                    return false; // Prevent form submission
-                }
-                return true; // Allow form submission
-            }
-
-            // Function to toggle password visibility
-            function togglePasswordVisibility() {
-                const passwordFields = document.querySelectorAll('input[type="password"]');
-                passwordFields.forEach(function (field) {
-                    field.type = field.type === 'password' ? 'text' : 'password';
-                });
-            }
-        </script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-</body>
-</html>
+}

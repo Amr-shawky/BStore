@@ -50,7 +50,7 @@ namespace BKStore_MVC
             });
 
             var app = builder.Build();
-
+            
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
