@@ -1,9 +1,12 @@
-﻿@model List<BKStore_MVC.ViewModel.BookCartItem>
+﻿@using Azure.Core
+@using System.Web;
+@model List<BKStore_MVC.ViewModel.BookCartItem>
 @{
     ViewData["Title"] = "Cart";
 }
 <style>
     .my-order-btn {
+        display: inline-block; /* Start hidden */
         margin-left: 10px;
         text-decoration: none;
         color: white;
@@ -17,7 +20,6 @@
         .my-order-btn:hover {
             background-color: #0056b3;
         }
-
 </style>
 <div class="container">
     <div class="row">
@@ -104,9 +106,17 @@
               </div>
         
     </div>
-    <div >
-        <a href="/Order/GetAllByCustomerID/" class="btn btn-primary my-order-btn ">My Order</a>
+    <div>
+        @{
+            var customerID = ViewBag.CustomerID as string;
+        }
+
+        @if (!string.IsNullOrEmpty(customerID))
+        {
+            <a href="/Order/GetAllByCustomerID/" class="btn btn-primary my-order-btn">My Order</a>
+        }
     </div>
+
 </div>
 <script>
     function removeFromCart(bookId) {

@@ -960,6 +960,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\fefe922e-d228-48da-80cf-22a1b988844d_Fearness.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\ffbcfa43-364a-40e9-98f4-c629b873fbfe_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>BKStore-MVC</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/BKStore-MVC</BasePath>
+      <RelativePath>assets/img/ffbcfa43-364a-40e9-98f4-c629b873fbfe_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\ffbcfa43-364a-40e9-98f4-c629b873fbfe_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\Head-First-Design-Patterns-388x500.jpg.png))">
       <SourceType>Package</SourceType>
       <SourceId>BKStore-MVC</SourceId>

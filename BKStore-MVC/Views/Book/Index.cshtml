@@ -131,6 +131,11 @@
         text-decoration: underline;
     }
 
+    .navbar {
+        position: sticky;
+        top: 0; /* Sticks to the top */
+        z-index: 1000; /* Ensures it sits on top of other elements */
+    }
     .pagination-container .pagination .active span {
         display: inline-block;
         width: 50px;
@@ -294,7 +299,7 @@
                 return response.json();
             }).then(data => {
                 if (data.success) {
-                    console.log('Rating submitted:', data);
+                     console.log('Rating submitted:', data);
                     // alert('Rating submitted successfully! Average rating: ' + data.averageRating);
                 } else {
                     alert('Failed to submit rating.');

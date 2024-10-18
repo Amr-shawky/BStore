@@ -377,8 +377,9 @@ namespace BKStore_MVC.Controllers
                 // Initialize an empty list if the cookie does not exist
                 cartItems = new List<BookCartItem>();
             }
+            var customerIDCookie = Request.Cookies["CustomerID"];
 
-
+            ViewBag.CustomerID = customerIDCookie;
             // Pass the ViewModel to the view
             return View("Cart", cartItems);
         }

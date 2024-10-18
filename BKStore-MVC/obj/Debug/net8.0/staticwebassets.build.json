@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lVi7IjfgZ7H2Zn5vrN3p5kU4+WaC6sj/FKUCRVgGTfA=",
+  "Hash": "8GHARlnYEYExefvbrb8Jh6r1AGzZOReWh1q2SBDc1YM=",
   "Source": "BKStore-MVC",
   "BasePath": "_content/BKStore-MVC",
   "Mode": "Default",
@@ -1193,6 +1193,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\fefe922e-d228-48da-80cf-22a1b988844d_Fearness.jpg"
+    },
+    {
+      "Identity": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\ffbcfa43-364a-40e9-98f4-c629b873fbfe_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg",
+      "SourceId": "BKStore-MVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\",
+      "BasePath": "_content/BKStore-MVC",
+      "RelativePath": "assets/img/ffbcfa43-364a-40e9-98f4-c629b873fbfe_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\ffbcfa43-364a-40e9-98f4-c629b873fbfe_WhatsApp Image 2024-04-25 at 14.38.01_e1509e5a.jpg"
     },
     {
       "Identity": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\assets\\img\\Head-First-Design-Patterns-388x500.jpg.png",

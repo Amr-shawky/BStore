@@ -7,16 +7,28 @@
       "RelativeMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|solutionrelative:views\\book\\cart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|f:\\full projects\\dpi\\book-store\\bstore\\bkstore-mvc\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|solutionrelative:controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|f:\\full projects\\dpi\\book-store\\bstore\\bkstore-mvc\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|solutionrelative:controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|f:\\full projects\\dpi\\book-store\\bstore\\bkstore-mvc\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|solutionrelative:wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|f:\\full projects\\dpi\\book-store\\bstore\\bkstore-mvc\\views\\shared\\_layoutc.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|solutionrelative:views\\shared\\_layoutc.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|f:\\full projects\\dpi\\book-store\\bstore\\bkstore-mvc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|f:\\full projects\\dpi\\book-store\\bstore\\bkstore-mvc\\views\\book\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|solutionrelative:views\\book\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|f:\\full projects\\dpi\\book-store\\bstore\\bkstore-mvc\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|solutionrelative:controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|f:\\full projects\\dpi\\book-store\\bstore\\bkstore-mvc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|f:\\full projects\\dpi\\book-store\\bstore\\bkstore-mvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,10 +51,6 @@
       "RelativeMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|solutionrelative:views\\customer\\addcustomer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|f:\\full projects\\dpi\\book-store\\bstore\\bkstore-mvc\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|solutionrelative:controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|f:\\full projects\\dpi\\book-store\\bstore\\bkstore-mvc\\viewmodel\\customerordervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{347A7B5B-DB79-4E96-BFCD-49D2C292D180}|BKStore-MVC.csproj|solutionrelative:viewmodel\\customerordervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -54,11 +62,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{ecb7191a-597b-41f5-9843-03a4cf275dde}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "site.css",
+              "DocumentMoniker": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\site.css",
+              "ToolTip": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "wwwroot\\css\\site.css",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAAYAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-10-16T10:19:32.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Views\\Book\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Book\\Index.cshtml",
+              "ToolTip": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Views\\Book\\Index.cshtml",
+              "RelativeToolTip": "Views\\Book\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-18T06:34:02.451Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -68,27 +102,27 @@
               "RelativeDocumentMoniker": "Views\\Book\\Cart.cshtml",
               "ToolTip": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Views\\Book\\Cart.cshtml",
               "RelativeToolTip": "Views\\Book\\Cart.cshtml",
-              "ViewState": "AgIAAFgAAAAAAAAAAAAswGUAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAswAYAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-10-13T18:03:45.361Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "_LayoutC.cshtml",
               "DocumentMoniker": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Views\\Shared\\_LayoutC.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_LayoutC.cshtml",
               "ToolTip": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Views\\Shared\\_LayoutC.cshtml",
               "RelativeToolTip": "Views\\Shared\\_LayoutC.cshtml",
-              "ViewState": "AgIAAH8AAAAAAAAAAAAswIMAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAswC8AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-10-13T18:01:53.265Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -100,7 +134,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "AddAdmin.cshtml",
               "DocumentMoniker": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Views\\Account\\AddAdmin.cshtml",
               "RelativeDocumentMoniker": "Views\\Account\\AddAdmin.cshtml",
@@ -112,7 +146,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "Register.cshtml",
               "DocumentMoniker": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Views\\Account\\Register.cshtml",
               "RelativeDocumentMoniker": "Views\\Account\\Register.cshtml",
@@ -124,7 +158,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "Login.cshtml",
               "DocumentMoniker": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "Views\\Account\\Login.cshtml",
@@ -136,7 +170,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "CustomerOrderVM.cs",
               "DocumentMoniker": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\ViewModel\\CustomerOrderVM.cs",
               "RelativeDocumentMoniker": "ViewModel\\CustomerOrderVM.cs",
@@ -148,19 +182,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 2,
               "Title": "CustomerController.cs",
               "DocumentMoniker": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Controllers\\CustomerController.cs",
               "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
               "ToolTip": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Controllers\\CustomerController.cs",
               "RelativeToolTip": "Controllers\\CustomerController.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAAAJEAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAJIAAAAAAAAAAAA7wJgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T16:09:50.678Z"
+              "WhenOpened": "2024-10-13T16:09:50.678Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "AddCustomer.cshtml",
               "DocumentMoniker": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Views\\Customer\\AddCustomer.cshtml",
               "RelativeDocumentMoniker": "Views\\Customer\\AddCustomer.cshtml",
@@ -172,20 +207,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "BookController.cs",
               "DocumentMoniker": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Controllers\\BookController.cs",
               "RelativeDocumentMoniker": "Controllers\\BookController.cs",
               "ToolTip": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Controllers\\BookController.cs",
               "RelativeToolTip": "Controllers\\BookController.cs",
-              "ViewState": "AgIAALEBAAAAAAAAAAAAAM0BAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAHYBAAAAAAAAAAAAAH0BAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-13T14:45:01.938Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",

@@ -45,7 +45,7 @@
 
         .main-content {
             margin-left: 20px; /* Adjust based on sidebar width */
-            padding: 20px;
+            padding: 75px;
             z-index: 1; /* Ensure main content is below the sidebar */
         }
 
@@ -109,11 +109,18 @@
                 background-color: #f1f1f1;
             }
 
+        .navbar {
+            position: fixed;
+            width: 1350px;
+            top: 0;
+            z-index: 1000;
+        }
+
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav style="position:fixed"  class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
