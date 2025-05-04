@@ -357,6 +357,10 @@
       "PackagePath": "staticwebassets\\assets\\img\\star-filled.svg"
     },
     {
+      "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
+    },
+    {
       "Id": "F:\\FULL Projects\\DPI\\Book-Store\\BStore\\BKStore-MVC\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

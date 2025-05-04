@@ -1068,6 +1068,18 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"cacpxzxvf2"},{"Name":"integrity","Value":"sha256-dAeWAmuuzA9Znbq1ubAg\u002BVrHQh5p0WIYtRuTxzJCuJ4="},{"Name":"label","Value":"_content/BKStore-MVC/BKStore-MVC.bundle.scp.css"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2261"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022dAeWAmuuzA9Znbq1ubAg\u002BVrHQh5p0WIYtRuTxzJCuJ4=\u0022"},{"Name":"Last-Modified","Value":"Sat, 19 Oct 2024 18:57:18 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/BKStore-MVC/css/bootstrap.min.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\bootstrap.min.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-dGzv5jWGK7Kc8f6zhb9JpgjPIR7hLfvqO8Un\u002BKV\u002BZ4c="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"317555"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022dGzv5jWGK7Kc8f6zhb9JpgjPIR7hLfvqO8Un\u002BKV\u002BZ4c=\u0022"},{"Name":"Last-Modified","Value":"Sun, 04 May 2025 16:18:58 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/BKStore-MVC/css/bootstrap.min.gjhnb8xjth.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\bootstrap.min.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"gjhnb8xjth"},{"Name":"integrity","Value":"sha256-dGzv5jWGK7Kc8f6zhb9JpgjPIR7hLfvqO8Un\u002BKV\u002BZ4c="},{"Name":"label","Value":"_content/BKStore-MVC/css/bootstrap.min.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"317555"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022dGzv5jWGK7Kc8f6zhb9JpgjPIR7hLfvqO8Un\u002BKV\u002BZ4c=\u0022"},{"Name":"Last-Modified","Value":"Sun, 04 May 2025 16:18:58 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/BKStore-MVC/css/site.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>

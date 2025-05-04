@@ -86,6 +86,7 @@ wwwroot\assets\img\shopping-cart.png
 wwwroot\assets\img\shopping-cart.svg
 wwwroot\assets\img\star-empty.svg
 wwwroot\assets\img\star-filled.svg
+wwwroot\css\bootstrap.min.css
 wwwroot\css\site.css
 wwwroot\css\site1.css
 wwwroot\css\styles.css
